@@ -57,7 +57,7 @@ const VideoIntro = () => (
   <div className="w-full max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-[0_0_60px_rgba(217,119,6,0.3)] border-4 border-amber-600/50 mb-12 relative bg-slate-950 aspect-video group">
     <iframe 
       className="absolute inset-0 w-full h-full"
-      src="https://www.youtube.com/embed/ndj37zSR5Uo?autoplay=0&rel=0" 
+      src="https://www.youtube.com/embed/ndj37zSR5Uo?autoplay=0&amp;rel=0" 
       title="Introducción a La Odisea" 
       frameBorder="0" 
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -515,12 +515,12 @@ const CODEX_DATA = {
             <AlertTriangle size={16}/> Aoristos Fuertes Imprescindibles
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-mono text-slate-200">
-            <li className="bg-slate-900 p-2 rounded border border-slate-700">λείπω (abandonar) ➜ <span className="text-amber-400 font-bold block mt-1 text-sm">ἔλιπον</span></li>
-            <li className="bg-slate-900 p-2 rounded border border-slate-700">βάλλω (lanzar) ➜ <span className="text-amber-400 font-bold block mt-1 text-sm">ἔβαλον</span></li>
-            <li className="bg-slate-900 p-2 rounded border border-slate-700">λαμβάνω (coger) ➜ <span className="text-amber-400 font-bold block mt-1 text-sm">ἔλαβον</span></li>
-            <li className="bg-slate-900 p-2 rounded border border-slate-700">ὁράω (ver) ➜ <span className="text-amber-400 font-bold block mt-1 text-sm">εἶδον</span> (supletivo)</li>
-            <li className="bg-slate-900 p-2 rounded border border-slate-700">λέγω (decir) ➜ <span className="text-amber-400 font-bold block mt-1 text-sm">εἶπον</span> (supletivo)</li>
-            <li className="bg-slate-900 p-2 rounded border border-slate-700">ἔρχομαι (ir) ➜ <span className="text-amber-400 font-bold block mt-1 text-sm">ἦλθον</span> (supletivo)</li>
+            <li className="bg-slate-900 p-2 rounded border border-slate-700">λείπω (abandonar) ➔ <span className="text-amber-400 font-bold block mt-1 text-sm">ἔλιπον</span></li>
+            <li className="bg-slate-900 p-2 rounded border border-slate-700">βάλλω (lanzar) ➔ <span className="text-amber-400 font-bold block mt-1 text-sm">ἔβαλον</span></li>
+            <li className="bg-slate-900 p-2 rounded border border-slate-700">λαμβάνω (coger) ➔ <span className="text-amber-400 font-bold block mt-1 text-sm">ἔλαβον</span></li>
+            <li className="bg-slate-900 p-2 rounded border border-slate-700">ὁράω (ver) ➔ <span className="text-amber-400 font-bold block mt-1 text-sm">εἶδον</span> (supletivo)</li>
+            <li className="bg-slate-900 p-2 rounded border border-slate-700">λέγω (decir) ➔ <span className="text-amber-400 font-bold block mt-1 text-sm">εἶπον</span> (supletivo)</li>
+            <li className="bg-slate-900 p-2 rounded border border-slate-700">ἔρχομαι (ir) ➔ <span className="text-amber-400 font-bold block mt-1 text-sm">ἦλθον</span> (supletivo)</li>
           </ul>
         </div>
       </div>
@@ -661,7 +661,7 @@ const LEVELS = [
         <InteractiveWord word="νόστον" hint="CD. Acus. Sg. 2ª Decl. 'Regreso'." type="vocab"/> κωλύει."
       </div>
     ),
-    translation: "«Después del terrible terrible guerra los aqueos llenan rápidamente los bellos barcos y navegan hacia la patria. Y el astuto Odiseo abandonó Troya y marcha hacia el mar. Pero otro poderoso dios impide el regreso.»",
+    translation: "«Después del terrible guerra los aqueos llenan rápidamente los bellos barcos y navegan hacia la patria. Y el astuto Odiseo abandonó Troya y marcha hacia el mar. Pero otro poderoso dios impide el regreso.»",
     instruction: "Revisa 'Mitología y Monstruos' en el Códex. Este viaje de regreso no será fácil porque has ofendido a un dios muy vengativo.",
     question: "¿Qué dios del Olimpo se convierte en tu enemigo principal durante la Odisea, representando la fuerza bruta del mar frente a la astucia (Metis) de Atenea?",
     options: [
@@ -713,7 +713,7 @@ const LEVELS = [
     papyrusText: (
       <div className="text-center">
         "ἡ κακὴ <InteractiveWord word="Κίρκη" hint="Nom. Sg. 1ª Decl. en -η." type="grammar"/> τὰ φάρμακα 
-        <InteractiveWord word="ποιεῖ" hint="Verbo contracto (ποιέ-ει > ποιεῖ). 'Hace/Prepara'." type="grammar"/> 
+        <InteractiveWord word="ποιεῖ" hint="Verbo contracto (ποιέ-ει ➔ ποιεῖ). 'Hace/Prepara'." type="grammar"/> 
         καὶ τοὺς ἄνδρας <InteractiveWord word="σῦς" hint="Acusativo Plural. 3ª Decl. 'Cerdos'." type="vocab"/> ποιεῖ.<br/>
         οἱ δὲ ἄθλιοι <InteractiveWord word="ἑταῖροι" hint="Suj. Nom. Pl. 2ª Decl. 'Compañeros'." type="grammar"/> μάλα δακρύουσι 
         καὶ τὸν Ὀδυσσέα βοηθεῖν <InteractiveWord word="καλοῦσιν" hint="Verbo contracto (καλέ-ουσι). 'Llaman'." type="grammar"/>.<br/>
