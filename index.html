@@ -255,7 +255,6 @@
             </div>
           );
         };
-
         const DiccionarioEpico = () => {
           const [searchTerm, setSearchTerm] = useState('');
           const dictionary = [
@@ -329,54 +328,22 @@
         };
 
         const LEVELS = [
-          { id: 1, location: "Troya", athenaMsg: "El viaje del Nóstos comienza.", title: "El Origen", lore: "Abandonáis Ilión.", codexUnlock: "mitologia", papyrusText: <div className="text-center">μετὰ τὸν <InteractiveWord word="πόλεμον" hint="CD. Acusativo" type="grammar"/> ὁ Ὀδυσσεὺς τὴν Τροίαν ἔλιπεν.</div>, translation: "Después de la guerra Odiseo dejó Troya.", instruction: "Abre Mitología.", question: "¿Quién es tu enemigo principal?", options: [{ text: "Apolo", correct: false }, { text: "Poseidón", correct: true }], oracleHint: "Dios del mar.", reward: "Favor de Atenea", rewardIcon: "🦉", mapX: 85, mapY: 15 },
-          { id: 2, location: "Lotófagos", athenaMsg: "Cuidado con el loto.", title: "El Olvido", lore: "Comen el loto.", codexUnlock: "verbos_presente", papyrusText: <div className="text-center">οἱ ἑταῖροι τὸν λωτὸν ἤσθιον.</div>, translation: "Los compañeros comían el loto.", instruction: "Revisa Imperfecto.", question: "¿Por qué ἤσθιον lleva η?", options: [{ text: "Contracción", correct: false }, { text: "Aumento Temporal", correct: true }], oracleHint: "Marca de pasado vocal.", reward: "Loto", rewardIcon: "🌸", mapX: 75, mapY: 85 },
-          { id: 3, location: "Polifemo", athenaMsg: "Ciega al gigante.", title: "El Cíclope", lore: "Atrapados en la cueva.", codexUnlock: "declinaciones", papyrusText: <div className="text-center">Ὀδυσσεὺς τὸν <InteractiveWord word="ὀφθαλμὸν" hint="Acusativo Sg." type="vocab"/> βάλλει.</div>, translation: "Odiseo atraviesa el ojo.", instruction: "Usa el Acusativo.", question: "¿Qué declinación y caso es τὸν ὀφθαλμὸν?", options: [{ text: "3ª Acus Pl", correct: false }, { text: "2ª Acus Sg", correct: true }], oracleHint: "Termina en -ον.", reward: "Estaca", rewardIcon: "🔥", mapX: 65, mapY: 70 },
-          { id: 4, location: "Isla de Eolo", athenaMsg: "Eolo te da vientos.", title: "Los Vientos", lore: "Saco de vientos.", codexUnlock: "funciones", papyrusText: <div className="text-center">ἄνεμοι ἐκ τῆς θαλάττης ἔρχονται.</div>, translation: "Vientos vienen del mar.", instruction: "Preposiciones de origen.", question: "¿Qué caso exige ἐκ?", options: [{ text: "Acusativo", correct: false }, { text: "Genitivo", correct: true }], oracleHint: "Caso de procedencia.", reward: "Saco", rewardIcon: "💨", mapX: 60, mapY: 55 },
-          { id: 5, location: "Lestrigones", athenaMsg: "Gigantes atacan.", title: "Rocas", lore: "Lanzan piedras.", codexUnlock: "vocabulario", papyrusText: <div className="text-center">μεγάλους λίθους βάλλουσιν.</div>, translation: "Lanzan grandes piedras.", instruction: "Concordancia.", question: "¿En qué concuerda un adjetivo?", options: [{ text: "Raíz", correct: false }, { text: "Género, Número, Caso", correct: true }], oracleHint: "Tres rasgos exactos.", reward: "Espada", rewardIcon: "🗡️", mapX: 55, mapY: 30 },
-          { id: 6, location: "Eea (Circe)", athenaMsg: "Verbos contractos.", title: "La Hechicera", lore: "Pociones mágicas.", codexUnlock: "diccionario", papyrusText: <div className="text-center">ἡ κακὴ Κίρκη φάρμακα ποιεῖ.</div>, translation: "Circe prepara venenos.", instruction: "Busca Verbos Contractos.", question: "¿Qué resulta de τιμά-ομεν?", options: [{ text: "τιμοῦμεν", correct: false }, { text: "τιμῶμεν", correct: true }], oracleHint: "Regla de contracción en -άω.", reward: "Moly", rewardIcon: "🌿", mapX: 45, mapY: 35 },
-          { id: 7, location: "El Hades", athenaMsg: "Raíces fuertes.", title: "Las Sombras", lore: "Almas en aoristo.", codexUnlock: "aoristos", papyrusText: <div className="text-center">Ὀδυσσεὺς εἰς τὸν Ἅιδην ἦλθεν.</div>, translation: "Odiseo fue al Hades.", instruction: "Estudia Aoristos Fuertes.", question: "¿Aoristo fuerte de λείπω?", options: [{ text: "ἔλιπε", correct: true }, { text: "ἔλειψε", correct: false }], oracleHint: "Apofonía de raíz.", reward: "Profecía", rewardIcon: "👁️", mapX: 20, mapY: 25 },
-          { id: 8, location: "Sirenas", athenaMsg: "La voz media.", title: "El Canto", lore: "Promesas mortales.", codexUnlock: "voz_media", papyrusText: <div className="text-center">Ὀδυσσεὺς βούλεται ἀκούειν τὸν μῦθον.</div>, translation: "Odiseo quiere escuchar.", instruction: "Verbos deponentes.", question: "¿Por qué βούλεται es media?", options: [{ text: "Es pasivo", correct: false }, { text: "Es deponente (sentido activo)", correct: true }], oracleHint: "Significado interno activo.", reward: "Cuerda", rewardIcon: "🪢", mapX: 30, mapY: 50 },
-          { id: 9, location: "Escila", athenaMsg: "Adjetivos verbales.", title: "Participios", lore: "Decisiones trágicas.", codexUnlock: "analizador", papyrusText: <div className="text-center">Σκύλλα, ἔχουσα ἓξ κεφαλάς, ἁρπάζει ἑταίρους.</div>, translation: "Escila, teniendo seis cabezas, arrebata compañeros.", instruction: "Identifica participios.", question: "¿Participio masculino de ἔχω?", options: [{ text: "ἔχων", correct: true }, { text: "ἐχόμενος", correct: false }], oracleHint: "Sufijo activo -ων.", reward: "Lágrima", rewardIcon: "💧", mapX: 40, mapY: 65 },
-          { id: 10, location: "Calipso", athenaMsg: "Inmortalidad rechazada.", title: "Voz Reflexiva", lore: "Siete años atrapado.", codexUnlock: "literatura", papyrusText: <div className="text-center">Ὀδυσσεὺς ἐπὶ τῇ ἀκτῇ κάθηται.</div>, translation: "Odiseo está sentado en la orilla.", instruction: "Verbos de postura.", question: "¿Qué expresa la voz media aquí?", options: [{ text: "Acción forzada", correct: false }, { text: "Reflexividad corporal/íntima", correct: true }], oracleHint: "Implicación del sujeto.", reward: "Madera", rewardIcon: "🪵", mapX: 50, mapY: 80 },
-          { id: 11, location: "Esqueria", athenaMsg: "Raíces aorísticas.", title: "Nausícaa", lore: "Encuentro en el río.", codexUnlock: "aoristos", papyrusText: <div className="text-center">αἱ δοῦλαι ἔφυγον.</div>, translation: "Las esclavas huyeron.", instruction: "Aoristo de φεύγω.", question: "¿Qué pasa con la raíz (φευγ-)?", options: [{ text: "Añade -σα-", correct: false }, { text: "Grado cero (φυγ-)", correct: true }], oracleHint: "Raíz reducida.", reward: "Manto", rewardIcon: "🥻", mapX: 60, mapY: 70 },
-          { id: 12, location: "Ítaca", athenaMsg: "Identidad oculta.", title: "Perro Argos", lore: "El fiel compañero.", codexUnlock: "declinaciones", papyrusText: <div className="text-center">αὐτὸς δὲ ἐγγὺς ἐλθεῖν οὐκέτι ἐδύνατο.</div>, translation: "Él mismo ya no podía acercarse.", instruction: "El pronombre autos.", question: "¿Cómo se traduce αὐτὸς aislado?", options: [{ text: "Él mismo (énfasis)", correct: true }, { text: "Lo (objeto)", correct: false }], oracleHint: "Identidad exclusiva.", reward: "Lealtad", rewardIcon: "🐶", mapX: 75, mapY: 60 },
-          { id: 13, location: "Palacio", athenaMsg: "Acción atemática.", title: "La Cicatriz", lore: "Reconocimiento.", codexUnlock: "verbos_presente", papyrusText: <div className="text-center">αὐτίκα δὲ τὴν οὐλὴν ἔγνω.</div>, translation: "Reconoció la cicatriz.", instruction: "Aoristo atemático.", question: "¿Qué lo hace atemático?", options: [{ text: "Desinencias directas a la raíz", correct: true }, { text: "Siempre es pasivo", correct: false }], oracleHint: "Sin vocal de unión.", reward: "Silencio", rewardIcon: "🤫", mapX: 85, mapY: 40 },
-          { id: 14, location: "Mégaron", athenaMsg: "Venganza justa.", title: "El Arco", lore: "La matanza.", codexUnlock: "voz_media", papyrusText: <div className="text-center">Ὀδυσσεὺς λαμβάνει τὸ τόξον.</div>, translation: "Odiseo toma el arco.", instruction: "Beneficio personal.", question: "¿Forma media de λύω (1ª Sg)?", options: [{ text: "λύομαι", correct: true }, { text: "ἔλυσα", correct: false }], oracleHint: "Terminación -ομαι.", reward: "Flecha", rewardIcon: "🏹", mapX: 95, mapY: 30 },
-          { id: 15, location: "Lecho", athenaMsg: "Secreto revelado.", title: "Juicio Final", lore: "La prueba de Penélope.", codexUnlock: "adjetivos", papyrusText: <div className="text-center">ἐγὼ τὸ λέχος ἐποίησα ἐκ δένδρου.</div>, translation: "Yo construí el lecho del árbol.", instruction: "Aoristo contracto.", question: "¿Qué pasa con la 'ε' de ποιέω?", options: [{ text: "Desaparece", correct: false }, { text: "Se alarga a 'η'", correct: true }], oracleHint: "Alargamiento vocálico.", reward: "Corona", rewardIcon: "👑", mapX: 95, mapY: 45 }
+          { id: 1, location: "Troya", athenaMsg: "El viaje del Nóstos comienza. Los aqueos llenan sus barcos, pero los dioses no olvidan.", title: "El Origen", lore: "Tus hombres cargan las naves negras. El largo viaje comienza.", codexUnlock: "mitologia", papyrusText: <div className="text-center">μετὰ τὸν <InteractiveWord word="πόλεμον" hint="CD. Acusativo" type="grammar"/> ὁ Ὀδυσσεὺς τὴν Τροίαν ἔλιπεν.</div>, translation: "Después de la guerra Odiseo dejó Troya.", instruction: "Abre la Biblioteca en Mitología.", question: "¿Quién es tu enemigo principal en el viaje de regreso?", options: [{ text: "Apolo", correct: false }, { text: "Poseidón", correct: true }], oracleHint: "Dios del abismo salado.", reward: "Favor de Atenea", rewardIcon: "🦉", mapX: 85, mapY: 15 },
+          { id: 2, location: "Lotófagos", athenaMsg: "Las acciones repetitivas y durativas habitan en el pasado. Cuidado con el loto.", title: "El Olvido", lore: "Tus hombres comen una flor extraña y olvidan su patria.", codexUnlock: "verbos_presente", papyrusText: <div className="text-center">οἱ ἑταῖροι τὸν λωτὸν ἤσθιον καὶ μόνον ἔκλαιον.</div>, translation: "Los compañeros comían loto y solo lloraban.", instruction: "Revisa el Pretérito Imperfecto en el Códex.", question: "¿Por qué el verbo ἤσθιον lleva 'η' en lugar de su 'ε' inicial?", options: [{ text: "Contracción de vocales.", correct: false }, { text: "Aumento Temporal por estar en pasado.", correct: true }], oracleHint: "Las vocales breves se alargan en el pasado indicativo.", reward: "Flor de Loto", rewardIcon: "🌸", mapX: 75, mapY: 85 },
+          { id: 3, location: "Polifemo", athenaMsg: "La bestia bloquea la puerta. Necesitas conocer la función del acusativo directo para atacar.", title: "El Cíclope", lore: "El gigante devora a tus hombres. Vas a atravesar su único ojo.", codexUnlock: "declinaciones", papyrusText: <div className="text-center">Ὀδυσσεὺς τὸν <InteractiveWord word="ὀφθαλμὸν" hint="El ojo" type="vocab"/> βάλλει ὀξεῖ ξύλῳ.</div>, translation: "Odiseo atraviesa el ojo con madera afilada.", instruction: "Estudia las declinaciones y los casos.", question: "¿Qué declinación y caso es 'τὸν ὀφθαλμὸν' (Complemento Directo)?", options: [{ text: "3ª Declinación, Acusativo Plural", correct: false }, { text: "2ª Declinación, Acusativo Singular", correct: true }], oracleHint: "La marca -ον indica la segunda declinación.", reward: "Estaca Humeante", rewardIcon: "🔥", mapX: 65, mapY: 70 },
+          { id: 4, location: "Isla de Eolo", athenaMsg: "Los vientos soplan desde el mar. Las preposiciones griegas exigen casos muy concretos.", title: "Los Vientos", lore: "El rey Eolo encierra a los malos vientos en un odre.", codexUnlock: "funciones", papyrusText: <div className="text-center">πάντες κακοὶ ἄνεμοι ἐκ τῆς θαλάττης ἔρχονται.</div>, translation: "Todos los malos vientos vienen del mar.", instruction: "Revisa las preposiciones.", question: "La preposición ἐκ (desde/fuera de) ¿qué caso exige siempre para marcar origen?", options: [{ text: "Acusativo (dirección)", correct: false }, { text: "Genitivo (separación u origen)", correct: true }], oracleHint: "El caso que marca alejamiento.", reward: "Saco de Cuero", rewardIcon: "💨", mapX: 60, mapY: 55 },
+          { id: 5, location: "Lestrigones", athenaMsg: "Gigantes asesinos destruyen tu flota. Cuidado con los adjetivos monstruosos.", title: "Las Rocas", lore: "Caníbales lanzan piedras gigantes desde los acantilados.", codexUnlock: "vocabulario", papyrusText: <div className="text-center">Λαιστρυγόνες μεγάλους λίθους βάλλουσιν.</div>, translation: "Lestrigones lanzan grandes piedras.", instruction: "Repasa la concordancia de los adjetivos.", question: "Para que el adjetivo 'μεγάλους' concuerde con 'λίθους', ¿en qué deben coincidir?", options: [{ text: "Misma declinación y raíz", correct: false }, { text: "Género, Número y Caso", correct: true }], oracleHint: "Tres rasgos exactos y obligatorios.", reward: "Espada Salvada", rewardIcon: "🗡️", mapX: 55, mapY: 30 },
+          { id: 6, location: "Eea (Circe)", athenaMsg: "Verbos contractos. La hechicera fusiona pociones y vocales por igual.", title: "La Hechicera", lore: "Tus hombres han sido transformados en cerdos por una droga.", codexUnlock: "diccionario", papyrusText: <div className="text-center">ἡ κακὴ Κίρκη φάρμακα ποιεῖ.</div>, translation: "La mala Circe prepara venenos.", instruction: "Busca Verbos Contractos en la Biblioteca.", question: "Si un verbo termina en -άω y le añades -ομεν, ¿qué vocal resulta (Ej: τιμά-ομεν)?", options: [{ text: "τιμοῦμεν", correct: false }, { text: "τιμῶμεν", correct: true }], oracleHint: "La 'a' choca con 'o' y gana la omega.", reward: "Raíz Moly", rewardIcon: "🌿", mapX: 45, mapY: 35 },
+          { id: 7, location: "El Hades", athenaMsg: "Las almas descarnadas exigen raíces fuertes. Desciende a los infiernos.", title: "Las Sombras", lore: "Bajas al Hades para escuchar la profecía de Tiresias.", codexUnlock: "aoristos", papyrusText: <div className="text-center">Ὀδυσσεὺς εἰς τὸν Ἅιδην ἦλθεν καὶ μητέρα εἶδεν.</div>, translation: "Odiseo fue al Hades y vio a su madre.", instruction: "Estudia los Aoristos Fuertes.", question: "¿Cómo es el Aoristo Fuerte del verbo λείπω (yo dejo)?", options: [{ text: "ἔλιπε (pierde la épsilon)", correct: true }, { text: "ἔλειψε (añade sigma)", correct: false }], oracleHint: "Hay una apofonía (colapso de la vocal en la raíz).", reward: "Profecía de Tiresias", rewardIcon: "👁️", mapX: 20, mapY: 25 },
+          { id: 8, location: "Sirenas", athenaMsg: "Sus voces prometen conocimiento, pero el deseo interno requiere la Voz Media.", title: "El Canto Letal", lore: "Quieres escuchar su canción sin sucumbir a la muerte. Te atas al mástil.", codexUnlock: "voz_media", papyrusText: <div className="text-center">Ὀδυσσεὺς βούλεται ἀκούειν τὸν μῦθον.</div>, translation: "Odiseo quiere (desea intensamente) escuchar el relato.", instruction: "Busca información sobre Verbos Deponentes.", question: "¿Por qué βούλεται (quiere) tiene desinencia media/pasiva (-εται)?", options: [{ text: "Es pasivo y significa 'es querido'.", correct: false }, { text: "Es deponente: carece de voz activa, pero su sentido interno es puramente activo.", correct: true }], oracleHint: "Acciones psicológicas fuertes suelen ser deponentes.", reward: "Cuerdas Tensadas", rewardIcon: "🪢", mapX: 30, mapY: 50 },
+          { id: 9, location: "Escila", athenaMsg: "Monstruos de seis cabezas. Los participios son verbos que actúan como adjetivos.", title: "El Sacrificio", lore: "Pierdes seis hombres devorados por Escila. Una decisión terrible.", codexUnlock: "analizador", papyrusText: <div className="text-center">Σκύλλα, ἔχουσα ἓξ κεφαλάς, ἁρπάζει ἑταίρους.</div>, translation: "Escila, teniendo seis cabezas, arrebata compañeros.", instruction: "Identifica los Participios Activos.", question: "Si 'ἔχουσα' es el participio femenino (teniendo), ¿cuál es el masculino (el que tiene)?", options: [{ text: "ἔχων", correct: true }, { text: "ἐχόμενος", correct: false }], oracleHint: "Usa el sufijo activo -ων, -οντος.", reward: "Lágrima Derramada", rewardIcon: "💧", mapX: 40, mapY: 65 },
+          { id: 10, location: "Calipso", athenaMsg: "La ninfa te ofrece inmortalidad. Tu rechazo es absoluto y reflexivo.", title: "Inmortalidad Rechazada", lore: "Lloras frente al mar tras 7 años cautivo. Anhelas regresar a casa.", codexUnlock: "adjetivos", papyrusText: <div className="text-center">Ὀδυσσεὺς ἐπὶ τῇ ἀκτῇ κάθηται καὶ ὀδύρεται.</div>, translation: "Odiseo se sienta en la orilla y se lamenta.", instruction: "Voz Media: verbos de postura física.", question: "¿Qué matiz principal aporta la Voz Media a un verbo como 'sentarse' (κάθηται)?", options: [{ text: "La acción es impuesta por otro por la fuerza.", correct: false }, { text: "La acción revierte directamente sobre el propio cuerpo o ego del sujeto (reflexividad).", correct: true }], oracleHint: "Implicación física y personal del sujeto.", reward: "Madera para Balsa", rewardIcon: "🪵", mapX: 50, mapY: 80 },
+          { id: 11, location: "Esqueria", athenaMsg: "Un naufragio te deja desnudo. Ante las jóvenes doncellas, los pasados irregulares reinan.", title: "La Princesa Nausícaa", lore: "Surges de los arbustos desnudo. Las esclavas huyen aterrorizadas.", codexUnlock: "literatura", papyrusText: <div className="text-center">αἱ μὲν δοῦλαι ἔλαβον φόβον καὶ ἔφυγον.</div>, translation: "Las esclavas tomaron miedo y huyeron.", instruction: "Revisa de nuevo el Aoristo Fuerte.", question: "El verbo 'ἔφυγον' (huyeron) viene del presente 'φεύγω'. ¿Qué proceso le ha ocurrido a su raíz?", options: [{ text: "Ha añadido la marca -σα- regular.", correct: false }, { text: "Ha sufrido reducción vocálica o grado cero (φευγ- -> φυγ-).", correct: true }], oracleHint: "Pierde una vocal fundamental de la raíz.", reward: "Manto Feacio", rewardIcon: "🥻", mapX: 60, mapY: 70 },
+          { id: 12, location: "Ítaca", athenaMsg: "Has vuelto disfrazado. El pronombre de identidad revela la tragedia del tiempo.", title: "El Perro Argos", lore: "Argos, tu viejo perro, te reconoce pero ya no puede levantarse.", codexUnlock: "declinaciones", papyrusText: <div className="text-center">αὐτὸς δὲ ἐγγὺς ἐλθεῖν οὐκέτι ἐδύνατο.</div>, translation: "Pero ÉL MISMO ya no podía acercarse.", instruction: "Busca la sección de Pronombres (αὐτός).", question: "Cuando el pronombre 'αὐτός' aparece aislado en caso Nominativo, ¿cómo debe traducirse?", options: [{ text: "Como un pronombre de identidad exclusivo: 'Él mismo' o 'Por sí solo'.", correct: true }, { text: "Como un simple Complemento Directo: 'A él'.", correct: false }], oracleHint: "Aporta un gran énfasis sobre el sujeto.", reward: "La Lealtad de Argos", rewardIcon: "🐶", mapX: 75, mapY: 60 },
+          { id: 13, location: "Palacio", athenaMsg: "Una cicatriz destapa la verdad. Aoristos sin vocales de unión.", title: "La Anciana Euriclea", lore: "Tu nodriza te lava los pies y reconoce la vieja herida del jabalí.", codexUnlock: "aoristos", papyrusText: <div className="text-center">αὐτίκα δὲ τὴν οὐλὴν ἔγνω.</div>, translation: "Y al instante reconoció la cicatriz.", instruction: "Aoristo Atemático.", question: "El verbo 'ἔγνω' es un Aoristo Atemático (radical). ¿Qué significa esto morfológicamente?", options: [{ text: "Las desinencias personales se pegan a la raíz sin ninguna vocal de unión ni sigma intermedia.", correct: true }, { text: "Carece de sujeto porque no tiene un tema literario claro.", correct: false }], oracleHint: "No hay 'o' ni 'e' entre la raíz y la desinencia.", reward: "El Silencio Acordado", rewardIcon: "🤫", mapX: 85, mapY: 40 },
+          { id: 14, location: "Mégaron", athenaMsg: "El arco se tensa. La venganza es un acto de puro interés personal.", title: "La Matanza de los Pretendientes", lore: "Disparas el arco a través de las hachas. La sangre fluye en tu propia casa.", codexUnlock: "voz_media", papyrusText: <div className="text-center">Ὀδυσσεὺς λαμβάνει τὸ μέγα τόξον καὶ βάλλει.</div>, translation: "Odiseo toma el gran arco y dispara.", instruction: "Reflexiona sobre la Voz Media.", question: "Si quisieras decir 'Yo desato (la flecha) para mi beneficio personal y profundo' con el verbo λύω, ¿qué forma usarías?", options: [{ text: "λύομαι (Presente Medio, 1ª Pers. Sg).", correct: true }, { text: "ἔλυσα (Aoristo Activo regular).", correct: false }], oracleHint: "El sufijo -ομαι te implica personalmente.", reward: "Flecha de Apolo", rewardIcon: "🏹", mapX: 95, mapY: 30 },
+          { id: 15, location: "Lecho Nupcial", athenaMsg: "El engaño final. Un lecho tallado en un árbol vivo. La prueba de la esposa.", title: "El Juicio de Penélope", lore: "Penélope manda sacar tu cama. Solo tú sabes que está unida a las raíces de un olivo.", codexUnlock: "verbos_presente", papyrusText: <div className="text-center">ἐγὼ τὸ λέχος ἐποίησα ἐκ δένδρου.</div>, translation: "Pues yo construí el lecho a partir de un árbol.", instruction: "El Analizador te dirá la verdad sobre ποιέω.", question: "Para formar el aoristo de ποιέω (ἐποίησα), ¿qué ocurre con la 'ε' final de la raíz original?", options: [{ text: "Se pierde en el vacío.", correct: false }, { text: "Sufre un alargamiento vocálico obligatorio y se convierte en 'η'.", correct: true }], oracleHint: "Las vocales breves crecen antes de chocar con la sigma.", reward: "Corona de Olivo y Nóstos", rewardIcon: "👑", mapX: 95, mapY: 45 }
         ];
-
-        const AthenaGuide = ({ message }) => {
-          const [displayedText, setDisplayedText] = useState('');
-          useEffect(() => {
-            setDisplayedText(''); let i = 0;
-            const intervalId = setInterval(() => { setDisplayedText(message.substring(0, i + 1)); i++; if (i >= message.length) clearInterval(intervalId); }, 18);
-            return () => clearInterval(intervalId);
-          }, [message]);
-          return (
-            <div className="bg-slate-900/90 border-2 border-amber-500/40 p-5 rounded-2xl flex gap-4 items-start mb-8 shadow-2xl">
-              <div className="shrink-0 p-4 rounded-full bg-slate-950 border border-amber-400/60 shadow-[0_0_15px_rgba(217,119,6,0.6)]"><Feather className="text-amber-400" size={32} /></div>
-              <div>
-                <h4 className="text-amber-500 font-bold uppercase tracking-widest text-xs mb-2">Atenea Glaucópide te aconseja:</h4>
-                <p className="text-slate-200 text-lg italic font-serif">"{displayedText}"</p>
-              </div>
-            </div>
-          );
-        };
-
-        const OdysseyMap = ({ currentLevelId }) => (
-          <div className="relative w-full aspect-[3/1] bg-slate-950 rounded-2xl border border-slate-700 overflow-hidden mb-8 shadow-2xl bg-stars">
-             <svg className="absolute inset-0 w-full h-full z-10" preserveAspectRatio="none">
-                <path d="M 85 15 C 80 40, 90 70, 75 85 C 65 95, 55 80, 65 70 C 70 60, 50 45, 60 55 C 65 60, 45 30, 55 30 C 65 30, 30 20, 45 35 C 50 40, 20 15, 20 25 C 20 35, 30 40, 30 50 C 30 60, 50 70, 40 65 C 30 60, 60 90, 50 80 C 40 70, 70 70, 60 70 C 50 70, 80 50, 75 60 C 70 70, 90 30, 85 40 C 80 50, 100 20, 95 30 C 90 40, 100 50, 95 45" fill="none" stroke="#1e293b" strokeWidth="4" strokeDasharray="6,6" />
-                <path d="M 85 15 C 80 40, 90 70, 75 85 C 65 95, 55 80, 65 70 C 70 60, 50 45, 60 55 C 65 60, 45 30, 55 30 C 65 30, 30 20, 45 35 C 50 40, 20 15, 20 25 C 20 35, 30 40, 30 50 C 30 60, 50 70, 40 65 C 30 60, 60 90, 50 80 C 40 70, 70 70, 60 70 C 50 70, 80 50, 75 60 C 70 70, 90 30, 85 40 C 80 50, 100 20, 95 30 C 90 40, 100 50, 95 45" fill="none" stroke="#fbbf24" strokeWidth="3" strokeDasharray="3000" strokeDashoffset={3000 - (currentLevelId * (3000/15))} className="transition-all duration-[2000ms] ease-in-out" />
-             </svg>
-             {LEVELS.map(l => (
-                 <div key={l.id} className="absolute -translate-x-1/2 -translate-y-1/2 z-20" style={{ left: `${l.mapX}%`, top: `${l.mapY}%` }}>
-                    <div className={`w-4 h-4 rounded-full border-2 ${l.id === currentLevelId ? 'bg-amber-500 scale-150' : l.id < currentLevelId ? 'bg-amber-900 border-amber-600' : 'bg-slate-900 border-slate-700'}`}></div>
-                 </div>
-             ))}
-          </div>
-        );
 
         function App() {
           const [gameState, setGameState] = useState('intro');
@@ -399,13 +366,13 @@
                   <p>Durante siglos, los eruditos debatieron si Homero realmente existió. Hoy sabemos, gracias a Milman Parry, que estos poemas son el resultado de <strong>siglos de tradición oral</strong>.</p>
                   <div className="bg-amber-950/20 border-l-4 border-amber-600 p-5 rounded-r-xl mt-4">
                     <h5 className="font-bold text-amber-500 mb-2">El Colapso del Bronce</h5>
-                    <p className="text-sm">Homero canta sobre una época dorada (~1200 a.C.) que colapsó. Durante los siguientes 400 años, Grecia olvidó escribir, y los aedos mantuvieron viva la gloria cantando de memoria.</p>
+                    <p className="text-sm">Homero canta sobre una época dorada (~1200 a.C.) que colapsó violentamente. Durante los siguientes 400 años ("Edad Oscura"), Grecia olvidó escribir, y los aedos mantuvieron viva la gloria cantando de memoria.</p>
                   </div>
                   <h4 className="font-bold text-blue-400 text-xl border-b border-slate-700 pb-3 mt-8">Ética Heroica</h4>
                   <ul className="space-y-3 font-mono text-sm bg-slate-900 p-5 rounded-xl border border-slate-800">
-                    <li><strong className="text-blue-300">Aidos (Αἰδώς):</strong> Pudor y vergüenza social.</li>
-                    <li><strong className="text-red-400">Hybris (Ὕβρις):</strong> Desmesura. Creerte superior a los dioses.</li>
-                    <li><strong className="text-purple-400">Némesis (Νέμεσις):</strong> Retribución implacable divina.</li>
+                    <li><strong className="text-blue-300">Aidos (Αἰδώς):</strong> Pudor y vergüenza social. El temor a perder el honor.</li>
+                    <li><strong className="text-red-400">Hybris (Ὕβρις):</strong> Desmesura. Creerte superior a los dioses o a la ley.</li>
+                    <li><strong className="text-purple-400">Némesis (Νέμεσις):</strong> Retribución implacable divina que aplasta la Hybris.</li>
                   </ul>
                 </div>
               )
@@ -418,13 +385,13 @@
                     <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2 mb-4">Funciones Sintácticas</h4>
                     <ul className="space-y-2 bg-slate-900/50 p-4 rounded-xl border border-slate-700">
                       <li><strong className="text-blue-400">Nominativo:</strong> Sujeto y Atributo.</li>
-                      <li><strong className="text-emerald-400">Acusativo:</strong> CD y Dirección.</li>
+                      <li><strong className="text-emerald-400">Acusativo:</strong> CD y Dirección en el espacio.</li>
                       <li><strong className="text-red-400">Genitivo:</strong> CN, Posesión, Origen y Separación.</li>
-                      <li><strong className="text-amber-500">Dativo:</strong> CI, Instrumento, Compañía, Lugar.</li>
+                      <li><strong className="text-amber-500">Dativo:</strong> CI, Instrumento, Compañía, Lugar exacto en donde.</li>
                     </ul>
                   </div>
                   <div className="overflow-x-auto bg-slate-900 p-3 rounded-xl border border-slate-700">
-                    <h5 className="font-bold text-purple-300 text-center mb-3">La 3ª Declinación (Atemática)</h5>
+                    <h5 className="font-bold text-purple-300 text-center mb-3 uppercase tracking-widest text-xs">La 3ª Declinación (Atemática) - Modelos Clave</h5>
                     <table className="table-greek w-full whitespace-nowrap text-center">
                       <thead>
                         <tr><th>Caso</th><th>Oclusiva (ὁ κόραξ)</th><th>Nasal (ὁ δαίμων)</th><th>Vocal (ἡ πόλις)</th><th>Neutro (τὸ σῶμα)</th></tr>
@@ -440,7 +407,7 @@
                     </table>
                   </div>
                   <div className="overflow-x-auto bg-slate-900 p-3 rounded-xl border border-slate-700">
-                    <h5 className="font-bold text-amber-500 text-center mb-3">Pronombres</h5>
+                    <h5 className="font-bold text-amber-500 text-center mb-3 uppercase tracking-widest text-xs">Pronombres Universales</h5>
                     <table className="table-greek w-full whitespace-nowrap text-center mb-4">
                       <thead>
                         <tr><th>Caso</th><th>1ª Pers (ἐγώ)</th><th>2ª Pers (σύ)</th><th>1ª Pl (ἡμεῖς)</th><th>2ª Pl (ὑμεῖς)</th></tr>
@@ -454,10 +421,10 @@
                     </table>
                     <table className="table-greek w-full text-xs text-left">
                       <tbody>
-                        <tr><td className="font-bold text-amber-400">αὐτός, -ή, -ό</td><td className="whitespace-normal">1. Sin art: "Él mismo" (Énfasis). 2. Con art: "El mismo" (Identidad). 3. Oblicuos: Pronombre personal 3ª pers.</td></tr>
-                        <tr><td className="font-bold text-cyan-400">οὗτος, αὕτη, τοῦτο</td><td className="whitespace-normal">Demostrativo de distancia media ("Ese").</td></tr>
-                        <tr><td className="font-bold text-emerald-400">τίς (con tilde)</td><td className="whitespace-normal">Interrogativo: ¿Quién? ¿Qué? (Acus: τίνα).</td></tr>
-                        <tr><td className="font-bold text-emerald-400">τις (sin tilde)</td><td className="whitespace-normal">Indefinido enclítico: Alguien, algo. (Acus: τινά).</td></tr>
+                        <tr><td className="font-bold text-amber-400 p-2 border-b border-slate-700 w-1/3">αὐτός, -ή, -ό</td><td className="whitespace-normal p-2 border-b border-slate-700">1. Sin art: "Él mismo" (Énfasis absoluto). 2. Con art: "El mismo" (Identidad). 3. Oblicuos: Pronombre personal 3ª pers (lo, le, la).</td></tr>
+                        <tr><td className="font-bold text-cyan-400 p-2 border-b border-slate-700">οὗτος, αὕτη, τοῦτο</td><td className="whitespace-normal p-2 border-b border-slate-700">Demostrativo de distancia media ("Ese"). Combina 1ª y 2ª decl.</td></tr>
+                        <tr><td className="font-bold text-emerald-400 p-2 border-b border-slate-700">τίς (con tilde)</td><td className="whitespace-normal p-2 border-b border-slate-700">Interrogativo: ¿Quién? ¿Qué? Siempre acentuado.</td></tr>
+                        <tr><td className="font-bold text-emerald-400 p-2">τις (sin tilde)</td><td className="whitespace-normal p-2">Indefinido enclítico: Alguien, algo. Pierde el acento apoyándose en la palabra anterior.</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -481,10 +448,10 @@
                     </tbody>
                   </table>
                   <div className="bg-amber-950/20 border border-amber-800 p-5 rounded-xl">
-                    <h5 className="font-bold text-amber-500 mb-2">Leyes del Aumento (Pasado)</h5>
+                    <h5 className="font-bold text-amber-500 mb-2 text-lg">Leyes del Aumento (La Marca del Pasado)</h5>
                     <ul className="list-disc pl-5">
-                      <li><strong>Silábico:</strong> Consonantes añaden <strong>ἐ-</strong> (λύω -> ἔλυον).</li>
-                      <li><strong>Temporal:</strong> Vocales se alargan (α/ε -> η, ο -> ω, αι/ει -> ῃ).</li>
+                      <li className="mb-2"><strong>Silábico:</strong> Consonantes añaden <strong>ἐ-</strong> (λύω -> ἔλυον). Excepción: la 'rho' inicial se duplica (ἔρριπτον).</li>
+                      <li><strong>Temporal:</strong> Vocales alargan su duración natural: α/ε se hacen η. ο se hace ω. ai/ei se hacen ῃ (iota suscrita).</li>
                     </ul>
                   </div>
                 </div>
@@ -495,27 +462,27 @@
               content: (
                 <div className="space-y-6 text-sm text-slate-300">
                   <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Pasado Indefinido</h4>
-                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
-                      <h5 className="font-bold text-blue-400 mb-2">1. Aoristo Sigmático (Regular)</h5>
+                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="font-bold text-blue-400 mb-2 text-lg">1. Aoristo Sigmático (Regular)</h5>
                       <p className="mb-2">Añaden <strong>-σα-</strong>. Ej: ἔλυ-σα, ἔλυ-σας, ἔλυ-σε, ἐλύ-σαμεν, ἐλύ-σατε, ἔλυ-σαν.</p>
-                      <h5 className="font-bold text-amber-400 mb-2 mt-4">1.5 Aoristos Contractos (-άω, -έω, -όω)</h5>
-                      <p>Alargan la vocal antes de sigma. τιμάω -> ἐτίμ<strong>η</strong>σα. ποιέω -> ἐποί<strong>η</strong>σα.</p>
+                      <h5 className="font-bold text-amber-400 mb-2 mt-4 text-lg">1.5 Aoristos Contractos (-άω, -έω, -όω)</h5>
+                      <p>Para no colapsar la sigma, alargan la vocal de la raíz justo antes de la desinencia. τιμάω -> ἐτίμ<strong>η</strong>σα. ποιέω -> ἐποί<strong>η</strong>σα.</p>
                   </div>
-                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
-                      <h5 className="font-bold text-emerald-400 mb-2">2. Aoristo Fuerte (Apofónico)</h5>
-                      <p>Cambian la raíz. Terminan en -ον, -ες, -ε... como el imperfecto.</p>
-                      <ul className="grid grid-cols-2 gap-2 mt-2 font-mono">
+                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="font-bold text-emerald-400 mb-2 text-lg">2. Aoristo Fuerte (Apofónico)</h5>
+                      <p>Carecen de sigma. Indican el pasado reduciendo o destruyendo por completo la raíz del presente.</p>
+                      <ul className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-4 font-mono bg-slate-950 p-4 rounded-lg">
                           <li>λείπω ➔ ἔλιπον</li>
                           <li>βάλλω ➔ ἔβαλον</li>
                           <li>λαμβάνω ➔ ἔλαβον</li>
                           <li>φεύγω ➔ ἔφυγον</li>
-                          <li>ἔρχομαι ➔ ἦλθον</li>
-                          <li>ὁράω ➔ εἶδον</li>
+                          <li>ἔρχομαι ➔ ἦλθον (Supletivo)</li>
+                          <li>ὁράω ➔ εἶδον (Supletivo)</li>
                       </ul>
                   </div>
-                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
-                      <h5 className="font-bold text-purple-400 mb-2">3. Aoristo Atemático</h5>
-                      <p>Desinencias pegadas a la raíz: γιγνώσκω -> ἔγνων, ἔγνως, ἔγνω.</p>
+                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="font-bold text-purple-400 mb-2 text-lg">3. Aoristo Atemático (Muy Antiguo)</h5>
+                      <p>Desinencias pegadas a pelo a la raíz sin vocales de unión: γιγνώσκω -> ἔγνων, ἔγνως, ἔγνω.</p>
                   </div>
                 </div>
               )
@@ -525,19 +492,19 @@
               content: (
                 <div className="space-y-6 text-sm text-slate-300">
                   <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Ego del Sujeto (Voz Media)</h4>
-                  <p>La Voz Media indica que el sujeto realiza la acción y <strong>revierte física o psicológicamente sobre él mismo</strong> o su interés. Los <strong>Verbos Deponentes</strong> se conjugan igual, pero su significado es ACTIVO.</p>
+                  <p>La Voz Media indica que el sujeto realiza la acción y <strong>revierte física o psicológicamente sobre él mismo</strong> o su interés más íntimo. Los <strong>Verbos Deponentes</strong> se conjugan igual, pero su significado real es puramente ACTIVO.</p>
                   
                   <h4 className="font-bold text-purple-400 text-xl border-b border-slate-700 pb-2 mt-6">Declinación del Participio (Presente Activo)</h4>
-                  <div className="overflow-x-auto bg-slate-900 p-3 rounded-xl border border-slate-700">
+                  <div className="overflow-x-auto bg-slate-900 p-3 rounded-xl border border-slate-700 shadow-inner">
                     <table className="table-greek w-full whitespace-nowrap text-center">
                       <thead>
-                        <tr><th>Caso</th><th>Masc (3ª)</th><th>Fem (1ª)</th><th>Neutro (3ª)</th><th>Masc Pl</th></tr>
+                        <tr><th>Caso</th><th>Masc (3ª)</th><th>Fem (1ª)</th><th>Neutro (3ª)</th><th>Masc Plural</th></tr>
                       </thead>
                       <tbody>
-                        <tr><td className="font-bold text-slate-400">Nom</td><td>λύ-ων</td><td>λύ-ουσα</td><td>λῦ-ον</td><td>λύ-οντες</td></tr>
-                        <tr><td className="font-bold text-slate-400">Acus</td><td>λύ-οντα</td><td>λύ-ουσαν</td><td>λῦ-ον</td><td>λύ-οντας</td></tr>
-                        <tr><td className="font-bold text-slate-400">Gen</td><td>λύ-οντος</td><td>λυ-ούσης</td><td>λύ-οντος</td><td>λυ-όντων</td></tr>
-                        <tr><td className="font-bold text-slate-400">Dat</td><td>λύ-οντι</td><td>λυ-ούσῃ</td><td>λύ-οντι</td><td>λύ-ουσι(ν)</td></tr>
+                        <tr><td className="font-bold text-slate-400">Nom</td><td>λύ-<strong className="text-purple-400">ων</strong></td><td>λύ-<strong className="text-pink-400">ουσα</strong></td><td>λῦ-<strong className="text-purple-400">ον</strong></td><td>λύ-<strong className="text-purple-400">οντες</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">Acus</td><td>λύ-<strong className="text-purple-400">οντα</strong></td><td>λύ-<strong className="text-pink-400">ουσαν</strong></td><td>λῦ-<strong className="text-purple-400">ον</strong></td><td>λύ-<strong className="text-purple-400">οντας</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">Gen</td><td>λύ-<strong className="text-purple-400">οντος</strong></td><td>λυ-<strong className="text-pink-400">ούσης</strong></td><td>λύ-<strong className="text-purple-400">οντος</strong></td><td>λυ-<strong className="text-purple-400">όντων</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">Dat</td><td>λύ-<strong className="text-purple-400">οντι</strong></td><td>λυ-<strong className="text-pink-400">ούσῃ</strong></td><td>λύ-<strong className="text-purple-400">οντι</strong></td><td>λύ-<strong className="text-purple-400">ουσι(ν)</strong></td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -553,21 +520,21 @@
                 <div className="space-y-6 text-sm text-slate-300">
                   <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Cosmos Homérico</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-blue-950/40 p-4 rounded-xl border border-blue-800">
-                      <h5 className="font-bold text-blue-400 mb-1">🌊 Poseidón</h5>
-                      <p>Agitador de la Tierra. El abismo irracional. Enemigo de Odiseo por cegar a su hijo.</p>
+                    <div className="bg-blue-950/40 p-5 rounded-xl border border-blue-800 shadow-inner">
+                      <h5 className="font-bold text-blue-400 mb-1 text-lg">🌊 Poseidón</h5>
+                      <p>Agitador de la Tierra. Encarna el abismo insondable e irracional de la naturaleza. Enemigo mortal de Odiseo por cegar a su hijo, el Cíclope.</p>
                     </div>
-                    <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-600">
-                      <h5 className="font-bold text-slate-200 mb-1">🦉 Atenea Glaucópide</h5>
-                      <p>Diosa de la civilización y la Mētis (astucia táctica). Guía del héroe.</p>
+                    <div className="bg-slate-800/60 p-5 rounded-xl border border-slate-600 shadow-inner">
+                      <h5 className="font-bold text-slate-200 mb-1 text-lg">🦉 Atenea Glaucópide</h5>
+                      <p>Diosa de la civilización y la Mētis (astucia táctica). Guía del héroe, no con fuerza bruta, sino con consejos e ilusiones.</p>
                     </div>
                   </div>
-                  <h4 className="font-bold text-red-400 text-xl mt-6 border-b border-slate-700 pb-2">Monstruos y Pruebas</h4>
-                  <ul className="space-y-3 bg-slate-900/50 p-4 rounded-xl border border-slate-700">
-                    <li><strong className="text-red-400">Cíclopes:</strong> Antítesis de la civilización. Devoran a los huéspedes (violan la Xenía).</li>
-                    <li><strong className="text-emerald-400">Lotófagos:</strong> El terror al olvido. Destruyen el Nóstos.</li>
-                    <li><strong className="text-pink-400">Calipso y Circe:</strong> Ofrecen estancamiento o falsa inmortalidad.</li>
-                    <li><strong className="text-indigo-400">Escila y Caribdis:</strong> El dilema trágico; aceptar pérdidas inevitables.</li>
+                  <h4 className="font-bold text-red-400 text-xl mt-6 border-b border-slate-700 pb-2">Monstruos y Pruebas del Alma</h4>
+                  <ul className="space-y-4 bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                    <li><strong className="text-red-400 font-sans text-lg">Cíclopes:</strong> Antítesis de la civilización. No plantan, no tienen asamblea (ágora) y devoran a los huéspedes (violan la Xenía de Zeus).</li>
+                    <li><strong className="text-emerald-400 font-sans text-lg">Lotófagos:</strong> El terror al olvido. La flor de loto destruye el deseo activo de volver a casa (el Nóstos).</li>
+                    <li><strong className="text-pink-400 font-sans text-lg">Calipso y Circe:</strong> Representan el estancamiento. Circe animaliza, revelando la verdadera naturaleza. Calipso ofrece el mayor tabú de todos: la inmortalidad para un humano.</li>
+                    <li><strong className="text-indigo-400 font-sans text-lg">Escila y Caribdis:</strong> El dilema trágico; aceptar pérdidas dolorosas e inevitables cuando no existe la elección perfecta.</li>
                   </ul>
                 </div>
               )
@@ -576,12 +543,12 @@
               category: "Morfología Nominal", title: "Vocabulario Épico", icon: <BookOpen size={20} />,
               content: (
                 <div className="space-y-6 text-sm text-slate-300">
-                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">Epítetos y Fórmulas</h4>
-                  <p>Sustantivo + Epíteto para encajar en la métrica dactílica.</p>
-                  <ul className="font-mono text-emerald-300 bg-slate-900 p-4 rounded-xl border border-slate-700">
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">Epítetos y Fórmulas Orales</h4>
+                  <p>Sustantivo + Epíteto conformaban bloques prefabricados que los aedos usaban para encajar en la métrica dactílica sin tener que pensar la sílaba exacta en directo.</p>
+                  <ul className="font-mono text-emerald-300 bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-inner space-y-2">
                     <li>πολύμητις Ὀδυσσεύς (Odiseo, fecundo en ardides)</li>
-                    <li>γλαυκῶπις Ἀθήνη (Atenea, de ojos brillantes)</li>
-                    <li>ῥοδοδάκτυλος Ἠώς (Aurora, de dedos rosados)</li>
+                    <li>γλαυκῶπις Ἀθήνη (Atenea, de ojos brillantes/lechuza)</li>
+                    <li>ῥοδοδάκτυλος Ἠώς (La Aurora, de dedos rosados)</li>
                   </ul>
                 </div>
               )
@@ -590,18 +557,19 @@
               category: "Morfología Nominal", title: "Adjetivos (1ª y 2ª Clase)", icon: <Layers size={20} />,
               content: (
                 <div className="space-y-6 text-sm text-slate-300">
-                  <h4 className="font-bold text-blue-400 text-xl border-b border-slate-700 pb-2">1ª Clase (2-1-2)</h4>
-                  <table className="table-greek w-full text-center mb-6">
+                  <h4 className="font-bold text-blue-400 text-xl border-b border-slate-700 pb-2">1ª Clase (Modelo 2-1-2)</h4>
+                  <p>Usan la 2ª Declinación para Masculino/Neutro y la 1ª Declinación para Femenino.</p>
+                  <table className="table-greek w-full text-center mb-6 shadow-inner">
                     <thead><tr><th>Caso</th><th>Masc (2ª)</th><th>Fem (1ª)</th><th>Neutro (2ª)</th></tr></thead>
                     <tbody>
-                      <tr><td className="font-bold text-slate-400">Nom Sg</td><td>καλ-ός</td><td>καλ-ή</td><td>καλ-όν</td></tr>
-                      <tr><td className="font-bold text-slate-400">Acus Sg</td><td>καλ-όν</td><td>καλ-ήν</td><td>καλ-όν</td></tr>
-                      <tr><td className="font-bold text-slate-400">Gen Sg</td><td>καλ-οῦ</td><td>καλ-ῆς</td><td>καλ-οῦ</td></tr>
+                      <tr><td className="font-bold text-slate-400">Nom Sg</td><td>καλ-<strong className="text-amber-400">ός</strong></td><td>καλ-<strong className="text-pink-400">ή</strong></td><td>καλ-<strong className="text-emerald-400">όν</strong></td></tr>
+                      <tr><td className="font-bold text-slate-400">Acus Sg</td><td>καλ-<strong className="text-amber-400">όν</strong></td><td>καλ-<strong className="text-pink-400">ήν</strong></td><td>καλ-<strong className="text-emerald-400">όν</strong></td></tr>
+                      <tr><td className="font-bold text-slate-400">Gen Sg</td><td>καλ-<strong className="text-amber-400">οῦ</strong></td><td>καλ-<strong className="text-pink-400">ῆς</strong></td><td>καλ-<strong className="text-emerald-400">οῦ</strong></td></tr>
                     </tbody>
                   </table>
-                  <h4 className="font-bold text-purple-400 text-xl border-b border-slate-700 pb-2">2ª Clase (Tercera Declinación, 3-1-3)</h4>
-                  <p>Ejemplo: πᾶς, πᾶσα, πᾶν (todo).</p>
-                  <table className="table-greek w-full text-center">
+                  <h4 className="font-bold text-purple-400 text-xl border-b border-slate-700 pb-2 mt-8">2ª Clase (Modelo 3-1-3)</h4>
+                  <p>Masc/Neutro usan la 3ª Declinación. Femenino usa la 1ª (Alfa impura). Ejemplo: πᾶς, πᾶσα, πᾶν (todo).</p>
+                  <table className="table-greek w-full text-center shadow-inner">
                     <thead><tr><th>Caso</th><th>Masc (3ª)</th><th>Fem (1ª)</th><th>Neutro (3ª)</th></tr></thead>
                     <tbody>
                       <tr><td className="font-bold text-slate-400">Nom Sg</td><td>πᾶς</td><td>πᾶσ-α</td><td>πᾶν</td></tr>
@@ -676,11 +644,11 @@
                     <h2 className="text-[5rem] font-black text-amber-500 mb-8 uppercase leading-none">¡El Nóstos<br/>ha terminado!</h2>
                     <div className="bg-slate-900 p-12 rounded-[3rem] border border-slate-700 max-w-4xl mx-auto">
                       <p className="text-2xl text-slate-300 mb-10 leading-relaxed">Has burlado a los dioses, derrotado a los monstruos y recuperado Ítaca gracias a tu conocimiento de la antigua gramática.</p>
-                      <h4 className="text-amber-500 font-black mb-6 uppercase tracking-widest text-xl"><Star className="inline mr-2"/> Tesoros <Star className="inline ml-2"/></h4>
+                      <h4 className="text-amber-500 font-black mb-6 uppercase tracking-widest text-xl"><Star className="inline mr-2"/> Tesoros de la Epopeya <Star className="inline ml-2"/></h4>
                       <div className="flex flex-wrap justify-center gap-4 mb-12">
-                        {inventory.map((item, i) => (<div key={i} className="bg-slate-800 p-4 rounded-xl flex flex-col items-center border border-slate-600 w-28"><span className="text-4xl mb-2">{item.icon}</span><span className="text-[10px] font-bold text-center">{item.name}</span></div>))}
+                        {inventory.map((item, i) => (<div key={i} className="bg-slate-800 p-4 rounded-xl flex flex-col items-center border border-slate-600 w-32 shadow-xl"><span className="text-5xl mb-3">{item.icon}</span><span className="text-[11px] font-bold text-center text-amber-100 uppercase tracking-wider">{item.name}</span></div>))}
                       </div>
-                      <button onClick={() => window.location.reload()} className="bg-amber-600 px-12 py-5 text-black text-2xl font-black rounded-xl hover:scale-105">Volver a jugar</button>
+                      <button onClick={() => window.location.reload()} className="bg-gradient-to-r from-amber-600 to-amber-500 text-black text-2xl font-black px-16 py-6 rounded-2xl shadow-[0_0_40px_rgba(217,119,6,0.6)] transform hover:scale-105 transition-all">Volver a jugar</button>
                     </div>
                   </div>
                 )}
@@ -689,8 +657,8 @@
               {gameState === 'playing' && (
                 <div className="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-md border-t border-slate-800 p-4 z-40">
                   <div className="max-w-6xl mx-auto flex items-center gap-4 overflow-x-auto custom-scrollbar">
-                    <span className="text-amber-500 font-black uppercase text-sm mr-2">Tesoros:</span>
-                    {inventory.length === 0 ? <span className="text-slate-500 italic">Vacío</span> : inventory.map((item, idx) => (<div key={idx} className="bg-slate-800 px-4 py-2 rounded-xl flex items-center gap-2 border border-slate-700 whitespace-nowrap"><span className="text-xl">{item.icon}</span><span className="text-xs font-bold">{item.name}</span></div>))}
+                    <span className="text-amber-500 font-black uppercase text-sm mr-2 tracking-widest">Tesoros:</span>
+                    {inventory.length === 0 ? <span className="text-slate-500 italic font-serif">Aún no tienes tesoros...</span> : inventory.map((item, idx) => (<div key={idx} className="bg-slate-800 px-4 py-2 rounded-xl flex items-center gap-2 border border-slate-700 whitespace-nowrap shadow-md"><span className="text-xl">{item.icon}</span><span className="text-xs font-bold text-slate-200 uppercase tracking-wider">{item.name}</span></div>))}
                   </div>
                 </div>
               )}
@@ -699,19 +667,19 @@
                 <div className="fixed inset-0 z-50 bg-slate-950/95 p-6 flex">
                   <div className="bg-[#0f172a] w-full h-full rounded-3xl flex overflow-hidden border-2 border-amber-500/50 shadow-[0_0_100px_rgba(217,119,6,0.2)] relative">
                     <button onClick={() => setIsCodexOpen(false)} className="absolute top-6 right-6 z-50 text-white bg-red-600/80 hover:bg-red-600 p-3 rounded-full transition-colors"><XCircle size={28}/></button>
-                    <div className="w-80 border-r border-slate-800 p-6 overflow-y-auto flex flex-col gap-3 bg-[#020617]">
+                    <div className="w-80 border-r border-slate-800 p-6 overflow-y-auto flex flex-col gap-3 bg-[#020617] custom-scrollbar">
                       <h2 className="text-xl font-black text-amber-500 mb-6 flex items-center gap-2 uppercase tracking-widest"><BookOpen/> Biblioteca</h2>
                       {Object.keys(CODEX_DATA).map(k => (
-                        <button key={k} onClick={() => setActiveTopic(k)} className={`p-4 text-left rounded-xl transition-all border-2 ${activeTopic === k ? 'bg-slate-800 border-amber-500 text-amber-400' : 'bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-600'}`}>
-                           <span className="text-[10px] uppercase text-slate-500 block mb-1">{CODEX_DATA[k].category}</span>
-                           <strong className="block">{CODEX_DATA[k].title}</strong>
+                        <button key={k} onClick={() => setActiveTopic(k)} className={`p-4 text-left rounded-xl transition-all border-2 ${activeTopic === k ? 'bg-slate-800 border-amber-500 text-amber-400 scale-105 shadow-[0_0_15px_rgba(217,119,6,0.3)] z-10' : 'bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-600'}`}>
+                           <span className="text-[10px] uppercase text-slate-500 block mb-1 tracking-widest">{CODEX_DATA[k].category}</span>
+                           <strong className="block text-sm">{CODEX_DATA[k].title}</strong>
                         </button>
                       ))}
                     </div>
                     <div className="flex-1 p-12 overflow-y-auto relative custom-scrollbar">
                       <div className="absolute inset-0 opacity-5 pointer-events-none flex justify-center items-center"><BookOpen size={600}/></div>
                       <div className="relative z-10 max-w-4xl mx-auto">
-                         <h3 className="text-5xl font-black mb-10 text-white border-b-2 border-slate-800 pb-8 flex items-center gap-4"><span className="text-amber-500">{CODEX_DATA[activeTopic].icon}</span> {CODEX_DATA[activeTopic].title}</h3>
+                         <h3 className="text-4xl md:text-5xl font-black mb-10 text-white border-b-2 border-slate-800 pb-8 flex items-center gap-4"><span className="text-amber-500">{CODEX_DATA[activeTopic].icon}</span> {CODEX_DATA[activeTopic].title}</h3>
                          {CODEX_DATA[activeTopic].content}
                       </div>
                     </div>
@@ -721,7 +689,6 @@
             </div>
           );
         }
-
         const QuoteIcon = (props) => (
             <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                 <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
