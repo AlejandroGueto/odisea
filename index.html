@@ -677,31 +677,40 @@ const MonstruosHeroes = () => {
 
           const startGame = () => { setGameState('playing'); };
 
-          const CODEX_DATA = {
+         const CODEX_DATA = {
             literatura: {
               category: "Contexto Cultural", title: "1. Literatura, Sociedad y Oralidad", icon: <Feather size={20} />,
               content: (
                 <div className="space-y-6 text-slate-300">
-                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-3">La Cuestión Homérica y la Oralidad</h4>
-                  <p>Durante siglos, los eruditos debatieron si Homero realmente existió. Hoy sabemos, gracias a las investigaciones de Milman Parry, que estos poemas no fueron escritos por una sola persona en un escritorio, sino que son el resultado de <strong>siglos de tradición oral</strong> de bardos (aedos) que cantaban de memoria usando fórmulas repetitivas.</p>
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-3">La Cuestión Homérica y el Canto Oral</h4>
+                  <p className="leading-relaxed">Durante siglos, los eruditos debatieron si "Homero" (el rehén/el ciego) realmente existió. Hoy sabemos, gracias a las investigaciones de Milman Parry, que la Ilíada y la Odisea no fueron escritas por una sola pluma en un escritorio. Son la culminación de <strong>siglos de tradición oral</strong>. Los bardos (aedos) cantaban de memoria improvisando en directo gracias al <strong>hexámetro dactílico</strong>, un ritmo musical estricto.</p>
                   
                   <div className="grid md:grid-cols-2 gap-4 mt-4">
                     <div className="bg-amber-950/20 border-l-4 border-amber-600 p-5 rounded-r-xl">
-                      <h5 className="font-bold text-amber-500 mb-2">El Colapso del Bronce</h5>
-                      <p className="text-sm">Homero canta sobre la civilización Micénica (~1200 a.C.), una época dorada de palacios que colapsó misteriosamente. Durante los siguientes 400 años ("Edad Oscura"), Grecia olvidó escribir, y los aedos mantuvieron viva la gloria del pasado cantando.</p>
+                      <h5 className="font-bold text-amber-500 mb-2 text-lg">El Colapso del Bronce</h5>
+                      <p className="text-sm leading-relaxed">Homero canta sobre la gloriosa civilización Micénica (~1200 a.C.), una época de palacios, bronce y reyes guerreros que colapsó misteriosamente. Durante los siguientes 400 años (la "Edad Oscura"), Grecia perdió la escritura (Lineal B). En esa oscuridad, solo los aedos mantuvieron viva la memoria del pasado heroico a través del canto.</p>
                     </div>
                     <div className="bg-blue-950/20 border-l-4 border-blue-500 p-5 rounded-r-xl">
-                      <h5 className="font-bold text-blue-400 mb-2">Fórmulas y Epítetos</h5>
-                      <p className="text-sm">Para poder improvisar hexámetros dactílicos en directo, los aedos usaban "bloques prefabricados": epítetos como <em>Odiseo fecundo en ardides</em> o <em>Atenea la de ojos brillantes</em>. Encajaban perfectamente en la métrica musical.</p>
+                      <h5 className="font-bold text-blue-400 mb-2 text-lg">Fórmulas y Epítetos</h5>
+                      <p className="text-sm leading-relaxed">Para improvisar sin detenerse, los aedos usaban "bloques prefabricados". Por ejemplo, en lugar de decir solo "Atenea", decían <em>"Atenea la de ojos brillantes" (γλαυκῶπις Ἀθήνη)</em>. Estos bloques encajaban perfectamente en el puzle métrico del verso, ayudando al poeta a pensar la siguiente línea.</p>
                     </div>
                   </div>
 
-                  <h4 className="font-bold text-emerald-400 text-xl border-b border-slate-700 pb-3 mt-8">Valores de la Sociedad Épica</h4>
-                  <ul className="space-y-3 font-mono text-sm bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-inner">
-                    <li><strong className="text-blue-300 text-base">Oîkos (Οἶκος):</strong> La base de la sociedad en la Odisea. No es la ciudad (polis), sino la casa, el patrimonio, la familia y los siervos. Odiseo lucha por restaurar su Oikos.</li>
-                    <li><strong className="text-emerald-400 text-base">Xenía (Ξενία):</strong> La sagrada ley de la hospitalidad. Un forastero debe ser recibido, alimentado y bañado antes siquiera de preguntarle su nombre, pues podría ser un dios disfrazado. (Patrocinada por Zeus Xenios).</li>
-                    <li><strong className="text-amber-400 text-base">Aidos (Αἰδώς) vs Kleos (Κλέος):</strong> El Aidos es la vergüenza social, el miedo al "qué dirán". El Kleos es la gloria imperecedera. Aquiles eligió el Kleos muriendo joven; Odiseo busca el <em>Nóstos</em> (regreso) para disfrutar de su Kleos en vida.</li>
-                    <li><strong className="text-red-400 text-base">Hybris (Ὕβρις):</strong> La desmesura, el orgullo arrogante de creerse superior a las leyes divinas. Los pretendientes cometen Hybris al devorar el Oikos de Odiseo, y pagan con la Némesis (castigo divino).</li>
+                  <h4 className="font-bold text-purple-400 text-xl border-b border-slate-700 pb-3 mt-8">Estructura de la Odisea</h4>
+                  <p className="text-sm mb-4">A diferencia de la Ilíada, que es lineal, la Odisea es una obra maestra de la estructura narrativa dividida en 24 cantos y 3 grandes bloques:</p>
+                  <ul className="space-y-2 text-sm bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-inner">
+                    <li><strong className="text-purple-300">1. La Telemaquia (Cantos I-IV):</strong> Odiseo no aparece. Vemos las consecuencias de su ausencia en Ítaca y el viaje de madurez de su hijo Telémaco buscándolo.</li>
+                    <li><strong className="text-pink-300">2. Los Apólogos (Cantos IX-XII):</strong> El gran "flashback". Odiseo, en primera persona, relata a los feacios sus aventuras mágicas y monstruosas.</li>
+                    <li><strong className="text-red-300">3. La Mnesterofonía (Matanza) y el Nóstos:</strong> El regreso en secreto a Ítaca, el disfraz de mendigo, la prueba del arco y la venganza sangrienta.</li>
+                  </ul>
+
+                  <h4 className="font-bold text-emerald-400 text-xl border-b border-slate-700 pb-3 mt-8">El Código Ético y los Valores</h4>
+                  <ul className="space-y-4 font-mono text-sm bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-inner">
+                    <li><strong className="text-blue-300 text-base">Oîkos (Οἶκος):</strong> La base del mundo homérico. No es la ciudad-estado (polis), sino la casa, el patrimonio, la familia, la tierra y los siervos. Odiseo lucha por evitar la destrucción de su Oikos.</li>
+                    <li><strong className="text-emerald-400 text-base">Xenía (Ξενία):</strong> La ley sagrada de la hospitalidad, regida por Zeus Xenios. Todo forastero debe ser bañado y alimentado antes de preguntarle quién es, pues los dioses suelen caminar disfrazados de mendigos. Polifemo viola esta ley devorando a sus huéspedes.</li>
+                    <li><strong className="text-amber-400 text-base">Kleos (Κλέος) vs Nóstos (Νόστος):</strong> El <em>Kleos</em> es la gloria que se canta, la fama inmortal. Aquiles eligió morir joven por el Kleos. Odiseo elige el <em>Nóstos</em> (el doloroso viaje de regreso a casa y a la mortalidad) para disfrutar de su Kleos en vida.</li>
+                    <li><strong className="text-red-400 text-base">Hybris (Ὕβρις) y Némesis (Νέμεσις):</strong> La Hybris es la desmesura, la arrogancia extrema de creerse igual a los dioses o pisotear el derecho ajeno (como hacen los pretendientes). Inevitablemente atrae la Némesis, el castigo y la retribución divina equilibradora.</li>
+                    <li><strong className="text-cyan-400 text-base">Mêtis (Μῆτις) vs Bíe (Βίη):</strong> La <em>Bíe</em> es la fuerza bruta e impulsiva (Aquiles, el Cíclope). La <em>Mêtis</em> es la inteligencia práctica, el engaño, la astucia y la supervivencia. Odiseo es el campeón absoluto de la Mêtis.</li>
                   </ul>
                 </div>
               )
@@ -832,94 +841,135 @@ const MonstruosHeroes = () => {
               )
             },
             verbos_presente: {
-              category: "Morfología Verbal", title: "4. Tiempos de Acción Continua", icon: <Sparkles size={20} />,
+              category: "Morfología Verbal", title: "4. Imperfecto y Acción Continua", icon: <Sparkles size={20} />,
               content: (
-                <div className="space-y-8 text-sm text-slate-300">
-                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Tema de Presente</h4>
-                  <p>Expresa acciones inacabadas o en proceso. El <strong>Imperfecto</strong> añade el <strong>Aumento (ἐ-)</strong> a la raíz para indicar que la acción duraba en el pasado (yo desataba, yo comía).</p>
+                <div className="space-y-6 text-sm text-slate-300">
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Presente y el Imperfecto (El Tema de Presente)</h4>
+                  <p className="mb-4">El sistema de Presente expresa acciones <strong>inacabadas, habituales o en proceso de desarrollo</strong>. El <strong>Imperfecto</strong> es simplemente el pasado de esta acción continua ("yo desataba", "yo estaba desatando", "yo solía desatar"). Para indicar que la acción es en el pasado, el griego usa la marca de tiempo por excelencia: <strong>El Aumento</strong>.</p>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner overflow-x-auto">
-                      <h5 className="font-bold text-blue-300 text-center mb-2 uppercase tracking-widest text-xs">Voz Activa</h5>
-                      <table className="table-greek w-full whitespace-nowrap text-center text-xs">
-                        <thead><tr><th>Pers</th><th>PRESENTE</th><th>IMPERFECTO</th></tr></thead>
-                        <tbody>
-                          <tr><td className="font-bold text-slate-400">1Sg</td><td>λύ-<strong className="text-blue-400">ω</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-blue-400">ον</strong></td></tr>
-                          <tr><td className="font-bold text-slate-400">2Sg</td><td>λύ-<strong className="text-blue-400">εις</strong></td><td><strong className="text-amber-500">ἔ</strong>-λυ-<strong className="text-blue-400">ες</strong></td></tr>
-                          <tr><td className="font-bold text-slate-400">3Sg</td><td>λύ-<strong className="text-blue-400">ει</strong></td><td><strong className="text-amber-500">ἔ</strong>-λυ-<strong className="text-blue-400">ε(ν)</strong></td></tr>
-                          <tr><td className="font-bold text-slate-400">1Pl</td><td>λύ-<strong className="text-blue-400">ομεν</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-blue-400">ομεν</strong></td></tr>
-                          <tr><td className="font-bold text-slate-400">2Pl</td><td>λύ-<strong className="text-blue-400">ετε</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-blue-400">ετε</strong></td></tr>
-                          <tr><td className="font-bold text-slate-400">3Pl</td><td>λύ-<strong className="text-blue-400">ουσι(ν)</strong></td><td><strong className="text-amber-500">ἔ</strong>-λυ-<strong className="text-blue-400">ον</strong></td></tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner overflow-x-auto">
-                      <h5 className="font-bold text-amber-400 text-center mb-2 uppercase tracking-widest text-xs">Voz Media-Pasiva</h5>
-                      <table className="table-greek w-full whitespace-nowrap text-center text-xs">
-                        <thead><tr><th>Pers</th><th>PRESENTE</th><th>IMPERFECTO</th></tr></thead>
-                        <tbody>
-                          <tr><td className="font-bold text-slate-400">1Sg</td><td>λύ-<strong className="text-amber-400">ομαι</strong></td><td><strong className="text-amber-500">ἐ</strong>-λυ-<strong className="text-amber-400">όμην</strong></td></tr>
-                          <tr><td className="font-bold text-slate-400">2Sg</td><td>λύ-<strong className="text-amber-400">ῃ / -ει</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-amber-400">ου</strong></td></tr>
-                          <tr><td className="font-bold text-slate-400">3Sg</td><td>λύ-<strong className="text-amber-400">εται</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-amber-400">ετο</strong></td></tr>
-                          <tr><td className="font-bold text-slate-400">1Pl</td><td>λυ-<strong className="text-amber-400">όμεθα</strong></td><td><strong className="text-amber-500">ἐ</strong>-λυ-<strong className="text-amber-400">όμεθα</strong></td></tr>
-                          <tr><td className="font-bold text-slate-400">2Pl</td><td>λύ-<strong className="text-amber-400">εσθε</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-amber-400">εσθε</strong></td></tr>
-                          <tr><td className="font-bold text-slate-400">3Pl</td><td>λύ-<strong className="text-amber-400">ονται</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-amber-400">οντο</strong></td></tr>
-                        </tbody>
-                      </table>
+                  <div className="bg-slate-900 p-5 rounded-xl border border-amber-900/50 shadow-inner mb-6">
+                    <h5 className="font-bold text-amber-500 mb-4 text-lg border-b border-amber-900/50 pb-2 flex items-center gap-2"><Sparkles size={18}/> Las Reglas del Aumento</h5>
+                    <p className="mb-3">El aumento solo aparece en el modo Indicativo de los tiempos del pasado (Imperfecto, Aoristo y Pluscuamperfecto). Funciona de dos maneras dependiendo de cómo empiece el verbo:</p>
+                    
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="bg-slate-950 p-4 rounded-lg border border-slate-800">
+                        <h6 className="font-bold text-blue-400 mb-2 uppercase tracking-widest text-xs">1. Aumento Silábico</h6>
+                        <p className="text-xs mb-2">Si el verbo empieza por <strong>consonante</strong>, se le añade la sílaba <strong>ἐ-</strong> delante de la raíz.</p>
+                        <ul className="font-mono text-sm text-slate-300">
+                          <li>λύω ➔ <strong className="text-amber-400">ἐ</strong>-λυον</li>
+                          <li>γράφω ➔ <strong className="text-amber-400">ἔ</strong>-γραφον</li>
+                          <li>λαμβάνω ➔ <strong className="text-amber-400">ἐ</strong>-λάμβανον</li>
+                        </ul>
+                      </div>
+                      <div className="bg-slate-950 p-4 rounded-lg border border-slate-800">
+                        <h6 className="font-bold text-emerald-400 mb-2 uppercase tracking-widest text-xs">2. Aumento Temporal</h6>
+                        <p className="text-xs mb-2">Si el verbo empieza por <strong>vocal</strong>, no se añade "e", sino que la vocal inicial <strong>se alarga</strong> (crece en el tiempo).</p>
+                        <ul className="font-mono text-sm text-slate-300 grid grid-cols-2 gap-x-2">
+                          <li><strong className="text-emerald-400">α</strong> ➔ η <span className="text-xs text-slate-500 block">(ἄγω ➔ ἦγον)</span></li>
+                          <li><strong className="text-emerald-400">ε</strong> ➔ η <span className="text-xs text-slate-500 block">(ἐλπίζω ➔ ἤλπιζον)</span></li>
+                          <li><strong className="text-emerald-400">ο</strong> ➔ ω <span className="text-xs text-slate-500 block">(ὀνομάζω ➔ ὠνόμαζον)</span></li>
+                          <li><strong className="text-emerald-400">αι / ει</strong> ➔ ῃ <span className="text-xs text-slate-500 block">(αἰτέω ➔ ᾔτουν)</span></li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="bg-slate-950 p-5 rounded-2xl border border-blue-900/50 mt-6">
-                    <h4 className="font-bold text-blue-400 text-lg mb-3">Verbos Contractos (-άω, -έω, -όω)</h4>
-                    <p className="mb-3 text-xs text-slate-400">Cuando la raíz acaba en vocal y choca con la desinencia, se contraen y llevan acento circunflejo (῀).</p>
-                    <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
-                      <li className="bg-slate-900 p-3 rounded border border-amber-900/50"><strong className="text-amber-400 block mb-1">Regla de -άω:</strong> α + ο/ω = ω<br/>α + ε/η = α<br/><span className="text-slate-500">Ej: τιμά-ομεν ➔ τιμῶμεν</span></li>
-                      <li className="bg-slate-900 p-3 rounded border border-cyan-900/50"><strong className="text-cyan-400 block mb-1">Regla de -έω:</strong> ε + ε = ει<br/>ε + ο = ου<br/><span className="text-slate-500">Ej: ποιέ-ομεν ➔ ποιοῦμεν</span></li>
-                      <li className="bg-slate-900 p-3 rounded border border-emerald-900/50"><strong className="text-emerald-400 block mb-1">Regla de -όω:</strong> ο + ε/ο/ου = ου<br/>ο + η/ω = ω<br/><span className="text-slate-500">Ej: δηλό-ομεν ➔ δηλοῦμεν</span></li>
-                    </ul>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner overflow-x-auto">
+                      <h5 className="font-bold text-blue-300 text-center mb-2 uppercase tracking-widest text-xs">Voz Activa (-ω)</h5>
+                      <p className="text-center text-[10px] text-slate-400 mb-2">Observa la vocal temática (ο/ε) que une la raíz y la desinencia.</p>
+                      <table className="table-greek w-full whitespace-nowrap text-center text-xs">
+                        <thead><tr><th>Pers</th><th>PRESENTE</th><th>IMPERFECTO</th></tr></thead>
+                        <tbody>
+                          <tr><td className="font-bold text-slate-400">1Sg</td><td>λύ-<strong className="text-blue-400">ω</strong></td><td><strong className="text-amber-500">ἔ</strong>-λυ-<strong className="text-blue-400">ο-ν</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">2Sg</td><td>λύ-<strong className="text-blue-400">ει-ς</strong></td><td><strong className="text-amber-500">ἔ</strong>-λυ-<strong className="text-blue-400">ε-ς</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">3Sg</td><td>λύ-<strong className="text-blue-400">ει</strong></td><td><strong className="text-amber-500">ἔ</strong>-λυ-<strong className="text-blue-400">ε(ν)</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">1Pl</td><td>λύ-<strong className="text-blue-400">ο-μεν</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-blue-400">ο-μεν</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">2Pl</td><td>λύ-<strong className="text-blue-400">ε-τε</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-blue-400">ε-τε</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">3Pl</td><td>λύ-<strong className="text-blue-400">ουσι(ν)</strong></td><td><strong className="text-amber-500">ἔ</strong>-λυ-<strong className="text-blue-400">ο-ν</strong></td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner overflow-x-auto">
+                      <h5 className="font-bold text-amber-400 text-center mb-2 uppercase tracking-widest text-xs">Voz Media (-ομαι)</h5>
+                      <p className="text-center text-[10px] text-slate-400 mb-2">Desinencias secundarias de pasado (-μην, -σο, -το...)</p>
+                      <table className="table-greek w-full whitespace-nowrap text-center text-xs">
+                        <thead><tr><th>Pers</th><th>PRESENTE</th><th>IMPERFECTO</th></tr></thead>
+                        <tbody>
+                          <tr><td className="font-bold text-slate-400">1Sg</td><td>λύ-<strong className="text-amber-400">ο-μαι</strong></td><td><strong className="text-amber-500">ἐ</strong>-λυ-<strong className="text-amber-400">ό-μην</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">2Sg</td><td>λύ-<strong className="text-amber-400">ῃ / -ει</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-amber-400">ου</strong> (ε-σο)</td></tr>
+                          <tr><td className="font-bold text-slate-400">3Sg</td><td>λύ-<strong className="text-amber-400">ε-ται</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-amber-400">ε-το</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">1Pl</td><td>λυ-<strong className="text-amber-400">ό-μεθα</strong></td><td><strong className="text-amber-500">ἐ</strong>-λυ-<strong className="text-amber-400">ό-μεθα</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">2Pl</td><td>λύ-<strong className="text-amber-400">ε-σθε</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-amber-400">ε-σθε</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">3Pl</td><td>λύ-<strong className="text-amber-400">ο-νται</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-amber-400">ο-ντο</strong></td></tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               )
             },
             aoristos: {
-              category: "Morfología Verbal", title: "5. Tiempos Aoristos (El Pasado Épico)", icon: <Key size={20} />,
+              category: "Morfología Verbal", title: "5. Aoristos (El Pasado Épico)", icon: <Key size={20} />,
               content: (
                 <div className="space-y-6 text-sm text-slate-300">
-                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Pasado Puntual</h4>
-                  <p>El Aoristo (a-horistos, 'sin límites') concibe la acción como un punto cerrado en el pasado, sin importar su duración. Es el tiempo narrativo por excelencia. Siempre lleva <strong>Aumento (ἐ-)</strong> en el Indicativo.</p>
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Tiempo del Mito (Acción Puntual)</h4>
+                  <p className="mb-4">El Aoristo (a-horistos, 'sin límites') concibe la acción como un evento cerrado, concluido y único en el pasado, sin importar su duración. Es el equivalente a nuestro Pretérito Perfecto Simple ("desaté", "comí", "fui"). Como tiempo secundario del pasado, <strong>siempre lleva Aumento en el Indicativo</strong>.</p>
 
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-inner">
-                      <h5 className="font-bold text-blue-400 mb-3 text-base flex items-center gap-2"><Zap size={16}/> 1. Aoristo Sigmático</h5>
-                      <p className="mb-3 text-xs text-slate-400">Sufijo <strong>-σα-</strong>. Para verbos contractos, la vocal alarga (α/ε ➔ η; ο ➔ ω).</p>
-                      <table className="table-greek w-full text-xs">
-                        <tbody>
-                          <tr><td>1Sg</td><td>ἔλυ-<strong className="text-blue-400">σα</strong></td><td>ἐλύ-<strong className="text-amber-500">σάμην</strong> (Medio)</td></tr>
-                          <tr><td>3Sg</td><td>ἔλυ-<strong className="text-blue-400">σε(ν)</strong></td><td>ἐλύ-<strong className="text-amber-500">σατο</strong> (Medio)</td></tr>
-                          <tr><td>3Pl</td><td>ἔλυ-<strong className="text-blue-400">σαν</strong></td><td>ἐλύ-<strong className="text-amber-500">σαντο</strong> (Medio)</td></tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <div className="bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-inner">
-                      <h5 className="font-bold text-emerald-400 mb-3 text-base flex items-center gap-2"><Scroll size={16}/> 2. Aoristo Fuerte</h5>
-                      <p className="mb-3 text-xs text-slate-400">No tienen sigma. Reducen/destruyen su raíz fonética (grado cero). Usan las desinencias del imperfecto.</p>
-                      <ul className="space-y-2 text-xs font-mono">
-                        <li>λείπω ➔ <strong className="text-emerald-400">ἔλιπον</strong>, ἔλιπες, ἔλιπε...</li>
-                        <li>λαμβάνω ➔ <strong className="text-emerald-400">ἔλαβον</strong> (tomé)</li>
-                        <li>ὁράω ➔ <strong className="text-emerald-400">εἶδον</strong> (vi) - <em>Supletivo</em></li>
-                        <li>ἔρχομαι ➔ <strong className="text-emerald-400">ἦλθον</strong> (fui) - <em>Supletivo</em></li>
-                      </ul>
+                  <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 shadow-inner">
+                    <h5 className="font-bold text-blue-400 mb-4 text-lg flex items-center gap-2"><Zap size={20}/> 1. El Aoristo Sigmático</h5>
+                    <p className="mb-4 text-slate-300">Es la forma regular del aoristo. Inserta el morfema <strong>-σα-</strong> entre la raíz y las desinencias. Ej: ἔ-λυ-<strong className="text-blue-400">σα</strong>-μεν.</p>
+                    
+                    <div className="bg-slate-950 p-5 rounded-xl border border-blue-900/50 mb-4">
+                      <h6 className="font-bold text-amber-400 mb-3 border-b border-slate-800 pb-2">El Choque de Consonantes</h6>
+                      <p className="text-xs text-slate-400 mb-3">Si la raíz del verbo termina en consonante, al chocar violentamente contra la sigma (σ) del aoristo, se produce una explosión fonética que da lugar a una nueva letra doble:</p>
+                      <div className="grid md:grid-cols-3 gap-4 font-mono text-center">
+                        <div className="bg-slate-900 p-3 rounded-lg border border-slate-700">
+                          <span className="text-xs text-slate-400 block mb-1">Labiales</span>
+                          <span className="text-lg text-white">π, β, φ + σ = <strong className="text-blue-400 text-2xl">ψ</strong></span>
+                          <span className="text-xs text-slate-500 block mt-2">πέμ<strong className="text-white">π</strong>ω ➔ ἔπεμ<strong className="text-blue-400">ψ</strong>α</span>
+                        </div>
+                        <div className="bg-slate-900 p-3 rounded-lg border border-slate-700">
+                          <span className="text-xs text-slate-400 block mb-1">Velares</span>
+                          <span className="text-lg text-white">κ, γ, χ + σ = <strong className="text-blue-400 text-2xl">ξ</strong></span>
+                          <span className="text-xs text-slate-500 block mt-2">διώ<strong className="text-white">κ</strong>ω ➔ ἐδίω<strong className="text-blue-400">ξ</strong>α</span>
+                        </div>
+                        <div className="bg-slate-900 p-3 rounded-lg border border-slate-700">
+                          <span className="text-xs text-slate-400 block mb-1">Dentales</span>
+                          <span className="text-lg text-white">τ, δ, θ + σ = <strong className="text-blue-400 text-2xl">σ</strong></span>
+                          <span className="text-xs text-slate-500 block mt-2">πεί<strong className="text-white">θ</strong>ω ➔ ἔπει<strong className="text-blue-400">σ</strong>α</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="bg-purple-950/20 p-5 rounded-xl border border-purple-900/50 shadow-inner mt-4">
-                    <h5 className="font-bold text-purple-400 mb-3 text-lg">3. El Aoristo Pasivo (-θη-)</h5>
-                    <p className="mb-3 text-slate-300">A diferencia del presente, en el aoristo la Voz Pasiva tiene formas propias distintas a la Media. Se forman insertando el poderoso sufijo <strong>-θη-</strong> (o solo -η-) antes de unas desinencias que, paradójicamente, parecen activas.</p>
-                    <div className="bg-slate-950 p-3 rounded font-mono text-center text-sm border border-purple-800">
-                      ἐ-λύ-<strong className="text-purple-400 font-black">θη</strong>-ν <span className="text-slate-500 text-xs ml-2">(Fui desatado / Fui liberado)</span><br/>
-                      ἐ-λύ-<strong className="text-purple-400 font-black">θη</strong>-ς <span className="text-slate-500 text-xs ml-2">(Fuiste desatado)</span><br/>
-                      ἐ-λύ-<strong className="text-purple-400 font-black">θη</strong> <span className="text-slate-500 text-xs ml-2">(Fue desatado)</span>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-slate-900 p-5 rounded-xl border border-emerald-900/50 shadow-inner">
+                      <h5 className="font-bold text-emerald-400 mb-3 text-lg flex items-center gap-2"><Scroll size={18}/> 2. Aoristo Fuerte (Apofónico)</h5>
+                      <p className="mb-3 text-xs text-slate-400 leading-relaxed">Son verbos muy antiguos. En lugar de usar la marca "-σα-", indican el pasado <strong>destruyendo, reduciendo o alterando radicalmente la vocal de su propia raíz</strong> (fenómeno llamado apofonía o grado cero). Al quedarse sin la sigma, utilizan las mismas desinencias temáticas (-ον, -ες, -ε) que el imperfecto.</p>
+                      <ul className="space-y-2 text-sm font-mono bg-slate-950 p-3 rounded-lg border border-slate-800">
+                        <li className="flex justify-between items-center border-b border-slate-800 pb-1"><span>λείπω (dejo)</span> ➔ <strong className="text-emerald-400">ἔλιπον</strong></li>
+                        <li className="flex justify-between items-center border-b border-slate-800 pb-1"><span>βάλλω (lanzo)</span> ➔ <strong className="text-emerald-400">ἔβαλον</strong></li>
+                        <li className="flex justify-between items-center border-b border-slate-800 pb-1"><span>λαμβάνω (tomo)</span> ➔ <strong className="text-emerald-400">ἔλαβον</strong></li>
+                        <li className="flex justify-between items-center text-xs text-slate-500 pt-1"><span>ὁράω (veo) ➔</span> <strong className="text-purple-400">εἶδον (vi)</strong> [Supletivo]</li>
+                        <li className="flex justify-between items-center text-xs text-slate-500"><span>ἔρχομαι (voy) ➔</span> <strong className="text-purple-400">ἦλθον (fui)</strong> [Supletivo]</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-purple-950/20 p-5 rounded-xl border border-purple-900/50 shadow-inner">
+                      <h5 className="font-bold text-purple-400 mb-3 text-lg">3. El Aoristo Pasivo (-θη-)</h5>
+                      <p className="mb-3 text-xs text-slate-300 leading-relaxed">¡Atención! En el presente, la Voz Media y la Voz Pasiva comparten exactamente las mismas desinencias. Sin embargo, en el Aoristo, <strong>la Pasiva crea sus propias formas</strong> independientes insertando el poderoso marcador <strong>-θη-</strong> (o simplemente -η-) antes de unas desinencias que parecen extrañamente activas.</p>
+                      <table className="table-greek w-full text-center text-xs">
+                        <thead><tr><th>Aoristo Pasivo de λύω</th><th>Traducción</th></tr></thead>
+                        <tbody>
+                          <tr><td>ἐ-λύ-<strong className="text-purple-400 text-sm">θη</strong>-ν</td><td className="text-slate-400 italic">fui desatado</td></tr>
+                          <tr><td>ἐ-λύ-<strong className="text-purple-400 text-sm">θη</strong>-ς</td><td className="text-slate-400 italic">fuiste desatado</td></tr>
+                          <tr><td>ἐ-λύ-<strong className="text-purple-400 text-sm">θη</strong></td><td className="text-slate-400 italic">fue desatado</td></tr>
+                          <tr><td>ἐ-λύ-<strong className="text-purple-400 text-sm">θη</strong>-μεν</td><td className="text-slate-400 italic">fuimos desatados</td></tr>
+                          <tr><td>ἐ-λύ-<strong className="text-purple-400 text-sm">θη</strong>-τε</td><td className="text-slate-400 italic">fuisteis desatados</td></tr>
+                          <tr><td>ἐ-λύ-<strong className="text-purple-400 text-sm">θη</strong>-σαν</td><td className="text-slate-400 italic">fueron desatados</td></tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -929,39 +979,80 @@ const MonstruosHeroes = () => {
               category: "Morfología Verbal", title: "6. Voz Media y Deponentes", icon: <MessageCircle size={20} />,
               content: (
                 <div className="space-y-6 text-sm text-slate-300">
-                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Sujeto en el Centro de la Acción</h4>
-                  <p>En griego, la Voz Activa saca la acción fuera del sujeto. La Voz Pasiva hace que el sujeto sufra la acción. Pero la <strong>Voz Media</strong> implica que el sujeto realiza la acción <strong>para sí mismo, sobre sí mismo, o con un interés especial</strong>.</p>
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">La Acción Centrada en el Sujeto</h4>
+                  <p className="leading-relaxed">En griego antiguo, la diferencia principal no está entre activo y pasivo, sino entre <strong>Activo</strong> (la acción sale del sujeto hacia afuera, afectando a otra cosa) y <strong>Medio</strong> (la acción se realiza desde el sujeto y revierte sobre el propio sujeto o entra dentro de su esfera de profundo interés). Solo más tarde la voz pasiva evolucionó a partir de la media.</p>
                   
-                  <div className="grid md:grid-cols-3 gap-4 my-4">
-                    <div className="bg-slate-900 p-4 rounded-xl border border-blue-900 shadow-inner">
-                      <h5 className="font-bold text-blue-400 mb-2">Media Reflexiva Directa</h5>
-                      <p className="text-xs text-slate-400 mb-2">La acción recae sobre el cuerpo del sujeto.</p>
-                      <p className="font-mono text-sm text-white">λούομαι</p>
-                      <p className="text-xs text-blue-300 italic">"Me lavo a mí mismo (me baño)"</p>
-                    </div>
-                    <div className="bg-slate-900 p-4 rounded-xl border border-emerald-900 shadow-inner">
-                      <h5 className="font-bold text-emerald-400 mb-2">Media Reflexiva Indirecta</h5>
-                      <p className="text-xs text-slate-400 mb-2">La acción recae sobre algo que le pertenece.</p>
-                      <p className="font-mono text-sm text-white">λούομαι τὰς χεῖρας</p>
-                      <p className="text-xs text-emerald-300 italic">"Me lavo mis (propias) manos"</p>
-                    </div>
-                    <div className="bg-slate-900 p-4 rounded-xl border border-amber-900 shadow-inner">
-                      <h5 className="font-bold text-amber-400 mb-2">Media de Interés</h5>
-                      <p className="text-xs text-slate-400 mb-2">Se hace en beneficio/interés propio.</p>
-                      <p className="font-mono text-sm text-white">λύομαι τὸν υἱόν</p>
-                      <p className="text-xs text-amber-300 italic">"Libero a mi hijo (pagando yo un rescate por él)"</p>
+                  <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 shadow-inner my-6">
+                    <h5 className="font-bold text-amber-500 mb-4 text-lg border-b border-slate-800 pb-2">Los 3 Matices de la Voz Media</h5>
+                    
+                    <div className="space-y-6">
+                      <div className="border-l-4 border-blue-500 pl-4">
+                        <h6 className="font-bold text-blue-400 mb-1">1. Media Reflexiva Directa</h6>
+                        <p className="text-xs text-slate-400 mb-2">Es el uso más evidente pero menos frecuente. El sujeto es a la vez el agente y el paciente físico de la acción.</p>
+                        <div className="grid grid-cols-2 gap-4 bg-slate-950 p-3 rounded border border-slate-800 text-sm">
+                          <div><span className="text-xs text-slate-500 block">ACTIVA:</span> <strong className="text-white font-mono">λούω</strong> (lavo a otro)</div>
+                          <div><span className="text-xs text-slate-500 block">MEDIA:</span> <strong className="text-blue-400 font-mono">λούομαι</strong> (me lavo a mí mismo)</div>
+                        </div>
+                      </div>
+
+                      <div className="border-l-4 border-emerald-500 pl-4">
+                        <h6 className="font-bold text-emerald-400 mb-1">2. Media de Interés (Indirecta)</h6>
+                        <p className="text-xs text-slate-400 mb-2">Es el uso <strong>más común</strong>. El sujeto realiza la acción en beneficio propio o sobre algo que le pertenece íntimamente (una parte de su cuerpo, un familiar, su propiedad).</p>
+                        <div className="grid grid-cols-2 gap-4 bg-slate-950 p-3 rounded border border-slate-800 text-sm">
+                          <div><span className="text-xs text-slate-500 block">ACTIVA:</span> <strong className="text-white font-mono">λύω τὸν ἵππον</strong> (desato el caballo ajeno)</div>
+                          <div><span className="text-xs text-slate-500 block">MEDIA:</span> <strong className="text-emerald-400 font-mono">λύομαι τὸν υἱόν</strong> (rescato/desato a mi propio hijo)</div>
+                        </div>
+                      </div>
+
+                      <div className="border-l-4 border-amber-500 pl-4">
+                        <h6 className="font-bold text-amber-400 mb-1">3. Media Dinámica</h6>
+                        <p className="text-xs text-slate-400 mb-2">Indica que el sujeto participa con todo su ser, fuerza mental o emoción física en la acción.</p>
+                        <div className="grid grid-cols-2 gap-4 bg-slate-950 p-3 rounded border border-slate-800 text-sm">
+                          <div><span className="text-xs text-slate-500 block">ACTIVA:</span> <strong className="text-white font-mono">παύω</strong> (hago parar a otro)</div>
+                          <div><span className="text-xs text-slate-500 block">MEDIA:</span> <strong className="text-amber-400 font-mono">παύομαι</strong> (cesar uno mismo, detenerse con esfuerzo)</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
                   <div className="bg-red-950/20 border border-red-900/50 p-6 rounded-xl mt-4 shadow-lg">
-                    <h5 className="font-bold text-red-400 text-lg mb-3">Verbos Deponentes (Media Tantum)</h5>
-                    <p className="text-slate-200 text-sm mb-4">Son verbos que, por expresar implicación mental, física o emocional profunda, <strong>no tienen formas activas</strong>. Se conjugan en medio-pasiva (-ομαι), pero <strong>se traducen siempre en ACTIVA</strong>.</p>
-                    <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-red-100 font-mono text-sm">
-                      <li className="bg-red-950/50 p-3 rounded-lg text-center border border-red-800 shadow-sm"><span className="text-amber-300 block mb-1">ἔρχομαι</span>(ir/venir)</li>
-                      <li className="bg-red-950/50 p-3 rounded-lg text-center border border-red-800 shadow-sm"><span className="text-amber-300 block mb-1">γίγνομαι</span>(llegar a ser/nacer)</li>
-                      <li className="bg-red-950/50 p-3 rounded-lg text-center border border-red-800 shadow-sm"><span className="text-amber-300 block mb-1">βούλομαι</span>(querer)</li>
-                      <li className="bg-red-950/50 p-3 rounded-lg text-center border border-red-800 shadow-sm"><span className="text-amber-300 block mb-1">μάχομαι</span>(luchar)</li>
-                    </ul>
+                    <h5 className="font-bold text-red-400 text-xl mb-3 flex items-center gap-3"><AlertTriangle size={24}/> Verbos Deponentes (Media Tantum)</h5>
+                    <p className="text-slate-200 text-sm mb-4 leading-relaxed">Existen verbos en griego que, por su propia naturaleza semántica (implican procesos mentales profundos, movimientos del cuerpo entero o estados emocionales fuertes), <strong>jamás desarrollaron formas activas</strong>. En el diccionario solo los encontrarás terminados en <strong>-ομαι</strong>. Se conjugan con desinencias medio-pasivas, pero <strong>se traducen obligatoriamente en ACTIVA</strong> al español.</p>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-red-100 font-mono text-sm">
+                      <div className="bg-red-950/50 p-4 rounded-lg border border-red-800 shadow-sm flex flex-col items-center justify-center">
+                        <span className="text-amber-300 font-bold text-base mb-1">ἔρχομαι</span>
+                        <span className="text-xs text-slate-400">(ir / venir)</span>
+                      </div>
+                      <div className="bg-red-950/50 p-4 rounded-lg border border-red-800 shadow-sm flex flex-col items-center justify-center">
+                        <span className="text-amber-300 font-bold text-base mb-1">γίγνομαι</span>
+                        <span className="text-xs text-slate-400">(llegar a ser / nacer)</span>
+                      </div>
+                      <div className="bg-red-950/50 p-4 rounded-lg border border-red-800 shadow-sm flex flex-col items-center justify-center">
+                        <span className="text-amber-300 font-bold text-base mb-1">βούλομαι</span>
+                        <span className="text-xs text-slate-400">(querer / desear)</span>
+                      </div>
+                      <div className="bg-red-950/50 p-4 rounded-lg border border-red-800 shadow-sm flex flex-col items-center justify-center">
+                        <span className="text-amber-300 font-bold text-base mb-1">μάχομαι</span>
+                        <span className="text-xs text-slate-400">(luchar / combatir)</span>
+                      </div>
+                      <div className="bg-red-950/50 p-4 rounded-lg border border-red-800 shadow-sm flex flex-col items-center justify-center">
+                        <span className="text-amber-300 font-bold text-base mb-1">αἰσθάνομαι</span>
+                        <span className="text-xs text-slate-400">(percibir / notar)</span>
+                      </div>
+                      <div className="bg-red-950/50 p-4 rounded-lg border border-red-800 shadow-sm flex flex-col items-center justify-center">
+                        <span className="text-amber-300 font-bold text-base mb-1">ἕπομαι</span>
+                        <span className="text-xs text-slate-400">(seguir a alguien)</span>
+                      </div>
+                      <div className="bg-red-950/50 p-4 rounded-lg border border-red-800 shadow-sm flex flex-col items-center justify-center">
+                        <span className="text-amber-300 font-bold text-base mb-1">ἀποκρίνομαι</span>
+                        <span className="text-xs text-slate-400">(responder)</span>
+                      </div>
+                      <div className="bg-red-950/50 p-4 rounded-lg border border-red-800 shadow-sm flex flex-col items-center justify-center">
+                        <span className="text-amber-300 font-bold text-base mb-1">κάθημαι</span>
+                        <span className="text-xs text-slate-400">(estar sentado)</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )
