@@ -115,6 +115,70 @@
           );
         };
 
+        const IsopsephiaCalculator = () => {
+            const [word, setWord] = useState('');
+            const calculateValue = (str) => {
+                const values = {'α':1,'β':2,'γ':3,'δ':4,'ε':5,'ζ':7,'η':8,'θ':9,'ι':10,'κ':20,'λ':30,'μ':40,'ν':50,'ξ':60,'ο':70,'π':80,'ρ':100,'σ':200,'ς':200,'τ':300,'υ':400,'φ':500,'χ':600,'ψ':700,'ω':800,'ά':1,'έ':5,'ή':8,'ί':10,'ό':70,'ύ':400,'ώ':800,'ᾶ':1,'ῆ':8,'ῖ':10,'ῦ':400,'ῶ':800,'ἀ':1,'ἐ':5,'ἠ':8,'ἰ':10,'ὀ':70,'ὐ':400,'ὠ':800,'ἁ':1,'ἑ':5,'ἡ':8,'ἱ':10,'ὁ':70,'ὑ':400,'ὡ':800};
+                let total = 0; let breakdown = [];
+                for (let char of str.toLowerCase()) { if (values[char]) { total += values[char]; breakdown.push(`${char}=${values[char]}`); } }
+                return { total, breakdown };
+            };
+            const result = calculateValue(word);
+            return (
+                <div className="bg-slate-900 p-6 rounded-2xl border border-emerald-900/50 shadow-lg mt-6">
+                    <h5 className="font-bold text-emerald-400 mb-4 flex items-center gap-2 border-b border-slate-800 pb-2"><Calculator size={20}/> El Ábaco de Pitágoras (Isopsefía)</h5>
+                    <p className="text-sm text-slate-300 mb-4 leading-relaxed">Los antiguos griegos usaban su alfabeto para contar (α=1, ι=10, ρ=100...). Suma el valor místico de las letras.</p>
+                    <div className="flex flex-col gap-4">
+                        <input type="text" placeholder="Escribe en griego..." className="bg-slate-950 border border-slate-700 rounded-lg p-4 text-emerald-200 focus:outline-none focus:border-emerald-500 font-serif text-xl" value={word} onChange={(e) => setWord(e.target.value)} />
+                        <div className="bg-slate-950/50 border border-slate-800 rounded-lg p-6 min-h-[120px] flex flex-col items-center justify-center shadow-inner">
+                            {word ? (<><span className="font-mono text-5xl md:text-7xl text-emerald-400 font-bold tracking-widest text-center mb-4">{result.total}</span><span className="text-slate-500 font-mono text-sm break-words text-center">{result.breakdown.join(' + ')}</span></>) : (<span className="text-slate-600 italic">Esperando revelación...</span>)}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const HomericScansion = () => {
+            const [selectedVerse, setSelectedVerse] = useState(null);
+            const verses = [
+                { greek: "ἄνδρα μοι ἔννεπε, μοῦσα, πολύτροπον, ὃς μάλα πολλὰ", translation: "Háblame, Musa, de aquel varón de multiforme ingenio, que mucho...", scansion: "—  ∪  ∪  |  —  ∪  ∪  |  —  ∪  ∪  |  —  ∪  ∪  |  —  ∪  ∪  |  —  —", feet: ["Dáctilo", "Dáctilo", "Dáctilo", "Dáctilo", "Dáctilo", "Espondeo"] },
+                { greek: "μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος", translation: "Canta, oh diosa, la cólera del Pélida Aquiles...", scansion: "—  ∪  ∪  |  —  ∪  ∪  |  —  —  |  —  ∪  ∪  |  —  ∪  ∪  |  —  —", feet: ["Dáctilo", "Dáctilo", "Espondeo", "Dáctilo", "Dáctilo", "Espondeo"] },
+                { greek: "ὡς ἔφατ᾽, ἔδεισεν δ᾽ ὁ γέρων καὶ ἐπείθετο μύθῳ", translation: "Así habló; el anciano sintió miedo y obedeció la orden...", scansion: "—  ∪  ∪  |  —  —  |  —  ∪  ∪  |  —  ∪  ∪  |  —  ∪  ∪  |  —  —", feet: ["Dáctilo", "Espondeo", "Dáctilo", "Dáctilo", "Dáctilo", "Espondeo"] }
+            ];
+            return (
+                <div className="bg-slate-900 p-6 rounded-2xl border border-purple-900/50 shadow-lg mt-6 text-center">
+                    <h5 className="font-bold text-purple-400 mb-4 flex items-center justify-center gap-2"><Activity size={20}/> El Compás de las Musas (Métrica)</h5>
+                    <div className="flex flex-wrap gap-3 justify-center mb-6">
+                        {verses.map((v, i) => (<button key={i} onClick={() => setSelectedVerse(v)} className={`px-4 py-2 rounded-lg text-sm border font-serif ${selectedVerse === v ? 'bg-purple-600 text-white' : 'bg-slate-800 text-purple-300 hover:bg-slate-700'}`}>Verso {i + 1}</button>))}
+                    </div>
+                    <div className="bg-slate-950 border-2 border-slate-800 rounded-xl flex flex-col items-center justify-center p-6 min-h-[160px] overflow-x-auto custom-scrollbar">
+                        {selectedVerse ? (<div className="w-max mx-auto"><span className="font-serif text-xl text-amber-300 font-bold block mb-2">{selectedVerse.greek}</span><span className="font-mono text-xl md:text-2xl text-purple-400 font-black block mb-4 whitespace-pre text-center" style={{ wordSpacing: '0.2rem' }}>{selectedVerse.scansion}</span><div className="flex justify-center gap-2">{selectedVerse.feet.map((foot, idx) => (<span key={idx} className="bg-purple-900/50 text-purple-200 text-[10px] uppercase px-2 py-1 rounded">Pie {idx+1}: {foot}</span>))}</div></div>) : (<span className="text-slate-600 italic">Selecciona un verso</span>)}
+                    </div>
+                </div>
+            );
+        };
+
+        const EpithetGenerator = () => {
+            const [epithet, setEpithet] = useState(null);
+            const generate = () => {
+                const names = ['Ὀδυσσεὺς', 'Ἀχιλλεύς', 'Ἀγαμέμνων', 'Διομήδης', 'Ἕκτωρ'];
+                const prefixes = ['πολύμητις', 'ποδάρκης', 'ἄναξ ἀνδρῶν', 'βοὴν ἀγαθὸς', 'κορυθαίολος'];
+                const transNames = ['Odiseo', 'Aquiles', 'Agamenón', 'Diomedes', 'Héctor'];
+                const transPrefixes = ['el fecundo en ardides', 'el de los pies ligeros', 'el rey de hombres', 'el valiente en el grito', 'el de tremolante casco'];
+                const idxN = Math.floor(Math.random() * names.length); const idxP = Math.floor(Math.random() * prefixes.length);
+                setEpithet({ greek: `${prefixes[idxP]} ${names[idxN]}`, trans: `${transNames[idxN]} ${transPrefixes[idxP]}` });
+            };
+            return (
+                <div className="bg-slate-900 p-6 rounded-2xl border border-blue-900/50 shadow-lg mt-6 text-center">
+                    <h5 className="font-bold text-blue-400 mb-4 flex items-center justify-center gap-2"><Zap size={20}/> Forja de Epítetos</h5>
+                    <button onClick={generate} className="bg-blue-900/60 hover:bg-blue-800 text-blue-100 px-8 py-3 rounded-xl font-bold mb-6 text-sm">Generar Epíteto</button>
+                    <div className="bg-slate-950 border-2 border-slate-800 rounded-xl flex flex-col items-center justify-center p-6 min-h-[120px]">
+                        {epithet ? (<div><span className="font-serif text-2xl text-amber-400 font-bold block mb-2">{epithet.greek}</span><span className="text-slate-400 italic block">{epithet.trans}</span></div>) : (<span className="text-slate-600 italic">Pulsa el botón</span>)}
+                    </div>
+                </div>
+            );
+        };
+
         const AnalizadorUniversal = () => {
           const [word, setWord] = useState('');
           const lexicon = {
@@ -279,24 +343,6 @@
                 </div>
             );
         };
-        
-const CODEX_UNLOCK_BY_LEVEL = {
-  1: 'mitologia',
-  2: 'verbos_presente',
-  3: 'declinaciones',
-  4: 'declinaciones',
-  5: 'adjetivos',
-  6: 'verbos_presente',
-  7: 'aoristos',
-  8: 'voz_media',
-  9: 'voz_media',
-  10: 'voz_media',
-  11: 'aoristos',
-  12: 'declinaciones',
-  13: 'aoristos',
-  14: 'voz_media',
-  15: 'aoristos'
-};
 
         const LEVELS = [
           { id: 1, location: "Troya", athenaMsg: "El viaje del Nóstos comienza. Los aqueos llenan sus barcos, pero los dioses no olvidan.", title: "1. El Origen", lore: "Abandonáis las costas de Ilión tras diez años de guerra.", papyrusText: <div className="text-center">μετὰ τὸν δεινὸν <InteractiveWord word="πόλεμον" hint="CD. Acusativo Sg. 2ª Decl." type="grammar"/> οἱ <InteractiveWord word="Ἀχαιοὶ" hint="Sujeto. Nom. Pl. 2ª Decl." type="vocab"/> τὰ καλὰ πλοῖα πληροῦσιν.</div>, translation: "Después de la terrible guerra los aqueos llenan los bellos barcos.", instruction: "Abre la Biblioteca en Mitología.", question: "¿Quién es tu enemigo principal en el viaje de regreso?", options: [{ text: "Apolo", correct: false }, { text: "Poseidón", correct: true }], oracleHint: "Dios del abismo salado.", reward: "Favor de Atenea", rewardIcon: "🦉", mapX: 85, mapY: 15 },
@@ -362,213 +408,6 @@ const CODEX_UNLOCK_BY_LEVEL = {
             </div>
           );
         };
-const normalizeGreek = (text = '') =>
-  text
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[.,;:!?¿¡"'()[\]{}]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .toLowerCase();
-
-const ISOPSEPHIA_VALUES = {
-  α: 1, β: 2, γ: 3, δ: 4, ε: 5, ϝ: 6, ζ: 7, η: 8, θ: 9,
-  ι: 10, κ: 20, λ: 30, μ: 40, ν: 50, ξ: 60, ο: 70, π: 80, ϟ: 90,
-  ρ: 100, σ: 200, ς: 200, τ: 300, υ: 400, φ: 500, χ: 600, ψ: 700, ω: 800, ϡ: 900
-};
-
-const countGreekSyllables = (text = '') => {
-  const clean = normalizeGreek(text).replace(/\s+/g, '');
-  const groups = clean.match(/[αεηιουω]+/g);
-  return groups ? groups.length : 0;
-};
-
-const IsopsephiaCalculator = () => {
-  const [input, setInput] = useState('Ὀδυσσεύς');
-
-  const normalized = normalizeGreek(input);
-  const breakdown = [...normalized]
-    .filter((char) => ISOPSEPHIA_VALUES[char])
-    .map((char) => ({ char, value: ISOPSEPHIA_VALUES[char] }));
-
-  const total = breakdown.reduce((sum, item) => sum + item.value, 0);
-
-  return (
-    <div className="bg-slate-950 border border-slate-700 p-6 rounded-2xl shadow-inner">
-      <div className="flex items-center gap-3 mb-4">
-        <Calculator className="text-amber-400" size={22} />
-        <h4 className="text-lg font-black text-amber-400">Calculadora de Isopsefía</h4>
-      </div>
-
-      <p className="text-slate-400 text-sm mb-4">
-        Suma el valor numérico tradicional de las letras griegas.
-      </p>
-
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Escribe una palabra griega"
-        className="w-full bg-slate-900 border-2 border-slate-700 rounded-xl py-3 px-4 text-amber-200 font-serif text-xl focus:outline-none focus:border-amber-500"
-      />
-
-      <div className="mt-5 grid gap-4 md:grid-cols-2">
-        <div className="bg-slate-900 rounded-xl p-4 border border-slate-800">
-          <span className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
-            Desglose
-          </span>
-          <div className="flex flex-wrap gap-2">
-            {breakdown.length > 0 ? (
-              breakdown.map((item, idx) => (
-                <span
-                  key={`${item.char}-${idx}`}
-                  className="px-3 py-1 rounded-full bg-amber-950/40 border border-amber-700/40 text-amber-300 text-sm font-mono"
-                >
-                  {item.char} = {item.value}
-                </span>
-              ))
-            ) : (
-              <span className="text-slate-500 italic">Sin letras reconocidas</span>
-            )}
-          </div>
-        </div>
-
-        <div className="bg-slate-900 rounded-xl p-4 border border-slate-800 flex flex-col justify-center">
-          <span className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
-            Total
-          </span>
-          <span className="text-3xl font-black text-emerald-400">{total}</span>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const HomericScansion = () => {
-  const [verse, setVerse] = useState('ἄνδρα μοι ἔννεπε, μοῦσα, πολύτροπον');
-
-  const words = verse.trim().split(/\s+/).filter(Boolean);
-  const wordAnalysis = words.map((word) => ({
-    word,
-    syllables: countGreekSyllables(word)
-  }));
-  const totalSyllables = wordAnalysis.reduce((sum, item) => sum + item.syllables, 0);
-
-  return (
-    <div className="bg-slate-950 border border-slate-700 p-6 rounded-2xl shadow-inner">
-      <div className="flex items-center gap-3 mb-4">
-        <Activity className="text-cyan-400" size={22} />
-        <h4 className="text-lg font-black text-cyan-400">Escansión Homérica</h4>
-      </div>
-
-      <p className="text-slate-400 text-sm mb-4">
-        Herramienta didáctica aproximada para contar sílabas por grupos vocálicos.
-      </p>
-
-      <textarea
-        value={verse}
-        onChange={(e) => setVerse(e.target.value)}
-        rows={3}
-        className="w-full bg-slate-900 border-2 border-slate-700 rounded-xl py-3 px-4 text-slate-100 font-serif text-lg focus:outline-none focus:border-cyan-500 resize-none"
-      />
-
-      <div className="mt-5 grid gap-4 md:grid-cols-2">
-        <div className="bg-slate-900 rounded-xl p-4 border border-slate-800">
-          <span className="block text-xs uppercase tracking-widest text-slate-500 mb-3">
-            Palabras
-          </span>
-          <div className="space-y-2">
-            {wordAnalysis.map((item, idx) => (
-              <div
-                key={`${item.word}-${idx}`}
-                className="flex items-center justify-between bg-slate-800 rounded-lg px-3 py-2"
-              >
-                <span className="font-serif text-amber-300">{item.word}</span>
-                <span className="text-cyan-300 font-mono text-sm">{item.syllables} sílabas</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-slate-900 rounded-xl p-4 border border-slate-800 flex flex-col justify-center">
-          <span className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
-            Total aproximado
-          </span>
-          <span className="text-3xl font-black text-cyan-400">{totalSyllables}</span>
-          <p className="text-slate-500 text-xs mt-3">
-            Nota: es una ayuda didáctica, no un escáner métrico filológico perfecto.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const EpithetGenerator = () => {
-  const HEROES = {
-    'Ὀδυσσεύς': ['πολύμητις', 'πολύτροπος', 'ταλασίφρων'],
-    'Ἀθήνη': ['γλαυκῶπις', 'πολύβουλος', 'παλλάς'],
-    'Πηνελόπη': ['περίφρων', 'πιστή', 'σοφή'],
-    'Ἀχιλλεύς': ['ποδάρκης', 'δῖος', 'ταχύς']
-  };
-
-  const [hero, setHero] = useState('Ὀδυσσεύς');
-  const [index, setIndex] = useState(0);
-
-  const epithets = HEROES[hero];
-  const epithet = epithets[index % epithets.length];
-
-  return (
-    <div className="bg-slate-950 border border-slate-700 p-6 rounded-2xl shadow-inner">
-      <div className="flex items-center gap-3 mb-4">
-        <Flame className="text-red-400" size={22} />
-        <h4 className="text-lg font-black text-red-400">Generador de Epítetos</h4>
-      </div>
-
-      <p className="text-slate-400 text-sm mb-4">
-        Fórmulas orales inspiradas en la poesía épica.
-      </p>
-
-      <div className="grid md:grid-cols-[1fr_auto] gap-4 items-end">
-        <div>
-          <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
-            Héroe o divinidad
-          </label>
-          <select
-            value={hero}
-            onChange={(e) => {
-              setHero(e.target.value);
-              setIndex(0);
-            }}
-            className="w-full bg-slate-900 border-2 border-slate-700 rounded-xl py-3 px-4 text-slate-100 focus:outline-none focus:border-red-500"
-          >
-            {Object.keys(HEROES).map((name) => (
-              <option key={name} value={name}>
-                {name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <button
-          onClick={() => setIndex((prev) => prev + 1)}
-          className="px-5 py-3 rounded-xl bg-red-900/40 border border-red-700/50 text-red-200 hover:bg-red-800/50 transition-all font-bold"
-        >
-          Nuevo epíteto
-        </button>
-      </div>
-
-      <div className="mt-5 bg-slate-900 rounded-xl border border-slate-800 p-5 text-center">
-        <span className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
-          Fórmula épica
-        </span>
-        <p className="text-2xl font-serif text-amber-300">
-          {epithet} {hero}
-        </p>
-      </div>
-    </div>
-  );
-};
 
         function App() {
           const [gameState, setGameState] = useState('intro');
@@ -576,20 +415,7 @@ const EpithetGenerator = () => {
           const [inventory, setInventory] = useState([]);
           const [isCodexOpen, setIsCodexOpen] = useState(false);
           const [activeTopic, setActiveTopic] = useState('literatura');
-          const [unlockedCodex, setUnlockedCodex] = useState([
-  'literatura',
-  'mitologia',
-  'diccionario',
-  'vocabulario',
-  'analizador',
-  'funciones',
-  'declinaciones',
-  'verbos_presente',
-  'aoristos',
-  'voz_media',
-  'adjetivos'
-]);
-
+          const [unlockedCodex, setUnlockedCodex] = useState(['literatura', 'mitologia', 'diccionario', 'vocabulario', 'analizador', 'funciones', 'declinaciones', 'verbos_presente', 'aoristos', 'voz_media', 'adjetivos_pronombres']);
           const [feedback, setFeedback] = useState(null);
           const [shake, setShake] = useState(false);
           const [showOracle, setShowOracle] = useState(false);
@@ -623,16 +449,56 @@ const EpithetGenerator = () => {
               content: (
                 <div className="space-y-8 text-sm text-slate-300">
                   <div>
-                    <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2 mb-4">Funciones Sintácticas</h4>
+                    <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2 mb-4">Funciones Sintácticas: El Alma de la Oración</h4>
+                    <p className="mb-3 text-slate-400">En griego antiguo, el orden de las palabras es muy libre. Para saber qué hace cada palabra en la oración, debemos mirar su terminación (desinencia) y su artículo, que nos indican el <strong>Caso</strong>.</p>
                     <ul className="space-y-2 bg-slate-900/50 p-4 rounded-xl border border-slate-700">
-                      <li><strong className="text-blue-400">Nominativo:</strong> Sujeto y Atributo.</li>
-                      <li><strong className="text-emerald-400">Acusativo:</strong> CD y Dirección en el espacio.</li>
-                      <li><strong className="text-red-400">Genitivo:</strong> CN, Posesión, Origen y Separación.</li>
-                      <li><strong className="text-amber-500">Dativo:</strong> CI, Instrumento, Compañía, Lugar exacto en donde.</li>
+                      <li><strong className="text-blue-400">Nominativo (Sujeto / Atributo):</strong> Responde a "¿Quién realiza la acción?". Se usa para nombrar.</li>
+                      <li><strong className="text-emerald-400">Acusativo (Complemento Directo / Dirección):</strong> Responde a "¿Qué es lo + Participio?". En Homero, suele indicar dirección en el espacio (hacia dónde).</li>
+                      <li><strong className="text-red-400">Genitivo (Complemento del Nombre / Origen):</strong> Indica posesión ("de quién"), origen o punto de partida (desde dónde).</li>
+                      <li><strong className="text-amber-500">Dativo (Complemento Indirecto / Instrumento / Lugar):</strong> Indica a quién beneficia el daño ("a/para quién"), con qué instrumento se realiza, o el lugar exacto estático (en dónde).</li>
                     </ul>
                   </div>
-                  <div className="overflow-x-auto bg-slate-900 p-3 rounded-xl border border-slate-700">
-                    <h5 className="font-bold text-purple-300 text-center mb-3 uppercase tracking-widest text-xs">La 3ª Declinación (Atemática) - Modelos Clave</h5>
+
+                  <div className="overflow-x-auto bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                    <h5 className="font-bold text-blue-300 text-center mb-2 uppercase tracking-widest text-xs">Primera Declinación (Temas en -A)</h5>
+                    <p className="text-xs text-slate-400 text-center mb-4 italic">Dominada por nombres femeninos. <strong>Regla de oro:</strong> Si la raíz termina en ε, ι, o ρ, la alfa es "pura" y se mantiene siempre. Si termina en cualquier otra letra, es "impura/mixta" y cambia a -η en el Genitivo y Dativo singular.</p>
+                    <table className="table-greek w-full whitespace-nowrap text-center">
+                      <thead>
+                        <tr><th>Caso</th><th>Fem (-α pura)</th><th>Fem (-α impura)</th><th>Fem (-η)</th><th>Masc (-ας)</th><th>Masc (-ης)</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td className="font-bold text-slate-400">Nom Sg</td><td>ἡμέρ-<span className="highlight-alt">α</span></td><td>θάλαττ-<span className="text-cyan-400">α</span></td><td>κώμ-<span className="highlight-alt">η</span></td><td>νεανί-<span className="text-amber-400">ας</span></td><td>πολίτ-<span className="text-amber-400">ης</span></td></tr>
+                        <tr><td className="font-bold text-slate-400">Acus Sg</td><td>ἡμέρ-<span className="highlight-alt">αν</span></td><td>θάλαττ-<span className="text-cyan-400">αν</span></td><td>κώμ-<span className="highlight-alt">ην</span></td><td>νεανί-<span className="text-amber-400">αν</span></td><td>πολίτ-<span className="text-amber-400">ην</span></td></tr>
+                        <tr><td className="font-bold text-slate-400">Gen Sg</td><td>ἡμέρ-<span className="highlight-alt">ας</span></td><td>θαλάττ-<span className="text-pink-400">ης</span></td><td>κώμ-<span className="highlight-alt">ης</span></td><td>νεανί-<span className="text-amber-400">ου</span></td><td>πολίτ-<span className="text-amber-400">ου</span></td></tr>
+                        <tr><td className="font-bold text-slate-400">Dat Sg</td><td>ἡμέρ-<span className="highlight-alt">ᾳ</span></td><td>θαλάττ-<span className="text-pink-400">ῃ</span></td><td>κώμ-<span className="highlight-alt">ῃ</span></td><td>νεανί-<span className="text-amber-400">ᾳ</span></td><td>πολίτ-<span className="text-amber-400">ῃ</span></td></tr>
+                        <tr className="border-t border-slate-700"><td colSpan="6" className="text-[11px] text-amber-200/70 bg-slate-950 p-2 font-medium">Plural idéntico para los 5 modelos: Nom (-αι), Acus (-ας), Gen (-ων), Dat (-αις).</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="overflow-x-auto bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                    <h5 className="font-bold text-emerald-300 text-center mb-2 uppercase tracking-widest text-xs">Segunda Declinación (Temas en -O)</h5>
+                    <p className="text-xs text-slate-400 text-center mb-4 italic">El hogar de los nombres masculinos y neutros, y de algunas islas/árboles femeninos. Presta atención al neutro: su Nom, Voc y Acusativo son siempre iguales y en plural terminan en -α.</p>
+                    <table className="table-greek w-full whitespace-nowrap text-center">
+                      <thead>
+                        <tr><th>Caso</th><th>Masculinos/Femeninos (-ος)</th><th>Neutros (-ον)</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td className="font-bold text-slate-400">Nom Sg</td><td>ἄνθρωπ-<span className="highlight">ος</span></td><td>δῶρ-<span className="text-emerald-400">ον</span></td></tr>
+                        <tr><td className="font-bold text-slate-400">Acus Sg</td><td>ἄνθρωπ-<span className="highlight">ον</span></td><td>δῶρ-<span className="text-emerald-400">ον</span></td></tr>
+                        <tr><td className="font-bold text-slate-400">Gen Sg</td><td>ἀνθρώπ-<span className="highlight">ου</span></td><td>δώρ-<span className="text-emerald-400">ου</span></td></tr>
+                        <tr><td className="font-bold text-slate-400">Dat Sg</td><td>ἀνθρώπ-<span className="highlight">ῳ</span></td><td>δώρ-<span className="text-emerald-400">ῳ</span></td></tr>
+                        <tr className="border-t border-slate-700"><td className="font-bold text-slate-400">Nom Pl</td><td>ἄνθρωπ-<span className="highlight">οι</span></td><td>δῶρ-<span className="text-emerald-400">α</span></td></tr>
+                        <tr><td className="font-bold text-slate-400">Acus Pl</td><td>ἀνθρώπ-<span className="highlight">ους</span></td><td>δῶρ-<span className="text-emerald-400">α</span></td></tr>
+                        <tr><td className="font-bold text-slate-400">Gen Pl</td><td>ἀνθρώπ-<span className="highlight">ων</span></td><td>δώρ-<span className="text-emerald-400">ων</span></td></tr>
+                        <tr><td className="font-bold text-slate-400">Dat Pl</td><td>ἀνθρώπ-<span className="highlight">οις</span></td><td>δώρ-<span className="text-emerald-400">οις</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="overflow-x-auto bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                    <h5 className="font-bold text-purple-300 text-center mb-2 uppercase tracking-widest text-xs">La 3ª Declinación (Atemática) - Modelos Clave</h5>
+                    <p className="text-xs text-slate-400 text-center mb-4 italic">La declinación más compleja. Sus desinencias se añaden directamente a la raíz consonántica, provocando choques fonéticos en el Nominativo (κ + ς = ξ) y en el Dativo Plural.</p>
                     <table className="table-greek w-full whitespace-nowrap text-center">
                       <thead>
                         <tr><th>Caso</th><th>Oclusiva (ὁ κόραξ)</th><th>Nasal (ὁ δαίμων)</th><th>Vocal (ἡ πόλις)</th><th>Neutro (τὸ σῶμα)</th></tr>
@@ -647,7 +513,8 @@ const EpithetGenerator = () => {
                       </tbody>
                     </table>
                   </div>
-                  <div className="overflow-x-auto bg-slate-900 p-3 rounded-xl border border-slate-700">
+                  
+                  <div className="overflow-x-auto bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
                     <h5 className="font-bold text-amber-500 text-center mb-3 uppercase tracking-widest text-xs">Pronombres Universales</h5>
                     <table className="table-greek w-full whitespace-nowrap text-center mb-4">
                       <thead>
@@ -675,25 +542,78 @@ const EpithetGenerator = () => {
             verbos_presente: {
               category: "Morfología Verbal", title: "3. Tiempos de Acción Continua", icon: <Sparkles size={20} />,
               content: (
-                <div className="space-y-6 text-sm text-slate-300">
-                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Tema de Presente</h4>
-                  <table className="table-greek w-full whitespace-nowrap text-center">
-                    <thead><tr><th>Pers</th><th>PRESENTE (λύω)</th><th>IMPERFECTO (ἔλυον)</th><th>Contracto Imp. (ἐτίμων)</th></tr></thead>
-                    <tbody>
-                      <tr><td className="font-bold text-slate-400">1ª Sg</td><td>λύ-ω</td><td>ἐ-λύ-ον</td><td>ἐτίμ-ων</td></tr>
-                      <tr><td className="font-bold text-slate-400">2ª Sg</td><td>λύ-εις</td><td>ἔ-λυ-ες</td><td>ἐτίμ-ας</td></tr>
-                      <tr><td className="font-bold text-slate-400">3ª Sg</td><td>λύ-ει</td><td>ἔ-λυ-ε(ν)</td><td>ἐτίμ-α</td></tr>
-                      <tr><td className="font-bold text-slate-400">1ª Pl</td><td>λύ-ομεν</td><td>ἐ-λύ-ομεν</td><td>ἐτιμ-ῶμεν</td></tr>
-                      <tr><td className="font-bold text-slate-400">2ª Pl</td><td>λύ-ετε</td><td>ἐ-λύ-ετε</td><td>ἐτιμ-ᾶτε</td></tr>
-                      <tr><td className="font-bold text-slate-400">3ª Pl</td><td>λύ-ουσι(ν)</td><td>ἔ-λυ-ον</td><td>ἐτίμ-ων</td></tr>
-                    </tbody>
-                  </table>
-                  <div className="bg-amber-950/20 border border-amber-800 p-5 rounded-xl">
-                    <h5 className="font-bold text-amber-500 mb-2 text-lg">Leyes del Aumento (La Marca del Pasado)</h5>
-                    <ul className="list-disc pl-5">
-                      <li className="mb-2"><strong>Silábico:</strong> Consonantes añaden <strong>ἐ-</strong> (λύω -> ἔλυον). Excepción: la 'rho' inicial se duplica (ἔρριπτον).</li>
-                      <li><strong>Temporal:</strong> Vocales alargan su duración natural: α/ε se hacen η. ο se hace ω. ai/ei se hacen ῃ (iota suscrita).</li>
-                    </ul>
+                <div className="space-y-8 text-sm text-slate-300">
+                  <div>
+                    <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2 mb-4">El Tema de Presente y el Aumento Temporal</h4>
+                    <p className="mb-4">El sistema de Presente (Presente e Imperfecto) expresa acciones inacabadas o en proceso. El Imperfecto añade el <strong>Aumento (ἐ-)</strong> al principio de la raíz para indicar que es pasado.</p>
+                    <table className="table-greek w-full whitespace-nowrap text-center shadow-inner">
+                      <thead><tr><th>Pers</th><th>PRESENTE (λύω)</th><th>IMPERFECTO (ἔλυον)</th></tr></thead>
+                      <tbody>
+                        <tr><td className="font-bold text-slate-400">1ª Sg</td><td>λύ-<strong className="text-blue-400">ω</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-purple-400">ον</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">2ª Sg</td><td>λύ-<strong className="text-blue-400">εις</strong></td><td><strong className="text-amber-500">ἔ</strong>-λυ-<strong className="text-purple-400">ες</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">3ª Sg</td><td>λύ-<strong className="text-blue-400">ει</strong></td><td><strong className="text-amber-500">ἔ</strong>-λυ-<strong className="text-purple-400">ε(ν)</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">1ª Pl</td><td>λύ-<strong className="text-blue-400">ομεν</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-purple-400">ομεν</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">2ª Pl</td><td>λύ-<strong className="text-blue-400">ετε</strong></td><td><strong className="text-amber-500">ἐ</strong>-λύ-<strong className="text-purple-400">ετε</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">3ª Pl</td><td>λύ-<strong className="text-blue-400">ουσι(ν)</strong></td><td><strong className="text-amber-500">ἔ</strong>-λυ-<strong className="text-purple-400">ον</strong></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="bg-slate-900/80 p-5 rounded-2xl border border-blue-900/50 shadow-lg">
+                    <h4 className="font-bold text-blue-400 text-xl border-b border-blue-800/50 pb-2 mb-4">Verbos Contractos en Presente e Imperfecto</h4>
+                    <p className="mb-4">Son verbos cuya raíz termina en vocal (<strong>-α, -ε, -ο</strong>). Al unirse con las vocales temáticas de las desinencias (ο/ε), chocan y se <strong>contraen</strong> fusionándose en una vocal larga o diptongo. Se marcan siempre con acento circunflejo ( ῀ ).</p>
+                    
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+                      <div className="bg-slate-950 p-4 rounded-xl border border-slate-700">
+                        <h5 className="text-center font-bold text-amber-400 mb-2 border-b border-slate-800 pb-1">Reglas de -άω</h5>
+                        <ul className="text-xs font-mono space-y-1">
+                          <li>α + ο / ω ➔ <strong className="text-white text-sm">ω</strong></li>
+                          <li>α + ε / η ➔ <strong className="text-white text-sm">α</strong></li>
+                          <li className="text-slate-500 italic mt-2">La 'o' siempre gana y da 'ω'. Si no hay 'o', prevalece la 'α'.</li>
+                        </ul>
+                      </div>
+                      <div className="bg-slate-950 p-4 rounded-xl border border-slate-700">
+                        <h5 className="text-center font-bold text-cyan-400 mb-2 border-b border-slate-800 pb-1">Reglas de -έω</h5>
+                        <ul className="text-xs font-mono space-y-1">
+                          <li>ε + ε ➔ <strong className="text-white text-sm">ει</strong></li>
+                          <li>ε + ο ➔ <strong className="text-white text-sm">ου</strong></li>
+                          <li>ε + vocal larga ➔ <strong className="text-slate-500 line-through">ε</strong> (desaparece)</li>
+                        </ul>
+                      </div>
+                      <div className="bg-slate-950 p-4 rounded-xl border border-slate-700">
+                        <h5 className="text-center font-bold text-emerald-400 mb-2 border-b border-slate-800 pb-1">Reglas de -όω</h5>
+                        <ul className="text-xs font-mono space-y-1">
+                          <li>ο + ε / ο / ου ➔ <strong className="text-white text-sm">ου</strong></li>
+                          <li>ο + η / ω ➔ <strong className="text-white text-sm">ω</strong></li>
+                          <li>ο + ει / ῃ ➔ <strong className="text-white text-sm">οι</strong></li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <h5 className="font-bold text-slate-200 mb-3 text-center uppercase tracking-widest text-xs">Conjugación Contracta (Voz Activa)</h5>
+                    <div className="overflow-x-auto">
+                      <table className="table-greek w-full whitespace-nowrap text-center text-xs">
+                        <thead>
+                          <tr>
+                            <th>Pers</th>
+                            <th className="bg-amber-900/30">Pres (-άω) <br/> <span className="font-normal text-amber-200/70">τιμάω (honrar)</span></th>
+                            <th className="bg-amber-900/30">Imperf (-άω)</th>
+                            <th className="bg-cyan-900/30">Pres (-έω) <br/> <span className="font-normal text-cyan-200/70">ποιέω (hacer)</span></th>
+                            <th className="bg-cyan-900/30">Imperf (-έω)</th>
+                            <th className="bg-emerald-900/30">Pres (-όω) <br/> <span className="font-normal text-emerald-200/70">δηλόω (mostrar)</span></th>
+                            <th className="bg-emerald-900/30">Imperf (-όω)</th>
+                          </tr>
+                        </thead>
+                        <tbody className="font-mono">
+                          <tr><td className="font-bold text-slate-400 font-sans">1ªSg</td><td>τιμ<strong className="text-amber-400">ῶ</strong></td><td>ἐτίμ<strong className="text-amber-400">ων</strong></td><td>ποι<strong className="text-cyan-400">ῶ</strong></td><td>ἐποί<strong className="text-cyan-400">ουν</strong></td><td>δηλ<strong className="text-emerald-400">ῶ</strong></td><td>ἐδήλ<strong className="text-emerald-400">ουν</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400 font-sans">2ªSg</td><td>τιμ<strong className="text-amber-400">ᾷς</strong></td><td>ἐτίμ<strong className="text-amber-400">ας</strong></td><td>ποι<strong className="text-cyan-400">εῖς</strong></td><td>ἐποί<strong className="text-cyan-400">εις</strong></td><td>δηλ<strong className="text-emerald-400">οῖς</strong></td><td>ἐδήλ<strong className="text-emerald-400">ους</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400 font-sans">3ªSg</td><td>τιμ<strong className="text-amber-400">ᾷ</strong></td><td>ἐτίμ<strong className="text-amber-400">α</strong></td><td>ποι<strong className="text-cyan-400">εῖ</strong></td><td>ἐποί<strong className="text-cyan-400">ει</strong></td><td>δηλ<strong className="text-emerald-400">οῖ</strong></td><td>ἐδήλ<strong className="text-emerald-400">ου</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400 font-sans">1ªPl</td><td>τιμ<strong className="text-amber-400">ῶμεν</strong></td><td>ἐτιμ<strong className="text-amber-400">ῶμεν</strong></td><td>ποι<strong className="text-cyan-400">οῦμεν</strong></td><td>ἐποι<strong className="text-cyan-400">οῦμεν</strong></td><td>δηλ<strong className="text-emerald-400">οῦμεν</strong></td><td>ἐδηλ<strong className="text-emerald-400">οῦμεν</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400 font-sans">2ªPl</td><td>τιμ<strong className="text-amber-400">ᾶτε</strong></td><td>ἐτιμ<strong className="text-amber-400">ᾶτε</strong></td><td>ποι<strong className="text-cyan-400">εῖτε</strong></td><td>ἐποι<strong className="text-cyan-400">εῖτε</strong></td><td>δηλ<strong className="text-emerald-400">οῦτε</strong></td><td>ἐδηλ<strong className="text-emerald-400">οῦτε</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400 font-sans">3ªPl</td><td>τιμ<strong className="text-amber-400">ῶσι(ν)</strong></td><td>ἐτίμ<strong className="text-amber-400">ων</strong></td><td>ποι<strong className="text-cyan-400">οῦσι(ν)</strong></td><td>ἐποί<strong className="text-cyan-400">ουν</strong></td><td>δηλ<strong className="text-emerald-400">οῦσι(ν)</strong></td><td>ἐδήλ<strong className="text-emerald-400">ουν</strong></td></tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               )
@@ -702,124 +622,152 @@ const EpithetGenerator = () => {
               category: "Morfología Verbal", title: "4. Aoristo (Acción Puntual)", icon: <Key size={20} />,
               content: (
                 <div className="space-y-6 text-sm text-slate-300">
-                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Pasado Indefinido</h4>
-                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
-                      <h5 className="font-bold text-blue-400 mb-2 text-lg">1. Aoristo Sigmático (Regular)</h5>
-                      <p className="mb-2">Añaden <strong>-σα-</strong>. Ej: ἔλυ-σα, ἔλυ-σας, ἔλυ-σε, ἐλύ-σαμεν, ἐλύ-σατε, ἔλυ-σαν.</p>
-                      <h5 className="font-bold text-amber-400 mb-2 mt-4 text-lg">1.5 Aoristos Contractos (-άω, -έω, -όω)</h5>
-                      <p>Para no colapsar la sigma, alargan la vocal de la raíz justo antes de la desinencia. τιμάω -> ἐτίμ<strong>η</strong>σα. ποιέω -> ἐποί<strong>η</strong>σα.</p>
-                  </div>
-                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
-                      <h5 className="font-bold text-emerald-400 mb-2 text-lg">2. Aoristo Fuerte (Apofónico)</h5>
-                      <p>Carecen de sigma. Indican el pasado reduciendo o destruyendo por completo la raíz del presente.</p>
-                      <ul className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-4 font-mono bg-slate-950 p-4 rounded-lg">
-                          <li>λείπω ➔ ἔλιπον</li>
-                          <li>βάλλω ➔ ἔβαλον</li>
-                          <li>λαμβάνω ➔ ἔλαβον</li>
-                          <li>φεύγω ➔ ἔφυγον</li>
-                          <li>ἔρχομαι ➔ ἦλθον (Supletivo)</li>
-                          <li>ὁράω ➔ εἶδον (Supletivo)</li>
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Pasado Indefinido y las Sombras</h4>
+                  <p className="mb-4">El Aoristo (a-horistos, 'sin límites') concibe la acción como un punto cerrado en el pasado, sin importar su duración. Es el tiempo clave para la narración de la épica y el mito. Requiere de <strong>Aumento (ἐ-)</strong> como marca temporal en el Indicativo.</p>
+
+                  <div className="bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="font-bold text-blue-400 mb-3 text-lg flex items-center gap-2"><Zap size={18}/> 1. Aoristo Sigmático (Regular)</h5>
+                      <p className="mb-3 text-slate-400">Añaden el sufijo característico <strong>-σα-</strong> justo después de la raíz. Ejemplo con λύω:</p>
+                      <ul className="grid grid-cols-2 md:grid-cols-3 gap-2 font-mono text-center">
+                          <li className="bg-slate-800 p-2 rounded">1Sg: ἔλυ-<strong className="text-blue-400">σα</strong></li>
+                          <li className="bg-slate-800 p-2 rounded">2Sg: ἔλυ-<strong className="text-blue-400">σας</strong></li>
+                          <li className="bg-slate-800 p-2 rounded">3Sg: ἔλυ-<strong className="text-blue-400">σε(ν)</strong></li>
+                          <li className="bg-slate-800 p-2 rounded">1Pl: ἐλύ-<strong className="text-blue-400">σαμεν</strong></li>
+                          <li className="bg-slate-800 p-2 rounded">2Pl: ἐλύ-<strong className="text-blue-400">σατε</strong></li>
+                          <li className="bg-slate-800 p-2 rounded">3Pl: ἔλυ-<strong className="text-blue-400">σαν</strong></li>
                       </ul>
                   </div>
-                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
-                      <h5 className="font-bold text-purple-400 mb-2 text-lg">3. Aoristo Atemático (Muy Antiguo)</h5>
-                      <p>Desinencias pegadas a pelo a la raíz sin vocales de unión: γιγνώσκω -> ἔγνων, ἔγνως, ἔγνω.</p>
+
+                  <div className="bg-amber-950/20 p-5 rounded-xl border border-amber-900/50 shadow-inner mt-4">
+                      <h5 className="font-bold text-amber-500 mb-3 text-lg flex items-center gap-2"><Flame size={18}/> 1.5 Aoristos de Verbos Contractos</h5>
+                      <p className="mb-3 text-slate-300">Si un verbo contracto (cuya raíz acaba en α, ε, ο) intenta añadir la sigma del aoristo (-σα), las letras chocarían abruptamente. La solución griega es el <strong>alargamiento compensatorio de la vocal de la raíz</strong> antes de la sigma:</p>
+                      <div className="grid md:grid-cols-3 gap-4 font-mono text-center text-xs mt-4">
+                          <div className="bg-slate-900 p-3 rounded-lg border border-amber-700/40">
+                              <span className="block text-slate-500 uppercase tracking-widest mb-1">Verbos en -άω</span>
+                              <span className="text-white block mb-2">α ➔ <strong className="text-amber-400 text-base">η</strong></span>
+                              <div className="bg-slate-950 p-2 rounded">τιμάω <br/> ➔ ἐτίμ<strong className="text-amber-400">η</strong>σα</div>
+                          </div>
+                          <div className="bg-slate-900 p-3 rounded-lg border border-cyan-700/40">
+                              <span className="block text-slate-500 uppercase tracking-widest mb-1">Verbos en -έω</span>
+                              <span className="text-white block mb-2">ε ➔ <strong className="text-cyan-400 text-base">η</strong></span>
+                              <div className="bg-slate-950 p-2 rounded">ποιέω <br/> ➔ ἐποί<strong className="text-cyan-400">η</strong>σα</div>
+                          </div>
+                          <div className="bg-slate-900 p-3 rounded-lg border border-emerald-700/40">
+                              <span className="block text-slate-500 uppercase tracking-widest mb-1">Verbos en -όω</span>
+                              <span className="text-white block mb-2">ο ➔ <strong className="text-emerald-400 text-base">ω</strong></span>
+                              <div className="bg-slate-950 p-2 rounded">δηλόω <br/> ➔ ἐδήλ<strong className="text-emerald-400">ω</strong>σα</div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div className="bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="font-bold text-emerald-400 mb-3 text-lg flex items-center gap-2"><Scroll size={18}/> 2. Aoristo Fuerte (Apofónico)</h5>
+                      <p className="mb-4 text-slate-400">Son verbos muy antiguos y de uso constante. Carecen de la marca "sigma". En su lugar, indican el pasado <strong>reduciendo o destruyendo por completo la raíz fonética</strong> del presente (grado cero/apofonía). Toman las mismas desinencias del Imperfecto (-ον, -ες, -ε...).</p>
+                      <ul className="grid grid-cols-2 md:grid-cols-3 gap-3 font-mono text-center text-slate-300">
+                          <li className="bg-slate-950 p-3 rounded-lg border border-slate-800">λείπω ➔ <br/><strong className="text-emerald-400 text-lg">ἔλιπον</strong></li>
+                          <li className="bg-slate-950 p-3 rounded-lg border border-slate-800">βάλλω ➔ <br/><strong className="text-emerald-400 text-lg">ἔβαλον</strong></li>
+                          <li className="bg-slate-950 p-3 rounded-lg border border-slate-800">λαμβάνω ➔ <br/><strong className="text-emerald-400 text-lg">ἔλαβον</strong></li>
+                          <li className="bg-slate-950 p-3 rounded-lg border border-slate-800">φεύγω ➔ <br/><strong className="text-emerald-400 text-lg">ἔφυγον</strong></li>
+                          <li className="bg-slate-950 p-3 rounded-lg border border-purple-900/50"><span className="text-[10px] uppercase text-purple-300 block mb-1">Supletivo</span>ὁράω ➔ <strong className="text-purple-400 text-lg block">εἶδον</strong></li>
+                          <li className="bg-slate-950 p-3 rounded-lg border border-purple-900/50"><span className="text-[10px] uppercase text-purple-300 block mb-1">Supletivo</span>ἔρχομαι ➔ <strong className="text-purple-400 text-lg block">ἦλθον</strong></li>
+                      </ul>
+                  </div>
+                  
+                  <div className="bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="font-bold text-pink-400 mb-2 text-lg">3. Aoristo Atemático (El Ancestral)</h5>
+                      <p className="text-slate-400">Las desinencias se pegan directamente a una raíz de vocal larga sin usar la vocal de unión (ο/ε). Ej: γιγνώσκω -> <strong>ἔγνων, ἔγνως, ἔγνω</strong>.</p>
                   </div>
                 </div>
               )
             },
             voz_media: {
-              category: "Morfología Verbal", title: "5. Voz Media y Participios", icon: <MessageCircle size={20} />,
+              category: "Morfología Verbal", title: "5. Voz Media y Deponentes", icon: <MessageCircle size={20} />,
               content: (
                 <div className="space-y-6 text-sm text-slate-300">
-                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Ego del Sujeto (Voz Media)</h4>
-                  <p>La Voz Media indica que el sujeto realiza la acción y <strong>revierte física o psicológicamente sobre él mismo</strong> o su interés más íntimo. Los <strong>Verbos Deponentes</strong> se conjugan igual, pero su significado real es puramente ACTIVO.</p>
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Sujeto en el Centro de la Acción</h4>
+                  <p>En la Voz Media, el sujeto realiza la acción, pero <strong>la acción recae sobre sí mismo (reflexivo), sobre algo que le pertenece, o se realiza en su propio y profundo interés</strong>.</p>
                   
-                  <h4 className="font-bold text-purple-400 text-xl border-b border-slate-700 pb-2 mt-6">Declinación del Participio (Presente Activo)</h4>
-                  <div className="overflow-x-auto bg-slate-900 p-3 rounded-xl border border-slate-700 shadow-inner">
-                    <table className="table-greek w-full whitespace-nowrap text-center">
-                      <thead>
-                        <tr><th>Caso</th><th>Masc (3ª)</th><th>Fem (1ª)</th><th>Neutro (3ª)</th><th>Masc Plural</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td className="font-bold text-slate-400">Nom</td><td>λύ-<strong className="text-purple-400">ων</strong></td><td>λύ-<strong className="text-pink-400">ουσα</strong></td><td>λῦ-<strong className="text-purple-400">ον</strong></td><td>λύ-<strong className="text-purple-400">οντες</strong></td></tr>
-                        <tr><td className="font-bold text-slate-400">Acus</td><td>λύ-<strong className="text-purple-400">οντα</strong></td><td>λύ-<strong className="text-pink-400">ουσαν</strong></td><td>λῦ-<strong className="text-purple-400">ον</strong></td><td>λύ-<strong className="text-purple-400">οντας</strong></td></tr>
-                        <tr><td className="font-bold text-slate-400">Gen</td><td>λύ-<strong className="text-purple-400">οντος</strong></td><td>λυ-<strong className="text-pink-400">ούσης</strong></td><td>λύ-<strong className="text-purple-400">οντος</strong></td><td>λυ-<strong className="text-purple-400">όντων</strong></td></tr>
-                        <tr><td className="font-bold text-slate-400">Dat</td><td>λύ-<strong className="text-purple-400">οντι</strong></td><td>λυ-<strong className="text-pink-400">ούσῃ</strong></td><td>λύ-<strong className="text-purple-400">οντι</strong></td><td>λύ-<strong className="text-purple-400">ουσι(ν)</strong></td></tr>
-                      </tbody>
-                    </table>
+                  <div className="flex flex-col md:flex-row gap-4 my-4">
+                    <div className="flex-1 bg-slate-900 p-5 rounded-xl border border-blue-900 shadow-inner">
+                      <h5 className="font-bold text-blue-400 text-center mb-4 border-b border-blue-900/50 pb-2 text-lg">Comparativa de Sentido y Reflexividad</h5>
+                      <div className="space-y-4">
+                        <div className="bg-slate-950 p-4 rounded-lg border border-slate-800">
+                          <p className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Activa (Acción hacia fuera)</p>
+                          <p className="font-mono text-base text-white">λούω <span className="text-sm text-slate-400 ml-2">(Lavo el carro, lavo a mi hijo)</span></p>
+                          <p className="font-mono text-base text-white mt-2">λύω <span className="text-sm text-slate-400 ml-2">(Desato el nudo de la cuerda)</span></p>
+                        </div>
+                        <div className="bg-amber-950/30 p-4 rounded-lg border border-amber-900/50 shadow-md">
+                          <p className="text-xs text-amber-500 uppercase tracking-widest font-bold mb-2">Media (Acción hacia dentro/Interés)</p>
+                          <p className="font-mono text-base text-amber-200">λούομαι <span className="text-sm text-amber-400/70 ml-2">(Me lavo a mí mismo / Me baño)</span></p>
+                          <p className="font-mono text-base text-amber-200 mt-2">λύομαι <span className="text-sm text-amber-400/70 ml-2">(Me desato / Libero pagando rescate)</span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-emerald-950/20 border border-emerald-900/50 p-6 rounded-xl mt-4 shadow-lg relative overflow-hidden">
+                    <Flame size={120} className="absolute -bottom-4 -right-4 text-emerald-900/20" />
+                    <h5 className="font-bold text-emerald-400 flex items-center gap-2 mb-3 relative z-10 text-lg"><Flame size={20}/> Verbos Deponentes (Media Tantum)</h5>
+                    <p className="text-slate-200 text-sm mb-5 relative z-10">Son verbos "defectivos". <strong>Carecen de forma activa en el diccionario</strong>. Solo se conjugan con desinencias medias (-ομαι, -εται, -σθε), pero ¡OJO! <strong>su significado y traducción son siempre puramente ACTIVOS</strong>.</p>
+                    <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-emerald-100 font-mono text-sm relative z-10">
+                      <li className="bg-emerald-950/50 p-3 rounded-lg text-center border border-emerald-800 shadow-sm"><span className="text-amber-300 block mb-1">ἔρχομαι</span>(ir/venir)</li>
+                      <li className="bg-emerald-950/50 p-3 rounded-lg text-center border border-emerald-800 shadow-sm"><span className="text-amber-300 block mb-1">γίγνομαι</span>(llegar a ser / nacer)</li>
+                      <li className="bg-emerald-950/50 p-3 rounded-lg text-center border border-emerald-800 shadow-sm"><span className="text-amber-300 block mb-1">βούλομαι</span>(querer / desear)</li>
+                      <li className="bg-emerald-950/50 p-3 rounded-lg text-center border border-emerald-800 shadow-sm"><span className="text-amber-300 block mb-1">μάχομαι</span>(luchar / combatir)</li>
+                      <li className="bg-emerald-950/50 p-3 rounded-lg text-center border border-emerald-800 shadow-sm"><span className="text-amber-300 block mb-1">αἰσθάνομαι</span>(percibir / notar)</li>
+                      <li className="bg-emerald-950/50 p-3 rounded-lg text-center border border-emerald-800 shadow-sm"><span className="text-amber-300 block mb-1">ἀποκρίνομαι</span>(responder)</li>
+                    </ul>
+                  </div>
+
+                  <h4 className="font-bold text-purple-400 text-xl border-b border-slate-700 pb-2 mt-8">Los Participios (Adjetivos Verbales)</h4>
+                  <div className="grid md:grid-cols-2 gap-4 mt-4">
+                    <div className="overflow-x-auto bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="text-center font-bold text-purple-300 mb-3 text-xs uppercase tracking-widest">Participio Activo (λύων, λύουσα, λῦον)</h5>
+                      <table className="table-greek w-full whitespace-nowrap text-center text-xs">
+                        <thead>
+                          <tr><th>Caso</th><th>Masc (3ª)</th><th>Fem (1ª)</th><th>Neutro (3ª)</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td className="font-bold text-slate-400">Nom</td><td>λύ-<strong className="text-purple-400">ων</strong></td><td>λύ-<strong className="text-pink-400">ουσα</strong></td><td>λῦ-<strong className="text-purple-400">ον</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">Acus</td><td>λύ-<strong className="text-purple-400">οντα</strong></td><td>λύ-<strong className="text-pink-400">ουσαν</strong></td><td>λῦ-<strong className="text-purple-400">ον</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">Gen</td><td>λύ-<strong className="text-purple-400">οντος</strong></td><td>λυ-<strong className="text-pink-400">ούσης</strong></td><td>λύ-<strong className="text-purple-400">οντος</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">Dat</td><td>λύ-<strong className="text-purple-400">οντι</strong></td><td>λυ-<strong className="text-pink-400">ούσῃ</strong></td><td>λύ-<strong className="text-purple-400">οντι</strong></td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="overflow-x-auto bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="text-center font-bold text-amber-300 mb-3 text-xs uppercase tracking-widest">Participio Medio (λυόμενος, -η, -ον)</h5>
+                      <table className="table-greek w-full whitespace-nowrap text-center text-xs">
+                        <thead>
+                          <tr><th>Caso</th><th>Masc (2ª)</th><th>Fem (1ª)</th><th>Neutro (2ª)</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td className="font-bold text-slate-400">Nom</td><td>λυ-όμεν<strong className="text-amber-400">ος</strong></td><td>λυ-ομέν<strong className="text-pink-400">η</strong></td><td>λυ-όμεν<strong className="text-emerald-400">ον</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">Acus</td><td>λυ-όμεν<strong className="text-amber-400">ον</strong></td><td>λυ-ομέν<strong className="text-pink-400">ην</strong></td><td>λυ-όμεν<strong className="text-emerald-400">ον</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">Gen</td><td>λυ-ομέν<strong className="text-amber-400">ου</strong></td><td>λυ-ομέν<strong className="text-pink-400">ης</strong></td><td>λυ-ομέν<strong className="text-emerald-400">ου</strong></td></tr>
+                          <tr><td className="font-bold text-slate-400">Dat</td><td>λυ-ομέν<strong className="text-amber-400">ῳ</strong></td><td>λυ-ομέν<strong className="text-pink-400">ῃ</strong></td><td>λυ-ομέν<strong className="text-emerald-400">ῳ</strong></td></tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               )
             },
-            analizador: { category: "Herramientas Mágicas", title: "6. Analizador Universal", icon: <Search size={20} />, content: <AnalizadorUniversal /> },
-            diccionario: { category: "Herramientas Mágicas", title: "7. Diccionario Épico", icon: <BookOpen size={20} />, content: <DiccionarioEpico /> },
-            funciones: { category: "Herramientas Mágicas", title: "8. Forja de Homero", icon: <Zap size={20} />, content: <div className="space-y-6"><IsopsephiaCalculator /><HomericScansion /><EpithetGenerator /></div> },
-            mitologia: {
-              category: "Contexto Cultural", title: "Mitología y Monstruos", icon: <Shield size={20} />,
-              content: (
-                <div className="space-y-6 text-sm text-slate-300">
-                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Cosmos Homérico</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-blue-950/40 p-5 rounded-xl border border-blue-800 shadow-inner">
-                      <h5 className="font-bold text-blue-400 mb-1 text-lg">🌊 Poseidón</h5>
-                      <p>Agitador de la Tierra. Encarna el abismo insondable e irracional de la naturaleza. Enemigo mortal de Odiseo por cegar a su hijo, el Cíclope.</p>
-                    </div>
-                    <div className="bg-slate-800/60 p-5 rounded-xl border border-slate-600 shadow-inner">
-                      <h5 className="font-bold text-slate-200 mb-1 text-lg">🦉 Atenea Glaucópide</h5>
-                      <p>Diosa de la civilización y la Mētis (astucia táctica). Guía del héroe, no con fuerza bruta, sino con consejos e ilusiones.</p>
-                    </div>
-                  </div>
-                  <h4 className="font-bold text-red-400 text-xl mt-6 border-b border-slate-700 pb-2">Monstruos y Pruebas del Alma</h4>
-                  <ul className="space-y-4 bg-slate-900/50 p-6 rounded-xl border border-slate-700">
-                    <li><strong className="text-red-400 font-sans text-lg">Cíclopes:</strong> Antítesis de la civilización. No plantan, no tienen asamblea (ágora) y devoran a los huéspedes (violan la Xenía de Zeus).</li>
-                    <li><strong className="text-emerald-400 font-sans text-lg">Lotófagos:</strong> El terror al olvido. La flor de loto destruye el deseo activo de volver a casa (el Nóstos).</li>
-                    <li><strong className="text-pink-400 font-sans text-lg">Calipso y Circe:</strong> Representan el estancamiento. Circe animaliza, revelando la verdadera naturaleza. Calipso ofrece el mayor tabú de todos: la inmortalidad para un humano.</li>
-                    <li><strong className="text-indigo-400 font-sans text-lg">Escila y Caribdis:</strong> El dilema trágico; aceptar pérdidas dolorosas e inevitables cuando no existe la elección perfecta.</li>
-                  </ul>
-                </div>
-              )
-            },
-            vocabulario: {
-              category: "Morfología Nominal", title: "Vocabulario Épico", icon: <BookOpen size={20} />,
-              content: (
-                <div className="space-y-6 text-sm text-slate-300">
-                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">Epítetos y Fórmulas Orales</h4>
-                  <p>Sustantivo + Epíteto conformaban bloques prefabricados que los aedos usaban para encajar en la métrica dactílica sin tener que pensar la sílaba exacta en directo.</p>
-                  <ul className="font-mono text-emerald-300 bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-inner space-y-2">
-                    <li>πολύμητις Ὀδυσσεύς (Odiseo, fecundo en ardides)</li>
-                    <li>γλαυκῶπις Ἀθήνη (Atenea, de ojos brillantes/lechuza)</li>
-                    <li>ῥοδοδάκτυλος Ἠώς (La Aurora, de dedos rosados)</li>
-                  </ul>
-                </div>
-              )
-            },
-            adjetivos: {
-              category: "Morfología Nominal", title: "Adjetivos (1ª y 2ª Clase)", icon: <Layers size={20} />,
-              content: (
-                <div className="space-y-6 text-sm text-slate-300">
-                  <h4 className="font-bold text-blue-400 text-xl border-b border-slate-700 pb-2">1ª Clase (Modelo 2-1-2)</h4>
-                  <p>Usan la 2ª Declinación para Masculino/Neutro y la 1ª Declinación para Femenino.</p>
-                  <table className="table-greek w-full text-center mb-6 shadow-inner">
-                    <thead><tr><th>Caso</th><th>Masc (2ª)</th><th>Fem (1ª)</th><th>Neutro (2ª)</th></tr></thead>
-                    <tbody>
-                      <tr><td className="font-bold text-slate-400">Nom Sg</td><td>καλ-<strong className="text-amber-400">ός</strong></td><td>καλ-<strong className="text-pink-400">ή</strong></td><td>καλ-<strong className="text-emerald-400">όν</strong></td></tr>
-                      <tr><td className="font-bold text-slate-400">Acus Sg</td><td>καλ-<strong className="text-amber-400">όν</strong></td><td>καλ-<strong className="text-pink-400">ήν</strong></td><td>καλ-<strong className="text-emerald-400">όν</strong></td></tr>
-                      <tr><td className="font-bold text-slate-400">Gen Sg</td><td>καλ-<strong className="text-amber-400">οῦ</strong></td><td>καλ-<strong className="text-pink-400">ῆς</strong></td><td>καλ-<strong className="text-emerald-400">οῦ</strong></td></tr>
-                    </tbody>
-                  </table>
-                  <h4 className="font-bold text-purple-400 text-xl border-b border-slate-700 pb-2 mt-8">2ª Clase (Modelo 3-1-3)</h4>
-                  <p>Masc/Neutro usan la 3ª Declinación. Femenino usa la 1ª (Alfa impura). Ejemplo: πᾶς, πᾶσα, πᾶν (todo).</p>
-                  <table className="table-greek w-full text-center shadow-inner">
-                    <thead><tr><th>Caso</th><th>Masc (3ª)</th><th>Fem (1ª)</th><th>Neutro (3ª)</th></tr></thead>
-                    <tbody>
-                      <tr><td className="font-bold text-slate-400">Nom Sg</td><td>πᾶς</td><td>πᾶσ-α</td><td>πᾶν</td></tr>
-                      <tr><td className="font-bold text-slate-400">Acus Sg</td><td>πάντ-α</td><td>πᾶσ-αν</td><td>πᾶν</td></tr>
-                      <tr><td className="font-bold text-slate-400">Gen Sg</td><td>παντ-ός</td><td>πάσ-ης</td><td>παντ-ός</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              )
+            analizador: { category: "Premium", title: "10. Analizador Morfológico", icon: <Layers size={18} />, content: <div className="space-y-4"><h4 className="font-bold text-amber-400 text-lg border-b border-slate-700 pb-2">El Espejo de Atenea</h4><p className="text-sm text-slate-300">Selecciona una palabra problemática para ver su disección morfológica exacta y entender cómo se forma.</p><AnalizadorUniversal /></div> },
+            diccionario: { category: "Premium", title: "8. Diccionario Épico Interactivo", icon: <Search size={18} />, content: <div className="space-y-4"><h4 className="font-bold text-amber-400 text-lg border-b border-slate-700 pb-2">El Papiro de la Sabiduría</h4><p className="text-sm text-slate-300">Usa este glosario para buscar epítetos, dioses y conceptos homéricos clave.</p><DiccionarioEpico /></div> },
+            vocabulario: { category: "Minijuego", title: "9. Vocabulario de Supervivencia", icon: <RefreshCcw size={18} />, content: <div className="space-y-4"><h4 className="font-bold text-amber-400 text-lg border-b border-slate-700 pb-2">Tarjetas de Memoria Épica</h4><p className="text-sm text-slate-300 mb-6 bg-slate-800 p-3 rounded border border-slate-700 inline-block shadow-md">Haz clic en las tarjetas para girarlas y aprender el vocabulario imprescindible para traducir a Homero.</p><div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"><Flashcard greek="θάλαττα, -ης" spanish="El Mar" type="Sustantivo 1ª Decl. (Impura)" /><Flashcard greek="ἀνήρ, ἀνδρός" spanish="El Hombre / Varón" type="Sustantivo 3ª Decl." /><Flashcard greek="θεός, -οῦ" spanish="El Dios" type="Sustantivo 2ª Decl." /><Flashcard greek="βαίνω" spanish="Yo voy / marcho" type="Verbo (Presente)" /><Flashcard greek="καλός, -ή, -όν" spanish="Bello / Hermoso" type="Adjetivo 2-1-2" /><Flashcard greek="μῦθος, -ου" spanish="Palabra / Relato" type="Sustantivo 2ª Decl." /><Flashcard greek="νῆσος, -ου" spanish="La Isla" type="Sustantivo 2ª Decl. (Femenino!)" /><Flashcard greek="πλοῖον, -ου" spanish="El Barco / Nave" type="Sustantivo 2ª Decl. Neutro" /><Flashcard greek="μάχη, -ης" spanish="La Batalla" type="Sustantivo 1ª Decl. (En -η)" /><Flashcard greek="πολίτης, -ου" spanish="El Ciudadano" type="Sustantivo 1ª Decl. (Masc)" /><Flashcard greek="γυνή, γυναικός" spanish="La Mujer / Esposa" type="Sustantivo 3ª Decl." /><Flashcard greek="ποιέω" spanish="Yo hago / construyo" type="Verbo Contracto (-έω)" /></div></div> },
+            funciones: { category: "Premium", title: "11. Herramientas Filológicas", icon: <Activity size={18} />, content: <div className="space-y-6"><IsopsephiaCalculator /><HomericScansion /><EpithetGenerator /></div> }
+          };
+
+          const handleAnswer = (option) => {
+            if (feedback) return;
+            if (option.correct) {
+              setFeedback({ type: 'success', text: '¡Respuesta sublime! Atenea te sonríe.' });
+              if (!inventory.some(item => item.name === currentLevel.reward)) { setInventory([...inventory, { name: currentLevel.reward, icon: currentLevel.rewardIcon }]); }
+              setTimeout(() => { setFeedback(null); setShowOracle(false); if (levelIndex < LEVELS.length - 1) { const nextLevel = levelIndex + 1; setLevelIndex(nextLevel); const nextTopic = LEVELS[nextLevel].codexUnlock; if (!unlockedCodex.includes(nextTopic)) { setUnlockedCodex([...unlockedCodex, nextTopic]); setActiveTopic(nextTopic); } } else { setGameState('victory'); } }, 3000);
+            } else {
+              setFeedback({ type: 'error', text: '¡Error morfológico! Los dioses desatan la tormenta.' });
+              setShake(true); setTimeout(() => { setShake(false); setFeedback(null); }, 3000);
             }
           };
 
@@ -828,8 +776,6 @@ const EpithetGenerator = () => {
   setActiveTopic(safeTopic);
   setIsCodexOpen(true);
 };
-            
-          const openCodex = (topic = null) => { if (topic && unlockedCodex.includes(topic)) setActiveTopic(topic); setIsCodexOpen(true); };
 
           return (
             <div className="min-h-screen bg-[#020617] text-slate-200 font-sans selection:bg-amber-500/30 overflow-x-hidden relative">
@@ -1001,4 +947,5 @@ const EpithetGenerator = () => {
         root.render(<App />);
     </script>
 </body>
+</html>
 </html>
