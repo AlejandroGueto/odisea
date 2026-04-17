@@ -968,7 +968,11 @@
           const [isCodexOpen, setIsCodexOpen] = useState(false);
           const [activeTopic, setActiveTopic] = useState('literatura');
           // FIX: Iniciar solo con la literatura desbloqueada (¡Progresión real!)
-          const [unlockedCodex, setUnlockedCodex] = useState(['literatura']);
+          const [unlockedCodex, setUnlockedCodex] = useState([
+  'literatura', 'mitologia', 'diccionario', 'vocabulario', 
+  'analizador', 'funciones', 'declinaciones', 'verbos_presente', 
+  'aoristos', 'voz_media'
+]);
 
           const [feedback, setFeedback] = useState(null);
           const [shake, setShake] = useState(false);
@@ -1174,15 +1178,56 @@
                 </div>
               )
             },
-            mitologia: {
-              category: "Contexto Cultural", title: "Mitología y Monstruos", icon: <Shield size={20} />,
-              content: <p className="text-slate-300 leading-relaxed">Durante tu Odisea te enfrentarás a fuerzas implacables. <strong>Poseidón</strong>, señor del abismo salado (πόντος), es el principal antagonista que castigará tu ceguera. <strong>Zeus Xenios</strong> protege la sagrada hospitalidad forastera, castigando a quienes devoran a sus huéspedes. Finalmente, <strong>Atenea Glaucópide</strong> es la patrona de la astucia (Mētis) y será tu guía invisible hasta que regreses al hogar.</p>
+           mitologia: {
+              category: "Contexto Cultural", title: "Mitología y Leyes Divinas", icon: <Shield size={20} />,
+              content: (
+                <div className="space-y-6 text-sm md:text-base leading-relaxed text-slate-300">
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Orden Cósmico Homérico</h4>
+                  <p>En la Odisea, los dioses no son entidades bondadosas, sino fuerzas de la naturaleza y del orden social que exigen respeto absoluto. El viaje de Odiseo es un constante choque entre la voluntad humana y la implacable tiranía divina.</p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div className="bg-blue-950/30 p-5 rounded-xl border border-blue-900/50 shadow-inner">
+                      <h5 className="font-bold text-blue-400 mb-2 flex items-center gap-2">🌊 Poseidón (El Antagonista)</h5>
+                      <p className="text-sm">El "Agitador de la Tierra". Representa la fuerza bruta, irracional e implacable del mar. Persigue a Odiseo sin descanso por haber cegado a su hijo, el cíclope Polifemo. Es el enemigo natural de la astucia.</p>
+                    </div>
+                    
+                    <div className="bg-amber-950/30 p-5 rounded-xl border border-amber-900/50 shadow-inner">
+                      <h5 className="font-bold text-amber-400 mb-2 flex items-center gap-2">⚡ Zeus Xenios (El Rey)</h5>
+                      <p className="text-sm">El padre de los dioses y los hombres. Bajo su epíteto "Xenios", es el protector supremo de la <strong>Xenía</strong> (la sagrada hospitalidad). Castiga severamente a quienes devoran a sus huéspedes y a los que abusan del anfitrión.</p>
+                    </div>
+                    
+                    <div className="bg-slate-800/50 p-5 rounded-xl border border-slate-700 col-span-1 md:col-span-2 shadow-inner">
+                      <h5 className="font-bold text-slate-200 mb-2 flex items-center gap-2">🦉 Atenea Glaucópide (La Mentora)</h5>
+                      <p className="text-sm">Diosa de la guerra táctica y la sabiduría. Es la protectora incondicional de Odiseo porque ambos comparten la misma cualidad fundamental: la <strong>Mētis</strong> (inteligencia práctica, engaño y capacidad de adaptación).</p>
+                    </div>
+                  </div>
+                </div>
+              )
             },
             vocabulario: {
-              category: "Morfología Nominal", title: "Vocabulario Épico", icon: <BookOpen size={20} />,
-              content: <p className="text-slate-300 leading-relaxed">Recuerda la regla de oro de la concordancia de los adjetivos: siempre deben concordar en <strong>género, número y caso</strong> con el sustantivo al que acompañan. Adjetivos poderosos como <em>μέγας</em> (grande) son muy irregulares en el Nominativo y Acusativo singular, pero concuerdan perfectamente en sus rasgos morfológicos con su sustantivo, aunque visualmente sus terminaciones no parezcan encajar.</p>
+              category: "Morfología Nominal", title: "Vocabulario Épico y Fórmulas", icon: <BookOpen size={20} />,
+              content: (
+                <div className="space-y-6 text-sm md:text-base leading-relaxed text-slate-300">
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Lenguaje de los Aedos</h4>
+                  <p>Para memorizar miles de versos, los poetas orales usaban <strong>fórmulas prefabricadas</strong> (Sustantivo + Epíteto) que encajaban perfectamente en la métrica del hexámetro dactílico sin alterar la gramática.</p>
+                  
+                  <div className="bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-inner mt-4">
+                    <h5 className="font-bold text-emerald-400 mb-3 text-lg">Epítetos Frecuentes</h5>
+                    <ul className="space-y-3 font-mono text-sm">
+                      <li><span className="text-emerald-300 font-bold">πολύμητις Ὀδυσσεύς:</span> Odiseo, el de múltiples ardides.</li>
+                      <li><span className="text-emerald-300 font-bold">γλαυκῶπις Ἀθήνη:</span> Atenea, la de ojos brillantes (o de lechuza).</li>
+                      <li><span className="text-emerald-300 font-bold">ῥοδοδάκτυλος Ἠώς:</span> La Aurora, la de dedos rosados.</li>
+                      <li><span className="text-emerald-300 font-bold">περίφρων Πηνελόπεια:</span> La muy prudente Penélope.</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-amber-950/20 p-5 rounded-xl border-l-4 border-amber-600 mt-4">
+                     <h5 className="font-bold text-amber-500 mb-2">La Regla de Oro Adjetival</h5>
+                     <p className="text-sm">Recuerda: un adjetivo siempre debe concordar en <strong>Género, Número y Caso</strong> con su sustantivo. Aunque el adjetivo pertenezca a la 1ª declinación y el sustantivo a la 3ª, si ambos son Femenino Plural Acusativo, concuerdan perfectamente en la sintaxis.</p>
+                  </div>
+                </div>
+              )
             }
-          };
 
           return (
             <div className="min-h-screen bg-[#020617] text-slate-200 font-sans selection:bg-amber-500/30 overflow-x-hidden relative">
