@@ -734,3 +734,450 @@
     </script>
 </body>
 </html>
+const DiccionarioEpico = () => {
+          const [searchTerm, setSearchTerm] = useState('');
+          const dictionary = [
+            { word: 'ἄναξ, ἄνακτος (ὁ)', mean: 'Rey supremo, señor' },
+            { word: 'γλαυκῶπις', mean: 'De ojos brillantes (Atenea)' },
+            { word: 'πολύμητις', mean: 'De mucha astucia e ingenio (Odiseo)' },
+            { word: 'νόστος (ὁ)', mean: 'El viaje de regreso a casa' },
+            { word: 'ὕβρις (ἡ)', mean: 'La soberbia, desmesura humana' },
+            { word: 'ξενία (ἡ)', mean: 'La sagrada hospitalidad forastera, protegida por Zeus Xenios' },
+            { word: 'κλέος (τό)', mean: 'La gloria heroica, el renombre eterno' },
+            { word: 'οἶκος (ὁ)', mean: 'La casa, el patrimonio, la familia' },
+            { word: 'δαίμων, -ονος (ὁ)', mean: 'Divinidad, fuerza del destino' },
+            { word: 'ροδοδάκτυλος', mean: 'De dedos rosados (Aurora / Eos)' },
+            { word: 'μῆτις (ἡ)', mean: 'La inteligencia práctica, astucia' },
+            { word: 'πόντος (ὁ)', mean: 'El mar abierto, el abismo salado' }
+          ];
+          const filtered = dictionary.filter(item => item.word.toLowerCase().includes(searchTerm.toLowerCase()) || item.mean.toLowerCase().includes(searchTerm.toLowerCase()));
+          return (
+            <div className="bg-slate-950 border border-slate-700 p-5 md:p-8 rounded-xl mt-4 shadow-inner">
+              <div className="relative mb-6">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={24} />
+                <input type="text" placeholder="Buscar en griego o español..." className="w-full bg-slate-900 border-2 border-slate-600 rounded-xl py-4 pl-12 pr-4 text-amber-100 shadow-inner" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
+                {filtered.map((item, idx) => (
+                  <div key={idx} className="bg-slate-800 p-5 rounded-xl border border-slate-700 shadow-md"><span className="text-amber-400 font-serif font-bold text-2xl mb-2 block">{item.word}</span><span className="text-slate-300 text-sm md:text-base leading-relaxed">{item.mean}</span></div>
+                ))}
+              </div>
+            </div>
+          );
+        };
+
+        const WordAnalysisTable = ({ levelId }) => {
+            const [isOpen, setIsOpen] = useState(false);
+            const ANALYSIS_DATA = {
+                1: [{w:"μετὰ",l:"μετά",m:"Prep",s:"Enlace",t:"después de"},{w:"τὸν",l:"ὁ,ἡ,τό",m:"Art Masc Acus Sg",s:"Det",t:"la"},{w:"δεινὸν",l:"δεινός",m:"Adj Masc Acus Sg",s:"Ady",t:"terrible"},{w:"πόλεμον",l:"πόλεμος",m:"Sust Masc Acus Sg",s:"CD",t:"guerra"},{w:"οἱ",l:"ὁ",m:"Art Masc Nom Pl",s:"Det",t:"los"},{w:"Ἀχαιοὶ",l:"Ἀχαιός",m:"Sust Masc Nom Pl",s:"Sujeto",t:"aqueos"},{w:"τὰ",l:"τό",m:"Art Neut Acus Pl",s:"Det",t:"los"},{w:"καλὰ",l:"καλός",m:"Adj Neut Acus Pl",s:"Ady",t:"bellos"},{w:"πλοῖα",l:"πλοῖον",m:"Sust Neut Acus Pl",s:"CD",t:"barcos"},{w:"ταχέως",l:"ταχέως",m:"Adv",s:"CC Modo",t:"rápidamente"},{w:"πληροῦσιν",l:"πληρόω",m:"Vb Pres Ind Act 3Pl",s:"Núcleo PV",t:"llenan"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"πλέουσιν",l:"πλέω",m:"Vb Pres Ind Act 3Pl",s:"Núcleo PV",t:"navegan"},{w:"εἰς",l:"εἰς",m:"Prep",s:"Enlace",t:"hacia"},{w:"τὴν",l:"ἡ",m:"Art Fem Acus Sg",s:"Det",t:"la"},{w:"πατρίδα",l:"πατρίς",m:"Sust Fem Acus Sg",s:"Término(CC)",t:"patria"},{w:"ὁ",l:"ὁ",m:"Art Masc Nom Sg",s:"Det",t:"el"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"pero"},{w:"πολύμητις",l:"πολύμητις",m:"Adj Nom Sg",s:"Ady",t:"astuto"},{w:"Ὀδυσσεὺς",l:"Ὀδυσσεύς",m:"Sust Nom Sg",s:"Sujeto",t:"Odiseo"},{w:"τὴν",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"Τροίαν",l:"Τροία",m:"Sust Acus Sg",s:"CD",t:"Troya"},{w:"ἔλιπεν",l:"λείπω",m:"Vb Aor Fuerte Act 3Sg",s:"Núcleo PV",t:"abandonó"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"πρὸς",l:"πρός",m:"Prep",s:"Enlace",t:"hacia"},{w:"τὴν",l:"ἡ",m:"Art",s:"Det",t:"el"},{w:"θάλατταν",l:"θάλαττα",m:"Sust Fem 1Decl Acus Sg",s:"Término(CC)",t:"mar"},{w:"βαίνει",l:"βαίνω",m:"Vb Pres Ind Act 3Sg",s:"Núcleo PV",t:"marcha"},{w:"ἀλλὰ",l:"ἀλλά",m:"Conj",s:"Nexo",t:"pero"},{w:"ἕτερος",l:"ἕτερος",m:"Adj Nom Sg",s:"Ady",t:"otro"},{w:"κρατερὸς",l:"κρατερός",m:"Adj Nom Sg",s:"Ady",t:"poderoso"},{w:"θεὸς",l:"θεός",m:"Sust Nom Sg",s:"Sujeto",t:"dios"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"νόστον",l:"νόστος",m:"Sust Acus Sg",s:"CD",t:"regreso"},{w:"κωλύει",l:"κωλύω",m:"Vb Pres Ind Act 3Sg",s:"Núcleo PV",t:"impide"}],
+                2: [{w:"οἱ",l:"ὁ",m:"Art",s:"Det",t:"los"},{w:"μὲν",l:"μέν",m:"Part",s:"Nexo",t:"por un lado"},{w:"Λωτοφάγοι",l:"Λωτοφάγος",m:"Sust Nom Pl",s:"Suj",t:"Lotófagos"},{w:"οὐκ",l:"οὐ",m:"Adv",s:"Mod Neg",t:"no"},{w:"ἄγριοί",l:"ἄγριος",m:"Adj Nom Pl",s:"Atr",t:"salvajes"},{w:"εἰσιν",l:"εἰμί",m:"Vb Pres Ind 3Pl",s:"Cópula",t:"son"},{w:"ἀλλὰ",l:"ἀλλά",m:"Conj",s:"Nexo",t:"sino que"},{w:"τὸ",l:"τό",m:"Art",s:"Det",t:"la"},{w:"ἄνθος",l:"ἄνθος",m:"Sust Neut Acus Sg",s:"CD",t:"flor"},{w:"ἔδωκαν",l:"δίδωμι",m:"Vb Aor Act 3Pl",s:"Núcleo PV",t:"dieron"},{w:"τοῖς",l:"οἱ",m:"Art Dat Pl",s:"Det",t:"a los"},{w:"ἑταίροις",l:"ἑταῖρος",m:"Sust Dat Pl",s:"CI",t:"compañeros"},{w:"οἱ",l:"ὁ",m:"Art",s:"Det",t:"los"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"ἑταῖροι",l:"ἑταῖρος",m:"Sust Nom Pl",s:"Suj",t:"compañeros"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"ἡδὺν",l:"ἡδύς",m:"Adj Acus Sg",s:"Ady",t:"dulce"},{w:"λωτὸν",l:"λωτός",m:"Sust Acus Sg",s:"CD",t:"loto"},{w:"ἤσθιον",l:"ἐσθίω",m:"Vb Imperf Act 3Pl",s:"Núcleo PV",t:"comían"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"τὴν",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"πατρίδα",l:"πατρίς",m:"Sust Acus Sg",s:"CD",t:"patria"},{w:"οὐκέτι",l:"οὐκέτι",m:"Adv",s:"CC",t:"ya no"},{w:"ἐφίλουν",l:"φιλέω",m:"Vb Imperf Act 3Pl",s:"Núcleo PV",t:"amaban"},{w:"μόνον",l:"μόνον",m:"Adv",s:"CC",t:"solo"},{w:"ἔμενον",l:"μένω",m:"Vb Imperf Act 3Pl",s:"Núcleo PV",t:"permanecían"},{w:"ἐν",l:"ἐν",m:"Prep",s:"Enlace",t:"en"},{w:"τῇ",l:"ἡ",m:"Art Dat",s:"Det",t:"la"},{w:"νήσῳ",l:"νῆσος",m:"Sust 2Decl Fem Dat Sg",s:"Término",t:"isla"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"ἔκλαιον",l:"κλαίω",m:"Vb Imperf Act 3Pl",s:"Núcleo PV",t:"lloraban"}],
+                3: [{w:"τὸ",l:"τό",m:"Art Neut",s:"Det",t:"el"},{w:"γὰρ",l:"γάρ",m:"Part",s:"Nexo",t:"pues"},{w:"ἄγριον",l:"ἄγριος",m:"Adj Neut Nom Sg",s:"Ady",t:"salvaje"},{w:"τέρας",l:"τέρας",m:"Sust 3Decl Neut Nom Sg",s:"Sujeto",t:"monstruo"},{w:"οὐ",l:"οὐ",m:"Adv",s:"Mod Neg",t:"no"},{w:"σέβεται",l:"σέβομαι",m:"Vb Pres Deponente 3Sg",s:"Núcleo PV",t:"respeta"},{w:"τοὺς",l:"οἱ",m:"Art Masc Acus Pl",s:"Det",t:"a los"},{w:"θεοὺς",l:"θεός",m:"Sust Masc Acus Pl",s:"CD",t:"dioses"},{w:"οὐδὲ",l:"οὐδέ",m:"Conj",s:"Nexo",t:"ni"},{w:"τὴν",l:"ἡ",m:"Art Fem Acus",s:"Det",t:"la"},{w:"ξενίαν",l:"ξενία",m:"Sust Fem Acus Sg",s:"CD",t:"hospitalidad"},{w:"ὁ",l:"ὁ",m:"Art Masc",s:"Det",t:"el"},{w:"μὲν",l:"μέν",m:"Part",s:"Nexo",t:"por un lado"},{w:"δεινὸς",l:"δεινός",m:"Adj Masc Nom",s:"Ady",t:"terrible"},{w:"Κύκλωψ",l:"Κύκλωψ",m:"Sust 3Decl Nom Sg",s:"Sujeto",t:"Cíclope"},{w:"τοὺς",l:"ὁ",m:"Art",s:"Det",t:"a los"},{w:"ἑταίρους",l:"ἑταῖρος",m:"Sust 2Decl Acus Pl",s:"CD",t:"compañeros"},{w:"ἐν",l:"ἐν",m:"Prep",s:"Enlace",t:"en"},{w:"τῷ",l:"τό",m:"Art",s:"Det",t:"la"},{w:"σκοτεινῷ",l:"σκοτεινός",m:"Adj Neut Dat Sg",s:"Ady",t:"oscura"},{w:"ἄντρῳ",l:"ἄντρον",m:"Sust 2Decl Neut Dat Sg",s:"Término(CCL)",t:"cueva"},{w:"ἐσθίει",l:"ἐσθίω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"devora"},{w:"ὁ",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"Ὀδυσσεὺς",l:"Ὀδυσσεύς",m:"Sust 3Decl Nom",s:"Suj",t:"Odiseo"},{w:"τὸ",l:"τό",m:"Art",s:"Det",t:"el"},{w:"ὀξὺ",l:"ὀξύς",m:"Adj Neut Acus Sg",s:"Ady",t:"afilado"},{w:"ξύλον",l:"ξύλον",m:"Sust 2Decl Neut Acus Sg",s:"CD",t:"madero"},{w:"λαμβάνει",l:"λαμβάνω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"toma"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"ὀφθαλμὸν",l:"ὀφθαλμός",m:"Sust 2Decl Acus Sg",s:"CD",t:"ojo"},{w:"βάλλει",l:"βάλλω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"atraviesa"}],
+                4: [{w:"ὁ",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y / pero"},{w:"Αἴολος",l:"Αἴολος",m:"Sust Nom Sg",s:"Sujeto",t:"Eolo"},{w:"τοὺς",l:"ὁ",m:"Art",s:"Det",t:"a los"},{w:"ἀνέμους",l:"ἄνεμος",m:"Sust Acus Pl",s:"CD",t:"vientos"},{w:"ἐν",l:"ἐν",m:"Prep",s:"Enlace",t:"en"},{w:"τῷ",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"ἀσκῷ",l:"ἀσκός",m:"Sust 2Decl Dat Sg",s:"Término(CCL)",t:"saco"},{w:"ἔκλεισε",l:"κλείω",m:"Vb Aor Sigm Act 3Sg",s:"Núcleo PV",t:"encerró"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"κελεύει",l:"κελεύω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"ordena"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"a"},{w:"Ὀδυσσέα",l:"Ὀδυσσεύς",m:"Sust Acus Sg",s:"CD",t:"Odiseo"},{w:"ἀσφαλῶς",l:"ἀσφαλῶς",m:"Adv",s:"CC",t:"seguramente"},{w:"πλεῖν",l:"πλέω",m:"Infinitivo Pres Act",s:"Suplemento",t:"navegar"},{w:"πάντες",l:"πᾶς",m:"Pron Nom Pl",s:"Ady",t:"todos"},{w:"γὰρ",l:"γάρ",m:"Part",s:"Nexo",t:"pues"},{w:"οἱ",l:"ὁ",m:"Art",s:"Det",t:"los"},{w:"κακοὶ",l:"κακός",m:"Adj Nom Pl",s:"Ady",t:"malos"},{w:"ἄνεμοι",l:"ἄνεμος",m:"Sust Nom Pl",s:"Sujeto",t:"vientos"},{w:"ἐκ",l:"ἐκ",m:"Prep",s:"Enlace",t:"desde"},{w:"τῆς",l:"ἡ",m:"Art",s:"Det",t:"el"},{w:"θαλάττης",l:"θάλαττα",m:"Sust Gen Sg",s:"Término(CC)",t:"mar"},{w:"ἔρχονται",l:"ἔρχομαι",m:"Vb Pres Dep 3Pl",s:"Núcleo PV",t:"vienen"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"τὰ",l:"τό",m:"Art",s:"Det",t:"los"},{w:"πλοῖα",l:"πλοῖον",m:"Sust Acus Pl",s:"CD",t:"barcos"},{w:"διαφθείρουσιν",l:"διαφθείρω",m:"Vb Pres Act 3Pl",s:"Núcleo PV",t:"destruyen"},{w:"ἀλλὰ",l:"ἀλλά",m:"Conj",s:"Nexo",t:"pero"},{w:"οἱ",l:"ὁ",m:"Art",s:"Det",t:"los"},{w:"ἑταῖροι",l:"ἑταῖρος",m:"Sust Nom Pl",s:"Sujeto",t:"compañeros"},{w:"ἄφρονές",l:"ἄφρων",m:"Adj Nom Pl",s:"Atributo",t:"insensatos"},{w:"εἰσιν",l:"εἰμί",m:"Vb Pres 3Pl",s:"Cópula",t:"son"}],
+                5: [{w:"οἱ",l:"ὁ",m:"Art",s:"Det",t:"los"},{w:"μὲν",l:"μέν",m:"Part",s:"Nexo",t:"por un lado"},{w:"Λαιστρυγόνες",l:"Λαιστρυγών",m:"Sust Nom Pl",s:"Sujeto",t:"Lestrigones"},{w:"οὐκ",l:"οὐ",m:"Adv",s:"Mod Neg",t:"no"},{w:"ἄνθρωποί",l:"ἄνθρωπος",m:"Sust Nom Pl",s:"Atributo",t:"hombres"},{w:"εἰσιν",l:"εἰμί",m:"Vb",s:"Cópula",t:"son"},{w:"ἀλλὰ",l:"ἀλλά",m:"Conj",s:"Nexo",t:"sino que"},{w:"Γίγαντες",l:"Γίγας",m:"Sust Nom Pl",s:"Atributo",t:"Gigantes"},{w:"ἀπὸ",l:"ἀπό",m:"Prep",s:"Enlace",t:"desde"},{w:"τῶν",l:"τό",m:"Art",s:"Det",t:"las"},{w:"ὀρῶν",l:"ὄρος",m:"Sust Gen Pl",s:"Término(CC)",t:"montañas"},{w:"μεγάλους",l:"μέγας",m:"Adj Irreg Acus Pl",s:"Ady",t:"grandes"},{w:"λίθους",l:"λίθος",m:"Sust Acus Pl",s:"CD",t:"piedras"},{w:"ἐπὶ",l:"ἐπί",m:"Prep",s:"Enlace",t:"hacia"},{w:"τὰ",l:"τό",m:"Art",s:"Det",t:"los"},{w:"πλοῖα",l:"πλοῖον",m:"Sust Acus Pl",s:"Término(CC Dir)",t:"barcos"},{w:"βάλλουσιν",l:"βάλλω",m:"Vb Pres Act 3Pl",s:"Núcleo PV",t:"lanzan"},{w:"πάντα",l:"πᾶς",m:"Pron Neut Nom Pl",s:"Ady",t:"todos"},{w:"τὰ",l:"τό",m:"Art",s:"Det",t:"los"},{w:"πλοῖα",l:"πλοῖον",m:"Sust Nom Pl",s:"Sujeto",t:"barcos"},{w:"ἀπόλλυται",l:"ἀπόλλυμι",m:"Vb Pres Medio 3Sg",s:"Núcleo PV",t:"son destruidos"},{w:"πλὴν",l:"πλήν",m:"Prep(Gen)",s:"Enlace",t:"excepto"},{w:"τοῦ",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"Ὀδυσσέως",l:"Ὀδυσσεύς",m:"Sust Gen Sg",s:"CN",t:"de Odiseo"},{w:"πλοίου",l:"πλοῖον",m:"Sust Gen Sg",s:"Término",t:"barco"}],
+                6: [{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"κακὴ",l:"κακός",m:"Adj",s:"Ady",t:"malvada"},{w:"Κίρκη",l:"Κίρκη",m:"Sust",s:"Sujeto",t:"Circe"},{w:"τὰ",l:"τό",m:"Art",s:"Det",t:"los"},{w:"φάρμακα",l:"φάρμακον",m:"Sust Acus Pl",s:"CD",t:"venenos"},{w:"ποιεῖ",l:"ποιέω",m:"Vb Pres Contracto 3Sg",s:"Núcleo PV",t:"prepara"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"τοὺς",l:"ὁ",m:"Art",s:"Det",t:"a los"},{w:"ἄνδρας",l:"ἀνήρ",m:"Sust Acus Pl",s:"CD",t:"hombres"},{w:"σῦς",l:"σῦς",m:"Sust Acus Pl",s:"C.Predicativo",t:"cerdos"},{w:"ποιεῖ",l:"ποιέω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"hace"},{w:"οἱ",l:"ὁ",m:"Art",s:"Det",t:"los"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"ἄθλιοι",l:"ἄθλιος",m:"Adj",s:"Ady",t:"desdichados"},{w:"ἑταῖροι",l:"ἑταῖρος",m:"Sust Nom Pl",s:"Sujeto",t:"compañeros"},{w:"μάλα",l:"μάλα",m:"Adv",s:"CC",t:"mucho"},{w:"δακρύουσι",l:"δακρύω",m:"Vb Pres Act 3Pl",s:"Núcleo PV",t:"lloran"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"a"},{w:"Ὀδυσσέα",l:"Ὀδυσσεύς",m:"Sust Acus Sg",s:"CD",t:"Odiseo"},{w:"βοηθεῖν",l:"βοηθέω",m:"Infinitivo Contracto",s:"Suplemento",t:"ayudar"},{w:"καλοῦσιν",l:"καλέω",m:"Vb Pres Act 3Pl",s:"Núcleo PV",t:"llaman"},{w:"ὁ",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"pero"},{w:"ἥρως",l:"ἥρως",m:"Sust Nom Sg",s:"Sujeto",t:"héroe"},{w:"ἄφοβος",l:"ἄφοβος",m:"Adj",s:"C.Predicativo",t:"sin miedo"},{w:"τὸ",l:"τό",m:"Art",s:"Det",t:"el"},{w:"καλὸν",l:"καλός",m:"Adj",s:"Ady",t:"buen"},{w:"φάρμακον",l:"φάρμακον",m:"Sust Acus Sg",s:"CD",t:"antídoto"},{w:"λαμβάνει",l:"λαμβάνω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"toma"}],
+                7: [{w:"ὁ",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"Ὀδυσσεὺς",l:"Ὀδυσσεύς",m:"Sust",s:"Sujeto",t:"Odiseo"},{w:"εἰς",l:"εἰς",m:"Prep",s:"Enlace",t:"hacia"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"Ἅιδην",l:"Ἅιδης",m:"Sust Acus Sg",s:"Término(CC)",t:"Hades"},{w:"ἦλθεν",l:"ἔρχομαι",m:"Vb Aor Fuerte 3Sg",s:"Núcleo PV",t:"fue"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"τὴν",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"φίλην",l:"φίλος",m:"Adj Acus Sg",s:"Ady",t:"querida"},{w:"μητέρα",l:"μήτηρ",m:"Sust Acus Sg",s:"CD",t:"madre"},{w:"εἶδεν",l:"ὁράω",m:"Vb Aor Fuerte 3Sg",s:"Núcleo PV",t:"vio"},{w:"ἐκεῖ",l:"ἐκεῖ",m:"Adv",s:"CCL",t:"allí"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"ὁ",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"τυφλὸς",l:"τυφλός",m:"Adj",s:"Ady",t:"ciego"},{w:"μάντις",l:"μάντις",m:"Sust",s:"Sujeto",t:"adivino"},{w:"Τειρεσίας",l:"Τειρεσίας",m:"Sust",s:"Aposición",t:"Tiresias"},{w:"τὴν",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"ἀλήθειαν",l:"ἀλήθεια",m:"Sust Acus Sg",s:"CD",t:"verdad"},{w:"λέγει",l:"λέγω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"dice"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"μέγαν",l:"μέγας",m:"Adj",s:"Ady",t:"gran"},{w:"κίνδυνον",l:"κίνδυνος",m:"Sust Acus Sg",s:"CD",t:"peligro"},{w:"ὀρθῶς",l:"ὀρθῶς",m:"Adv",s:"CC",t:"correctamente"},{w:"προφητεύει",l:"προφητεύω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"profetiza"}],
+                8: [{w:"αἱ",l:"ἡ",m:"Art",s:"Det",t:"las"},{w:"κακαὶ",l:"κακός",m:"Adj",s:"Ady",t:"malvadas"},{w:"Σειρῆνες",l:"Σειρήν",m:"Sust Nom Pl",s:"Sujeto",t:"Sirenas"},{w:"καλῶς",l:"καλῶς",m:"Adv",s:"CC Modo",t:"bellamente"},{w:"ᾔδον",l:"ᾄδω",m:"Vb Imperf Act 3Pl",s:"Núcleo PV",t:"cantaban"},{w:"ἀλλὰ",l:"ἀλλά",m:"Conj",s:"Nexo",t:"pero"},{w:"Ὀδυσσεὺς",l:"Ὀδυσσεύς",m:"Sust",s:"Sujeto",t:"Odiseo"},{w:"βούλεται",l:"βούλομαι",m:"Vb Pres Deponente 3Sg",s:"Núcleo PV",t:"quiere"},{w:"ἀκούειν",l:"ἀκούω",m:"Infinitivo Pres",s:"Suplemento(CD)",t:"escuchar"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"μῦθον",l:"μῦθος",m:"Sust Acus Sg",s:"CD",t:"relato"},{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"el"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"θάλαττα",l:"θάλαττα",m:"Sust Nom Sg",s:"Sujeto",t:"mar"},{w:"ἥσυχός",l:"ἥσυχος",m:"Adj",s:"Atributo",t:"tranquilo"},{w:"ἐστι",l:"εἰμί",m:"Vb Pres 3Sg",s:"Cópula",t:"está"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"οἱ",l:"ὁ",m:"Art",s:"Det",t:"los"},{w:"πιστοὶ",l:"πιστός",m:"Adj",s:"Ady",t:"fieles"},{w:"ναῦται",l:"ναύτης",m:"Sust Nom Pl",s:"Sujeto",t:"marineros"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"al"},{w:"ἄνδρα",l:"ἀνήρ",m:"Sust Acus Sg",s:"CD",t:"hombre"},{w:"ἐπὶ",l:"ἐπί",m:"Prep",s:"Enlace",t:"en"},{w:"τῷ",l:"τό",m:"Art",s:"Det",t:"el"},{w:"ἱστῷ",l:"ἱστός",m:"Sust Dat Sg",s:"Término(CC)",t:"mástil"},{w:"ἰσχυρῶς",l:"ἰσχυρῶς",m:"Adv",s:"CC",t:"fuertemente"},{w:"δέουσιν",l:"δέω",m:"Vb Pres Act 3Pl",s:"Núcleo PV",t:"atan"}],
+                9: [{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"Σκύλλα",l:"Σκύλλα",m:"Sust Nom",s:"Sujeto",t:"Escila"},{w:"ἔχουσα",l:"ἔχω",m:"Part Pres Act Fem",s:"Ady",t:"teniendo"},{w:"ἓξ",l:"ἕξ",m:"Num",s:"Ady",t:"seis"},{w:"δεινὰς",l:"δεινός",m:"Adj Acus Pl",s:"Ady",t:"terribles"},{w:"κεφαλάς",l:"κεφαλή",m:"Sust Acus Pl",s:"CD",t:"cabezas"},{w:"τοὺς",l:"ὁ",m:"Art",s:"Det",t:"a los"},{w:"ἀρίστους",l:"ἄριστος",m:"Adj Acus Pl",s:"Ady",t:"mejores"},{w:"ἑταίρους",l:"ἑταῖρος",m:"Sust Acus Pl",s:"CD",t:"compañeros"},{w:"ἁρπάζει",l:"ἁρπάζω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"arrebata"},{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"Σκύλλα",l:"Σκύλλα",m:"Sust Nom Sg",s:"Sujeto",t:"Escila"},{w:"αὐτοὺς",l:"αὐτός",m:"Pron Acus Pl",s:"CD",t:"a ellos"},{w:"ἄνω",l:"ἄνω",m:"Adv",s:"CC Dir",t:"arriba"},{w:"φέρει",l:"φέρω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"lleva"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"οἱ",l:"ὁ",m:"Art",s:"Det",t:"los"},{w:"ἄνδρες",l:"ἀνήρ",m:"Sust Nom Pl",s:"Sujeto",t:"hombres"},{w:"μέγα",l:"μέγας",m:"Adv(Acus)",s:"CC",t:"grandemente"},{w:"βοῶσιν",l:"βοάω",m:"Vb Pres Contracto 3Pl",s:"Núcleo PV",t:"gritan"},{w:"Ὀδυσσεὺς",l:"Ὀδυσσεύς",m:"Sust Nom",s:"Sujeto",t:"Odiseo"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"pero"},{w:"αὐτοὺς",l:"αὐτός",m:"Pron Acus Pl",s:"CD",t:"a ellos"},{w:"ὁρᾷ",l:"ὁράω",m:"Vb Pres Contracto 3Sg",s:"Núcleo PV",t:"ve"},{w:"ἀλλὰ",l:"ἀλλά",m:"Conj",s:"Nexo",t:"pero"},{w:"βοηθεῖν",l:"βοηθέω",m:"Infinitivo",s:"CD",t:"ayudar"},{w:"οὐ",l:"οὐ",m:"Adv",s:"Mod Neg",t:"no"},{w:"δύναται",l:"δύναμαι",m:"Vb Pres Dep 3Sg",s:"Núcleo PV",t:"puede"}],
+                10: [{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"καλὴ",l:"καλός",m:"Adj",s:"Ady",t:"bella"},{w:"νύμφη",l:"νύμφη",m:"Sust",s:"Aposición",t:"ninfa"},{w:"Καλυψὼ",l:"Καλυψώ",m:"Sust Nom",s:"Sujeto",t:"Calipso"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"al"},{w:"ἥρωα",l:"ἥρως",m:"Sust Acus Sg",s:"CD",t:"héroe"},{w:"φιλεῖ",l:"φιλέω",m:"Vb Pres 3Sg",s:"Núcleo PV",t:"ama"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"ἐν",l:"ἐν",m:"Prep",s:"Enlace",t:"en"},{w:"τῷ",l:"τό",m:"Art",s:"Det",t:"la"},{w:"σπηλαίῳ",l:"σπήλαιον",m:"Sust Dat Sg",s:"Término",t:"cueva"},{w:"κρύπτει",l:"κρύπτω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"oculta"},{w:"ἀλλὰ",l:"ἀλλά",m:"Conj",s:"Nexo",t:"pero"},{w:"Ὀδυσσεὺς",l:"Ὀδυσσεύς",m:"Sust Nom",s:"Sujeto",t:"Odiseo"},{w:"ἐπὶ",l:"ἐπί",m:"Prep",s:"Enlace",t:"en"},{w:"τῇ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"ἀκτῇ",l:"ἀκτή",m:"Sust Dat Sg",s:"Término",t:"orilla"},{w:"κάθηται",l:"κάθημαι",m:"Vb Pres Medio 3Sg",s:"Núcleo PV",t:"está sentado"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"πρὸς",l:"πρός",m:"Prep",s:"Enlace",t:"hacia"},{w:"τὴν",l:"ἡ",m:"Art",s:"Det",t:"el"},{w:"θάλατταν",l:"θάλαττα",m:"Sust Acus Sg",s:"Término",t:"mar"},{w:"βλέπων",l:"βλέπω",m:"Part Pres Act Masc",s:"C.Predicativo",t:"mirando"},{w:"ὀδύρεται",l:"ὀδύρομαι",m:"Vb Pres Dep 3Sg",s:"Núcleo PV",t:"se lamenta"},{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"γὰρ",l:"γάρ",m:"Part",s:"Nexo",t:"pues"},{w:"θεὰ",l:"θεά",m:"Sust Nom Sg",s:"Sujeto",t:"diosa"},{w:"βούλεται",l:"βούλομαι",m:"Vb Pres Dep 3Sg",s:"Núcleo PV",t:"quiere"},{w:"αὐτὸν",l:"αὐτός",m:"Pron Acus Sg",s:"CD",t:"a él"},{w:"ἀθάνατον",l:"ἀθάνατος",m:"Adj Acus Sg",s:"C.Predicativo",t:"inmortal"},{w:"ποιεῖν",l:"ποιέω",m:"Infinitivo",s:"CD",t:"hacer"},{w:"ἀλλὰ",l:"ἀλλά",m:"Conj",s:"Nexo",t:"pero"},{w:"ἐκεῖνος",l:"ἐκεῖνος",m:"Pron Nom Sg",s:"Sujeto",t:"él"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"νόστον",l:"νόστος",m:"Sust Acus Sg",s:"CD",t:"regreso"},{w:"εὔχεται",l:"εὔχομαι",m:"Vb Pres Medio 3Sg",s:"Núcleo PV",t:"suplica"}],
+                11: [{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"μὲν",l:"μέν",m:"Part",s:"Nexo",t:"por un lado"},{w:"Ναυσικάα",l:"Ναυσικάα",m:"Sust Nom",s:"Sujeto",t:"Nausícaa"},{w:"τὰ",l:"τό",m:"Art",s:"Det",t:"las"},{w:"εἵματα",l:"εἷμα",m:"Sust Acus Pl",s:"CD",t:"ropas"},{w:"πρὸς",l:"πρός",m:"Prep",s:"Enlace",t:"junto a"},{w:"τῷ",l:"τό",m:"Art",s:"Det",t:"el"},{w:"ποταμῷ",l:"ποταμός",m:"Sust Dat Sg",s:"Término(CCL)",t:"río"},{w:"ἔπλυνεν",l:"πλύνω",m:"Vb Imperf Act 3Sg",s:"Núcleo PV",t:"lavaba"},{w:"σὺν",l:"σύν",m:"Prep",s:"Enlace",t:"con"},{w:"ταῖς",l:"ἡ",m:"Art",s:"Det",t:"las"},{w:"δούλαις",l:"δούλη",m:"Sust Dat Pl",s:"Término(CC)",t:"esclavas"},{w:"ὁ",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"Ὀδυσσεὺς",l:"Ὀδυσσεύς",m:"Sust Nom Sg",s:"Sujeto",t:"Odiseo"},{w:"γυμνὸς",l:"γυμνός",m:"Adj Nom Sg",s:"C.Pred",t:"desnudo"},{w:"ἐκ",l:"ἐκ",m:"Prep",s:"Enlace",t:"desde"},{w:"τῆς",l:"ἡ",m:"Art",s:"Det",t:"el"},{w:"ὕλης",l:"ὕλη",m:"Sust Gen Sg",s:"Término",t:"bosque"},{w:"ἦλθεν",l:"ἔρχομαι",m:"Vb Aor Fuerte 3Sg",s:"Núcleo PV",t:"vino"},{w:"αἱ",l:"ἡ",m:"Art",s:"Det",t:"las"},{w:"μὲν",l:"μέν",m:"Part",s:"Nexo",t:"y"},{w:"δοῦλαι",l:"δούλη",m:"Sust Nom Pl",s:"Sujeto",t:"esclavas"},{w:"φόβον",l:"φόβος",m:"Sust Acus Sg",s:"CD",t:"miedo"},{w:"ἔλαβον",l:"λαμβάνω",m:"Vb Aor Fuerte 3Pl",s:"Núcleo PV",t:"tomaron"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"ἔφυγον",l:"φεύγω",m:"Vb Aor Fuerte 3Pl",s:"Núcleo PV",t:"huyeron"},{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"pero"},{w:"βασίλεια",l:"βασίλεια",m:"Sust Nom Sg",s:"Sujeto",t:"reina"},{w:"μόνη",l:"μόνος",m:"Adj Fem Nom Sg",s:"Ady",t:"sola"},{w:"ἔμεινεν",l:"μένω",m:"Vb Aor Act 3Sg",s:"Núcleo PV",t:"permaneció"},{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"γὰρ",l:"γάρ",m:"Part",s:"Nexo",t:"pues"},{w:"Ἀθήνη",l:"Ἀθήνη",m:"Sust",s:"Sujeto",t:"Atenea"},{w:"θάρσος",l:"θάρσος",m:"Sust Neut Acus Sg",s:"CD",t:"valor"},{w:"ἐν",l:"ἐν",m:"Prep",s:"Enlace",t:"en"},{w:"τῇ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"φρενὶ",l:"φρήν",m:"Sust Dat Sg",s:"Término",t:"mente"},{w:"ἔθηκεν",l:"τίθημι",m:"Vb Aor Act 3Sg",s:"Núcleo PV",t:"puso"}],
+                12: [{w:"πρὸ",l:"πρό",m:"Prep (Gen)",s:"Enlace",t:"ante"},{w:"τῶν",l:"τό",m:"Art",s:"Det",t:"las"},{w:"πυλῶν",l:"πύλη",m:"Sust Gen Pl",s:"Término(CCL)",t:"puertas"},{w:"ὁ",l:"ὁ",m:"Art",s:"Det",t:"el"},{w:"πιστὸς",l:"πιστός",m:"Adj Nom Sg",s:"Ady",t:"fiel"},{w:"κύων",l:"κύων",m:"Sust Nom Sg",s:"Sujeto",t:"perro"},{w:"Ἄργος",l:"Ἄργος",m:"Sust Nom",s:"Aposición",t:"Argos"},{w:"ἐν",l:"ἐν",m:"Prep",s:"Enlace",t:"en"},{w:"τῇ",l:"ἡ",m:"Art",s:"Det",t:"el"},{w:"κόπρῳ",l:"κόπρος",m:"Sust Dat Sg",s:"Término",t:"estiércol"},{w:"ἔκειτο",l:"κεῖμαι",m:"Vb Imperf Deponente 3Sg",s:"Núcleo PV",t:"yacía"},{w:"ὡς",l:"ὡς",m:"Conj",s:"Nexo Temporal",t:"cuando"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"Ὀδυσσέα",l:"Ὀδυσσεύς",m:"Sust Acus Sg",s:"CD",t:"a Odiseo"},{w:"ἐγγὺς",l:"ἐγγύς",m:"Adv",s:"CCL",t:"cerca"},{w:"ἐρχόμενον",l:"ἔρχομαι",m:"Partic Pres Depon Acus Sg",s:"C.Predicativo",t:"viniendo"},{w:"ᾔσθετο",l:"αἰσθάνομαι",m:"Vb Aor Deponente 3Sg",s:"Núcleo PV",t:"percibió"},{w:"τὴν",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"οὐρὰν",l:"οὐρά",m:"Sust Acus Sg",s:"CD",t:"cola"},{w:"ἔσηνε",l:"σαίνω",m:"Vb Aor Act 3Sg",s:"Núcleo PV",t:"movió"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"τὰ",l:"τό",m:"Art",s:"Det",t:"las"},{w:"ὦτα",l:"οὖς",m:"Sust Acus Pl",s:"CD",t:"orejas"},{w:"κάββαλεν",l:"καταβάλλω",m:"Vb Aor Act 3Sg",s:"Núcleo PV",t:"bajó"},{w:"αὐτὸς",l:"αὐτός",m:"Pron Nom Sg",s:"Sujeto",t:"él mismo"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"pero"},{w:"ἐγγὺς",l:"ἐγγύς",m:"Adv",s:"CCL",t:"cerca"},{w:"ἐλθεῖν",l:"ἔρχομαι",m:"Infinitivo Aor",s:"CD",t:"ir"},{w:"οὐκέτι",l:"οὐκέτι",m:"Adv",s:"CC",t:"ya no"},{w:"ἐδύνατο",l:"δύναμαι",m:"Vb Imperf Deponente 3Sg",s:"Núcleo PV",t:"podía"},{w:"Ὀδυσσεὺς",l:"Ὀδυσσεύς",m:"Sust Nom",s:"Sujeto",t:"Odiseo"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"αὐτὸν",l:"αὐτός",m:"Pron Acus Sg",s:"CD",t:"lo(a él)"},{w:"ἰδὼν",l:"ὁράω",m:"Partic Aor Act Nom",s:"C.Pred",t:"viendo"},{w:"δάκρυον",l:"δάκρυον",m:"Sust Acus Sg",s:"CD",t:"lágrima"},{w:"ἀπέμορξεν",l:"ἀπομόργνυμι",m:"Vb Aor Act 3Sg",s:"Núcleo PV",t:"secó"}],
+                13: [{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"γραῦς",l:"γραῦς",m:"Sust Nom Sg",s:"Sujeto",t:"anciana"},{w:"τοὺς",l:"ὁ",m:"Art",s:"Det",t:"los"},{w:"πόδας",l:"πούς",m:"Sust Acus Pl",s:"CD",t:"pies"},{w:"ἔνιζεν",l:"νίζω",m:"Vb Imperf Act 3Sg",s:"Núcleo PV",t:"lavaba"},{w:"αὐτίκα",l:"αὐτίκα",m:"Adv",s:"CC Temp",t:"al punto"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"τὴν",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"οὐλὴν",l:"οὐλή",m:"Sust Acus Sg",s:"CD",t:"cicatriz"},{w:"ἔγνω",l:"γιγνώσκω",m:"Vb Aor Fuerte 3Sg",s:"Núcleo PV",t:"reconoció"},{w:"τήν",l:"ὅς,ἥ,ὅ",m:"Pron Relativo Fem Acus",s:"CD",t:"la cual"},{w:"ποτέ",l:"ποτέ",m:"Adv",s:"CC Temp",t:"una vez"},{w:"μιν",l:"μιν",m:"Pron Pers Enclítico 3Sg Acus",s:"CI",t:"le"},{w:"σῦς",l:"σῦς",m:"Sust Nom Sg",s:"Sujeto",t:"jabalí"},{w:"ἤλασε",l:"ἐλαύνω",m:"Vb Aor Act 3Sg",s:"Núcleo PV",t:"causó"},{w:"λευκῷ",l:"λευκός",m:"Adj Dat Sg",s:"Ady",t:"blanco"},{w:"ὀδόντι",l:"ὀδούς",m:"Sust Dat Sg",s:"CC Instr",t:"colmillo"},{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"Εὐρύκλεια",l:"Εὐρύκλεια",m:"Sust Nom",s:"Sujeto",t:"Euriclea"},{w:"τὸ",l:"τό",m:"Art",s:"Det",t:"la"},{w:"σκέλος",l:"σκέλος",m:"Sust Acus Sg",s:"CD",t:"pierna"},{w:"ἀφῆκε",l:"ἀφίημι",m:"Vb Aor Act 3Sg",s:"Núcleo PV",t:"dejó"},{w:"πεσεῖν",l:"πίπτω",m:"Infinitivo Aor",s:"C.Pred",t:"caer"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"τὸ",l:"τό",m:"Art",s:"Det",t:"el"},{w:"ὕδωρ",l:"ὕδωρ",m:"Sust Nom Sg",s:"Sujeto",t:"agua"},{w:"εἰς",l:"εἰς",m:"Prep",s:"Enlace",t:"hacia"},{w:"τὴν",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"γῆν",l:"γῆ",m:"Sust Acus Sg",s:"Término",t:"tierra"},{w:"ἔπεσεν",l:"πίπτω",m:"Vb Aor Fuerte 3Sg",s:"Núcleo PV",t:"cayó"},{w:"χαρὰ",l:"χαρά",m:"Sust Nom Sg",s:"Sujeto",t:"alegría"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"ἄλγος",l:"ἄλγος",m:"Sust Nom Sg",s:"Sujeto",t:"dolor"},{w:"τὴν",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"φρένα",l:"φρήν",m:"Sust Acus Sg",s:"CD",t:"mente"},{w:"εἷλεν",l:"αἱρέω",m:"Vb Aor Fuerte 3Sg",s:"Núcleo PV",t:"tomó"}],
+                14: [{w:"Ὀδυσσεὺς",l:"Ὀδυσσεύς",m:"Sust Nom",s:"Sujeto",t:"Odiseo"},{w:"τὸ",l:"τό",m:"Art",s:"Det",t:"el"},{w:"μέγα",l:"μέγας",m:"Adj Neut Acus Sg",s:"Ady",t:"gran"},{w:"τόξον",l:"τόξον",m:"Sust Acus Sg",s:"CD",t:"arco"},{w:"ἐν",l:"ἐν",m:"Prep",s:"Enlace",t:"en"},{w:"ταῖς",l:"ἡ",m:"Art",s:"Det",t:"las"},{w:"χερσὶ",l:"χείρ",m:"Sust Dat Pl",s:"Término",t:"manos"},{w:"λαμβάνει",l:"λαμβάνω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"coge"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"τοὺς",l:"ὁ",m:"Art",s:"Det",t:"los"},{w:"κακοὺς",l:"κακός",m:"Adj Acus Pl",s:"Ady",t:"malvados"},{w:"μνηστῆρας",l:"μνηστήρ",m:"Sust Acus Pl",s:"CD",t:"pretendientes"},{w:"βάλλει",l:"βάλλω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"dispara"},{w:"τὸ",l:"τό",m:"Art",s:"Det",t:"la"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"αἷμα",l:"αἷμα",m:"Sust Nom Sg",s:"Sujeto",t:"sangre"},{w:"ῥεῖ",l:"ῥέω",m:"Vb Pres Contracto 3Sg",s:"Núcleo PV",t:"fluye"},{w:"ἐν",l:"ἐν",m:"Prep",s:"Enlace",t:"en"},{w:"τῷ",l:"τό",m:"Art",s:"Det",t:"el"},{w:"μεγάρῳ",l:"μέγαρον",m:"Sust Dat Sg",s:"Término",t:"salón"},{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"μὲν",l:"μέν",m:"Part",s:"Correlativo",t:"por un lado"},{w:"Πηνελόπη",l:"Πηνελόπη",m:"Sust Nom",s:"Sujeto",t:"Penélope"},{w:"ἄνωθεν",l:"ἄνωθεν",m:"Adv",s:"CCL",t:"desde arriba"},{w:"ἀκούει",l:"ἀκούω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"escucha"},{w:"ὁ",l:"ὁ",m:"Art",s:"Det",t:"la"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"πόλεμος",l:"πόλεμος",m:"Sust Nom Sg",s:"Sujeto",t:"guerra"},{w:"ἐν",l:"ἐν",m:"Prep",s:"Enlace",t:"en"},{w:"τῇ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"Ἰθάκῃ",l:"Ἰθάκη",m:"Sust Dat Sg",s:"Término",t:"Ítaca"},{w:"τέλος",l:"τέλος",m:"Adv",s:"CC Temp",t:"finalmente"},{w:"τελευτᾷ",l:"τελευτάω",m:"Vb Pres Contracto 3Sg",s:"Núcleo PV",t:"termina"}],
+                15: [{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"δὲ",l:"δέ",m:"Part",s:"Nexo",t:"y"},{w:"σοφὴ",l:"σοφός",m:"Adj Fem Nom Sg",s:"Ady",t:"sabia"},{w:"Πηνελόπη",l:"Πηνελόπη",m:"Sust Nom Sg",s:"Sujeto",t:"Penélope"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"al"},{w:"ἄνδρα",l:"ἀνήρ",m:"Sust Acus Sg",s:"CD",t:"hombre"},{w:"πειρᾷ",l:"πειράω",m:"Vb Pres Contracto 3Sg",s:"Núcleo PV",t:"pone a prueba"},{w:"κελεύει",l:"κελεύω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"ordena"},{w:"γὰρ",l:"γάρ",m:"Part",s:"Nexo Explicativo",t:"pues"},{w:"τὸ",l:"τό",m:"Art",s:"Det",t:"el"},{w:"ἱερὸν",l:"ἱερός",m:"Adj Neut Acus Sg",s:"Ady",t:"sagrado"},{w:"λέχος",l:"λέχος",m:"Sust Acus Sg",s:"CD",t:"lecho"},{w:"ἐκφέρειν",l:"ἐκφέρω",m:"Infinitivo Pres",s:"Suplemento(CD)",t:"sacar"},{w:"ἐκ",l:"ἐκ",m:"Prep",s:"Enlace",t:"de"},{w:"τοῦ",l:"ὁ",m:"Art",s:"Det",t:"la"},{w:"θαλάμου",l:"θάλαμος",m:"Sust Gen Sg",s:"Término",t:"habitación"},{w:"ἀλλὰ",l:"ἀλλά",m:"Conj",s:"Nexo",t:"pero"},{w:"Ὀδυσσεὺς",l:"Ὀδυσσεύς",m:"Sust Nom Sg",s:"Sujeto",t:"Odiseo"},{w:"ὀργίζεται",l:"ὀργίζομαι",m:"Vb Pres Medio 3Sg",s:"Núcleo PV",t:"se enfada"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"λέγει",l:"λέγω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"dice"},{w:"ἐγὼ",l:"ἐγώ",m:"Pron Pers 1Sg Nom",s:"Sujeto",t:"yo"},{w:"γὰρ",l:"γάρ",m:"Part",s:"Nexo",t:"pues"},{w:"τὸ",l:"τό",m:"Art",s:"Det",t:"el"},{w:"λέχος",l:"λέχος",m:"Sust Acus Sg",s:"CD",t:"lecho"},{w:"ἐποίησα",l:"ποιέω",m:"Vb Aor Sigm Contracto 1Sg",s:"Núcleo PV",t:"construí"},{w:"ἐκ",l:"ἐκ",m:"Prep",s:"Enlace",t:"a partir de"},{w:"δένδρου",l:"δένδρον",m:"Sust Gen Sg",s:"Término",t:"árbol"},{w:"τότε",l:"τότε",m:"Adv",s:"CC Temp",t:"entonces"},{w:"ἡ",l:"ἡ",m:"Art",s:"Det",t:"la"},{w:"πιστὴ",l:"πιστός",m:"Adj Fem Nom Sg",s:"Ady",t:"fiel"},{w:"γυνὴ",l:"γυνή",m:"Sust Nom Sg",s:"Sujeto",t:"mujer"},{w:"γιγνώσκει",l:"γιγνώσκω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"reconoce"},{w:"τὸν",l:"ὁ",m:"Art",s:"Det",t:"al"},{w:"πόσιν",l:"πόσις",m:"Sust Acus Sg",s:"CD",t:"marido"},{w:"καὶ",l:"καί",m:"Conj",s:"Nexo",t:"y"},{w:"δακρύει",l:"δακρύω",m:"Vb Pres Act 3Sg",s:"Núcleo PV",t:"llora"}]
+            };
+            const data = ANALYSIS_DATA[levelId] || [];
+            if (data.length === 0) return null;
+            return (
+                <div className="mt-8 border-t-2 border-slate-700/50 pt-6">
+                    <button onClick={() => setIsOpen(!isOpen)} className="flex items-center justify-center gap-2 w-full bg-slate-900/80 hover:bg-amber-900/40 text-amber-500 font-serif italic py-3 rounded-xl border border-amber-900/30 shadow-sm"><Database size={18} /> {isOpen ? 'Ocultar Papiro' : 'Revelar Análisis'}</button>
+                    {isOpen && (
+                        <div className="mt-4 overflow-x-auto bg-[#fffbf0] p-4 rounded-xl border-2 border-[#b45309]">
+                            <table className="table-analysis">
+                                <thead><tr><th>Palabra</th><th>Lema</th><th>Morfología</th><th>Sintaxis</th><th>Traducción</th></tr></thead>
+                                <tbody>
+                                    {data.map((item, index) => (
+                                        <tr key={index}><td className="font-bold text-[#9a3412]">{item.w}</td><td>{item.l}</td><td>{item.m}</td><td>{item.s}</td><td className="italic text-[#854d0e]">{item.t}</td></tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const LEVELS = [
+          { id: 1, location: "Troya", athenaMsg: "El viaje del Nóstos comienza. Los aqueos llenan sus barcos, pero los dioses no olvidan.", title: "El Origen", lore: "Tus hombres cargan las naves negras. El largo viaje comienza.", codexUnlock: "mitologia", papyrusText: <div className="text-center">μετὰ τὸν <InteractiveWord word="πόλεμον" hint="CD. Acusativo" type="grammar"/> ὁ Ὀδυσσεὺς τὴν Τροίαν ἔλιπεν.</div>, translation: "Después de la guerra Odiseo dejó Troya.", instruction: "Abre la Biblioteca en Mitología.", question: "¿Quién es tu enemigo principal en el viaje de regreso?", options: [{ text: "Apolo", correct: false }, { text: "Poseidón", correct: true }], oracleHint: "Dios del abismo salado.", reward: "Favor de Atenea", rewardIcon: "🦉", mapX: 85, mapY: 15 },
+          { id: 2, location: "Lotófagos", athenaMsg: "Las acciones repetitivas y durativas habitan en el pasado. Cuidado con el loto.", title: "El Olvido", lore: "Tus hombres comen una flor extraña y olvidan su patria.", codexUnlock: "verbos_presente", papyrusText: <div className="text-center">οἱ ἑταῖροι τὸν λωτὸν ἤσθιον καὶ μόνον ἔκλαιον.</div>, translation: "Los compañeros comían loto y solo lloraban.", instruction: "Revisa el Pretérito Imperfecto en el Códex.", question: "¿Por qué el verbo ἤσθιον lleva 'η' en lugar de su 'ε' inicial?", options: [{ text: "Contracción de vocales.", correct: false }, { text: "Aumento Temporal por estar en pasado.", correct: true }], oracleHint: "Las vocales breves se alargan en el pasado indicativo.", reward: "Flor de Loto", rewardIcon: "🌸", mapX: 75, mapY: 85 },
+          { id: 3, location: "Polifemo", athenaMsg: "La bestia bloquea la puerta. Necesitas conocer la función del acusativo directo para atacar.", title: "El Cíclope", lore: "El gigante devora a tus hombres. Vas a atravesar su único ojo.", codexUnlock: "declinaciones", papyrusText: <div className="text-center">Ὀδυσσεὺς τὸν <InteractiveWord word="ὀφθαλμὸν" hint="El ojo" type="vocab"/> βάλλει ὀξεῖ ξύλῳ.</div>, translation: "Odiseo atraviesa el ojo con madera afilada.", instruction: "Estudia las declinaciones y los casos.", question: "¿Qué declinación y caso es 'τὸν ὀφθαλμὸν' (Complemento Directo)?", options: [{ text: "3ª Declinación, Acusativo Plural", correct: false }, { text: "2ª Declinación, Acusativo Singular", correct: true }], oracleHint: "La marca -ον indica la segunda declinación.", reward: "Estaca Humeante", rewardIcon: "🔥", mapX: 65, mapY: 70 },
+          { id: 4, location: "Isla de Eolo", athenaMsg: "Los vientos soplan desde el mar. Las preposiciones griegas exigen casos muy concretos.", title: "Los Vientos", lore: "El rey Eolo encierra a los malos vientos en un odre.", codexUnlock: "funciones", papyrusText: <div className="text-center">πάντες κακοὶ ἄνεμοι ἐκ τῆς θαλάττης ἔρχονται.</div>, translation: "Todos los malos vientos vienen del mar.", instruction: "Revisa las preposiciones.", question: "La preposición ἐκ (desde/fuera de) ¿qué caso exige siempre para marcar origen?", options: [{ text: "Acusativo (dirección)", correct: false }, { text: "Genitivo (separación u origen)", correct: true }], oracleHint: "El caso que marca alejamiento.", reward: "Saco de Cuero", rewardIcon: "💨", mapX: 60, mapY: 55 },
+          { id: 5, location: "Lestrigones", athenaMsg: "Gigantes asesinos destruyen tu flota. Cuidado con los adjetivos monstruosos.", title: "Las Rocas", lore: "Caníbales lanzan piedras gigantes desde los acantilados.", codexUnlock: "vocabulario", papyrusText: <div className="text-center">Λαιστρυγόνες μεγάλους λίθους βάλλουσιν.</div>, translation: "Lestrigones lanzan grandes piedras.", instruction: "Repasa la concordancia de los adjetivos.", question: "Para que el adjetivo 'μεγάλους' concuerde con 'λίθους', ¿en qué deben coincidir?", options: [{ text: "Misma declinación y raíz", correct: false }, { text: "Género, Número y Caso", correct: true }], oracleHint: "Tres rasgos exactos y obligatorios.", reward: "Espada Salvada", rewardIcon: "🗡️", mapX: 55, mapY: 30 },
+          { id: 6, location: "Eea (Circe)", athenaMsg: "Verbos contractos. La hechicera fusiona pociones y vocales por igual.", title: "La Hechicera", lore: "Tus hombres han sido transformados en cerdos por una droga.", codexUnlock: "diccionario", papyrusText: <div className="text-center">ἡ κακὴ Κίρκη φάρμακα ποιεῖ.</div>, translation: "La mala Circe prepara venenos.", instruction: "Busca Verbos Contractos en la Biblioteca.", question: "Si un verbo termina en -άω y le añades -ομεν, ¿qué vocal resulta (Ej: τιμά-ομεν)?", options: [{ text: "τιμοῦμεν", correct: false }, { text: "τιμῶμεν", correct: true }], oracleHint: "La 'a' choca con 'o' y gana la omega.", reward: "Raíz Moly", rewardIcon: "🌿", mapX: 45, mapY: 35 },
+          { id: 7, location: "El Hades", athenaMsg: "Las almas descarnadas exigen raíces fuertes. Desciende a los infiernos.", title: "Las Sombras", lore: "Bajas al Hades para escuchar la profecía de Tiresias.", codexUnlock: "aoristos", papyrusText: <div className="text-center">Ὀδυσσεὺς εἰς τὸν Ἅιδην ἦλθεν καὶ μητέρα εἶδεν.</div>, translation: "Odiseo fue al Hades y vio a su madre.", instruction: "Estudia los Aoristos Fuertes.", question: "¿Cómo es el Aoristo Fuerte del verbo λείπω (yo dejo)?", options: [{ text: "ἔλιπε (pierde la épsilon)", correct: true }, { text: "ἔλειψε (añade sigma)", correct: false }], oracleHint: "Hay una apofonía (colapso de la vocal en la raíz).", reward: "Profecía de Tiresias", rewardIcon: "👁️", mapX: 20, mapY: 25 },
+          { id: 8, location: "Sirenas", athenaMsg: "Sus voces prometen conocimiento, pero el deseo interno requiere la Voz Media.", title: "El Canto Letal", lore: "Quieres escuchar su canción sin sucumbir a la muerte. Te atas al mástil.", codexUnlock: "voz_media", papyrusText: <div className="text-center">Ὀδυσσεὺς βούλεται ἀκούειν τὸν μῦθον.</div>, translation: "Odiseo quiere (desea intensamente) escuchar el relato.", instruction: "Busca información sobre Verbos Deponentes.", question: "¿Por qué βούλεται (quiere) tiene desinencia media/pasiva (-εται)?", options: [{ text: "Es pasivo y significa 'es querido'.", correct: false }, { text: "Es deponente: carece de voz activa, pero su sentido interno es puramente activo.", correct: true }], oracleHint: "Acciones psicológicas fuertes suelen ser deponentes.", reward: "Cuerdas Tensadas", rewardIcon: "🪢", mapX: 30, mapY: 50 },
+          { id: 9, location: "Escila", athenaMsg: "Monstruos de seis cabezas. Los participios son verbos que actúan como adjetivos.", title: "El Sacrificio", lore: "Pierdes seis hombres devorados por Escila. Una decisión terrible.", codexUnlock: "analizador", papyrusText: <div className="text-center">Σκύλλα, ἔχουσα ἓξ κεφαλάς, ἁρπάζει ἑταίρους.</div>, translation: "Escila, teniendo seis cabezas, arrebata compañeros.", instruction: "Identifica los Participios Activos.", question: "Si 'ἔχουσα' es el participio femenino (teniendo), ¿cuál es el masculino (el que tiene)?", options: [{ text: "ἔχων", correct: true }, { text: "ἐχόμενος", correct: false }], oracleHint: "Usa el sufijo activo -ων, -οντος.", reward: "Lágrima Derramada", rewardIcon: "💧", mapX: 40, mapY: 65 },
+          { id: 10, location: "Calipso", athenaMsg: "La ninfa te ofrece inmortalidad. Tu rechazo es absoluto y reflexivo.", title: "Inmortalidad Rechazada", lore: "Lloras frente al mar tras 7 años cautivo. Anhelas regresar a casa.", codexUnlock: "adjetivos", papyrusText: <div className="text-center">Ὀδυσσεὺς ἐπὶ τῇ ἀκτῇ κάθηται καὶ ὀδύρεται.</div>, translation: "Odiseo se sienta en la orilla y se lamenta.", instruction: "Voz Media: verbos de postura física.", question: "¿Qué matiz principal aporta la Voz Media a un verbo como 'sentarse' (κάθηται)?", options: [{ text: "La acción es impuesta por otro por la fuerza.", correct: false }, { text: "La acción revierte directamente sobre el propio cuerpo o ego del sujeto (reflexividad).", correct: true }], oracleHint: "Implicación física y personal del sujeto.", reward: "Madera para Balsa", rewardIcon: "🪵", mapX: 50, mapY: 80 },
+          { id: 11, location: "Esqueria", athenaMsg: "Un naufragio te deja desnudo. Ante las jóvenes doncellas, los pasados irregulares reinan.", title: "La Princesa Nausícaa", lore: "Surges de los arbustos desnudo. Las esclavas huyen aterrorizadas.", codexUnlock: "literatura", papyrusText: <div className="text-center">αἱ μὲν δοῦλαι ἔλαβον φόβον καὶ ἔφυγον.</div>, translation: "Las esclavas tomaron miedo y huyeron.", instruction: "Revisa de nuevo el Aoristo Fuerte.", question: "El verbo 'ἔφυγον' (huyeron) viene del presente 'φεύγω'. ¿Qué proceso le ha ocurrido a su raíz?", options: [{ text: "Ha añadido la marca -σα- regular.", correct: false }, { text: "Ha sufrido reducción vocálica o grado cero (φευγ- -> φυγ-).", correct: true }], oracleHint: "Pierde una vocal fundamental de la raíz.", reward: "Manto Feacio", rewardIcon: "🥻", mapX: 60, mapY: 70 },
+          { id: 12, location: "Ítaca", athenaMsg: "Has vuelto disfrazado. El pronombre de identidad revela la tragedia del tiempo.", title: "El Perro Argos", lore: "Argos, tu viejo perro, te reconoce pero ya no puede levantarse.", codexUnlock: "declinaciones", papyrusText: <div className="text-center">αὐτὸς δὲ ἐγγὺς ἐλθεῖν οὐκέτι ἐδύνατο.</div>, translation: "Pero ÉL MISMO ya no podía acercarse.", instruction: "Busca la sección de Pronombres (αὐτός).", question: "Cuando el pronombre 'αὐτός' aparece aislado en caso Nominativo, ¿cómo debe traducirse?", options: [{ text: "Como un pronombre de identidad exclusivo: 'Él mismo' o 'Por sí solo'.", correct: true }, { text: "Como un simple Complemento Directo: 'A él'.", correct: false }], oracleHint: "Aporta un gran énfasis sobre el sujeto.", reward: "La Lealtad de Argos", rewardIcon: "🐶", mapX: 75, mapY: 60 },
+          { id: 13, location: "Palacio", athenaMsg: "Una cicatriz destapa la verdad. Aoristos sin vocales de unión.", title: "La Anciana Euriclea", lore: "Tu nodriza te lava los pies y reconoce la vieja herida del jabalí.", codexUnlock: "aoristos", papyrusText: <div className="text-center">αὐτίκα δὲ τὴν οὐλὴν ἔγνω.</div>, translation: "Y al instante reconoció la cicatriz.", instruction: "Aoristo Atemático.", question: "El verbo 'ἔγνω' es un Aoristo Atemático (radical). ¿Qué significa esto morfológicamente?", options: [{ text: "Las desinencias personales se pegan a la raíz sin ninguna vocal de unión ni sigma intermedia.", correct: true }, { text: "Carece de sujeto porque no tiene un tema literario claro.", correct: false }], oracleHint: "No hay 'o' ni 'e' entre la raíz y la desinencia.", reward: "El Silencio Acordado", rewardIcon: "🤫", mapX: 85, mapY: 40 },
+          { id: 14, location: "Mégaron", athenaMsg: "El arco se tensa. La venganza es un acto de puro interés personal.", title: "La Matanza de los Pretendientes", lore: "Disparas el arco a través de las hachas. La sangre fluye en tu propia casa.", codexUnlock: "voz_media", papyrusText: <div className="text-center">Ὀδυσσεὺς λαμβάνει τὸ μέγα τόξον καὶ βάλλει.</div>, translation: "Odiseo toma el gran arco y dispara.", instruction: "Reflexiona sobre la Voz Media.", question: "Si quisieras decir 'Yo desato (la flecha) para mi beneficio personal y profundo' con el verbo λύω, ¿qué forma usarías?", options: [{ text: "λύομαι (Presente Medio, 1ª Pers. Sg).", correct: true }, { text: "ἔλυσα (Aoristo Activo regular).", correct: false }], oracleHint: "El sufijo -ομαι te implica personalmente.", reward: "Flecha de Apolo", rewardIcon: "🏹", mapX: 95, mapY: 30 },
+          { id: 15, location: "Lecho Nupcial", athenaMsg: "El engaño final. Un lecho tallado en un árbol vivo. La prueba de la esposa.", title: "El Juicio de Penélope", lore: "Penélope manda sacar tu cama. Solo tú sabes que está unida a las raíces de un olivo.", codexUnlock: "verbos_presente", papyrusText: <div className="text-center">ἐγὼ τὸ λέχος ἐποίησα ἐκ δένδρου.</div>, translation: "Pues yo construí el lecho a partir de un árbol.", instruction: "El Analizador te dirá la verdad sobre ποιέω.", question: "Para formar el aoristo de ποιέω (ἐποίησα), ¿qué ocurre con la 'ε' final de la raíz original?", options: [{ text: "Se pierde en el vacío.", correct: false }, { text: "Sufre un alargamiento vocálico obligatorio y se convierte en 'η'.", correct: true }], oracleHint: "Las vocales breves crecen antes de chocar con la sigma.", reward: "Corona de Olivo y Nóstos", rewardIcon: "👑", mapX: 95, mapY: 45 }
+        ];
+
+        function App() {
+          const [gameState, setGameState] = useState('intro');
+          const [levelIndex, setLevelIndex] = useState(0);
+          const [inventory, setInventory] = useState([]);
+          const [isCodexOpen, setIsCodexOpen] = useState(false);
+          const [activeTopic, setActiveTopic] = useState('literatura');
+          const [unlockedCodex, setUnlockedCodex] = useState(['literatura', 'mitologia', 'diccionario', 'vocabulario', 'analizador', 'funciones', 'declinaciones', 'verbos_presente', 'aoristos', 'voz_media', 'adjetivos']);
+          const [feedback, setFeedback] = useState(null);
+          const [showOracle, setShowOracle] = useState(false);
+
+          const currentLevel = LEVELS[levelIndex];
+
+          const CODEX_DATA = {
+            literatura: {
+              category: "Contexto Cultural", title: "1. Literatura y Oralidad", icon: <Feather size={20} />,
+              content: (
+                <div className="space-y-6 text-slate-300">
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-3">La Cuestión Homérica y la Oralidad</h4>
+                  <p>Durante siglos, los eruditos debatieron si Homero realmente existió. Hoy sabemos, gracias a Milman Parry, que estos poemas son el resultado de <strong>siglos de tradición oral</strong>.</p>
+                  <div className="bg-amber-950/20 border-l-4 border-amber-600 p-5 rounded-r-xl mt-4">
+                    <h5 className="font-bold text-amber-500 mb-2">El Colapso del Bronce</h5>
+                    <p className="text-sm">Homero canta sobre una época dorada (~1200 a.C.) que colapsó violentamente. Durante los siguientes 400 años ("Edad Oscura"), Grecia olvidó escribir, y los aedos mantuvieron viva la gloria cantando de memoria.</p>
+                  </div>
+                  <h4 className="font-bold text-blue-400 text-xl border-b border-slate-700 pb-3 mt-8">Ética Heroica</h4>
+                  <ul className="space-y-3 font-mono text-sm bg-slate-900 p-5 rounded-xl border border-slate-800">
+                    <li><strong className="text-blue-300">Aidos (Αἰδώς):</strong> Pudor y vergüenza social. El temor a perder el honor.</li>
+                    <li><strong className="text-red-400">Hybris (Ὕβρις):</strong> Desmesura. Creerte superior a los dioses o a la ley.</li>
+                    <li><strong className="text-purple-400">Némesis (Νέμεσις):</strong> Retribución implacable divina que aplasta la Hybris.</li>
+                  </ul>
+                </div>
+              )
+            },
+            declinaciones: {
+              category: "Morfología Nominal", title: "2. Casos, Declinaciones y Pronombres", icon: <Layers size={20} />,
+              content: (
+                <div className="space-y-8 text-sm text-slate-300">
+                  <div>
+                    <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2 mb-4">Funciones Sintácticas</h4>
+                    <ul className="space-y-2 bg-slate-900/50 p-4 rounded-xl border border-slate-700">
+                      <li><strong className="text-blue-400">Nominativo:</strong> Sujeto y Atributo.</li>
+                      <li><strong className="text-emerald-400">Acusativo:</strong> CD y Dirección en el espacio.</li>
+                      <li><strong className="text-red-400">Genitivo:</strong> CN, Posesión, Origen y Separación.</li>
+                      <li><strong className="text-amber-500">Dativo:</strong> CI, Instrumento, Compañía, Lugar exacto en donde.</li>
+                    </ul>
+                  </div>
+                  <div className="overflow-x-auto bg-slate-900 p-3 rounded-xl border border-slate-700">
+                    <h5 className="font-bold text-purple-300 text-center mb-3 uppercase tracking-widest text-xs">La 3ª Declinación (Atemática) - Modelos Clave</h5>
+                    <table className="table-greek w-full whitespace-nowrap text-center">
+                      <thead>
+                        <tr><th>Caso</th><th>Oclusiva (ὁ κόραξ)</th><th>Nasal (ὁ δαίμων)</th><th>Vocal (ἡ πόλις)</th><th>Neutro (τὸ σῶμα)</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td className="font-bold text-slate-400">Nom Sg</td><td>κόραξ</td><td>δαίμων</td><td>πόλις</td><td>σῶμα</td></tr>
+                        <tr><td className="font-bold text-slate-400">Acus Sg</td><td>κόρακ-α</td><td>δαίμον-α</td><td>πόλι-ν</td><td>σῶμα</td></tr>
+                        <tr><td className="font-bold text-slate-400">Gen Sg</td><td>κόρακ-ος</td><td>δαίμον-ος</td><td>πόλε-ως</td><td>σώματ-ος</td></tr>
+                        <tr><td className="font-bold text-slate-400">Dat Sg</td><td>κόρακ-ι</td><td>δαίμον-ι</td><td>πόλε-ι</td><td>σώματ-ι</td></tr>
+                        <tr className="border-t border-slate-700"><td className="font-bold text-slate-400">Nom Pl</td><td>κόρακ-ες</td><td>δαίμον-ες</td><td>πόλε-ις</td><td>σώματ-α</td></tr>
+                        <tr><td className="font-bold text-slate-400">Gen Pl</td><td>κοράκ-ων</td><td>δαιμόν-ων</td><td>πόλε-ων</td><td>σωμάτ-ων</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="overflow-x-auto bg-slate-900 p-3 rounded-xl border border-slate-700">
+                    <h5 className="font-bold text-amber-500 text-center mb-3 uppercase tracking-widest text-xs">Pronombres Universales</h5>
+                    <table className="table-greek w-full whitespace-nowrap text-center mb-4">
+                      <thead>
+                        <tr><th>Caso</th><th>1ª Pers (ἐγώ)</th><th>2ª Pers (σύ)</th><th>1ª Pl (ἡμεῖς)</th><th>2ª Pl (ὑμεῖς)</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td className="font-bold text-slate-400">Nom</td><td>ἐγώ</td><td>σύ</td><td>ἡμεῖς</td><td>ὑμεῖς</td></tr>
+                        <tr><td className="font-bold text-slate-400">Acus</td><td>ἐμέ / με</td><td>σέ / σε</td><td>ἡμᾶς</td><td>ὑμᾶς</td></tr>
+                        <tr><td className="font-bold text-slate-400">Gen</td><td>ἐμοῦ / μου</td><td>σοῦ / σου</td><td>ἡμῶν</td><td>ὑμῶν</td></tr>
+                        <tr><td className="font-bold text-slate-400">Dat</td><td>ἐμοί / μοι</td><td>σοί / σοι</td><td>ἡμῖν</td><td>ὑμῖν</td></tr>
+                      </tbody>
+                    </table>
+                    <table className="table-greek w-full text-xs text-left">
+                      <tbody>
+                        <tr><td className="font-bold text-amber-400 p-2 border-b border-slate-700 w-1/3">αὐτός, -ή, -ό</td><td className="whitespace-normal p-2 border-b border-slate-700">1. Sin art: "Él mismo" (Énfasis absoluto). 2. Con art: "El mismo" (Identidad). 3. Oblicuos: Pronombre personal 3ª pers (lo, le, la).</td></tr>
+                        <tr><td className="font-bold text-cyan-400 p-2 border-b border-slate-700">οὗτος, αὕτη, τοῦτο</td><td className="whitespace-normal p-2 border-b border-slate-700">Demostrativo de distancia media ("Ese"). Combina 1ª y 2ª decl.</td></tr>
+                        <tr><td className="font-bold text-emerald-400 p-2 border-b border-slate-700">τίς (con tilde)</td><td className="whitespace-normal p-2 border-b border-slate-700">Interrogativo: ¿Quién? ¿Qué? Siempre acentuado.</td></tr>
+                        <tr><td className="font-bold text-emerald-400 p-2">τις (sin tilde)</td><td className="whitespace-normal p-2">Indefinido enclítico: Alguien, algo. Pierde el acento apoyándose en la palabra anterior.</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )
+            },
+            verbos_presente: {
+              category: "Morfología Verbal", title: "3. Tiempos de Acción Continua", icon: <Sparkles size={20} />,
+              content: (
+                <div className="space-y-6 text-sm text-slate-300">
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Tema de Presente</h4>
+                  <table className="table-greek w-full whitespace-nowrap text-center">
+                    <thead><tr><th>Pers</th><th>PRESENTE (λύω)</th><th>IMPERFECTO (ἔλυον)</th><th>Contracto Imp. (ἐτίμων)</th></tr></thead>
+                    <tbody>
+                      <tr><td className="font-bold text-slate-400">1ª Sg</td><td>λύ-ω</td><td>ἐ-λύ-ον</td><td>ἐτίμ-ων</td></tr>
+                      <tr><td className="font-bold text-slate-400">2ª Sg</td><td>λύ-εις</td><td>ἔ-λυ-ες</td><td>ἐτίμ-ας</td></tr>
+                      <tr><td className="font-bold text-slate-400">3ª Sg</td><td>λύ-ει</td><td>ἔ-λυ-ε(ν)</td><td>ἐτίμ-α</td></tr>
+                      <tr><td className="font-bold text-slate-400">1ª Pl</td><td>λύ-ομεν</td><td>ἐ-λύ-ομεν</td><td>ἐτιμ-ῶμεν</td></tr>
+                      <tr><td className="font-bold text-slate-400">2ª Pl</td><td>λύ-ετε</td><td>ἐ-λύ-ετε</td><td>ἐτιμ-ᾶτε</td></tr>
+                      <tr><td className="font-bold text-slate-400">3ª Pl</td><td>λύ-ουσι(ν)</td><td>ἔ-λυ-ον</td><td>ἐτίμ-ων</td></tr>
+                    </tbody>
+                  </table>
+                  <div className="bg-amber-950/20 border border-amber-800 p-5 rounded-xl">
+                    <h5 className="font-bold text-amber-500 mb-2 text-lg">Leyes del Aumento (La Marca del Pasado)</h5>
+                    <ul className="list-disc pl-5">
+                      <li className="mb-2"><strong>Silábico:</strong> Consonantes añaden <strong>ἐ-</strong> (λύω -> ἔλυον). Excepción: la 'rho' inicial se duplica (ἔρριπτον).</li>
+                      <li><strong>Temporal:</strong> Vocales alargan su duración natural: α/ε se hacen η. ο se hace ω. ai/ei se hacen ῃ (iota suscrita).</li>
+                    </ul>
+                  </div>
+                </div>
+              )
+            },
+            aoristos: {
+              category: "Morfología Verbal", title: "4. Aoristo (Acción Puntual)", icon: <Key size={20} />,
+              content: (
+                <div className="space-y-6 text-sm text-slate-300">
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Pasado Indefinido</h4>
+                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="font-bold text-blue-400 mb-2 text-lg">1. Aoristo Sigmático (Regular)</h5>
+                      <p className="mb-2">Añaden <strong>-σα-</strong>. Ej: ἔλυ-σα, ἔλυ-σας, ἔλυ-σε, ἐλύ-σαμεν, ἐλύ-σατε, ἔλυ-σαν.</p>
+                      <h5 className="font-bold text-amber-400 mb-2 mt-4 text-lg">1.5 Aoristos Contractos (-άω, -έω, -όω)</h5>
+                      <p>Para no colapsar la sigma, alargan la vocal de la raíz justo antes de la desinencia. τιμάω -> ἐτίμ<strong>η</strong>σα. ποιέω -> ἐποί<strong>η</strong>σα.</p>
+                  </div>
+                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="font-bold text-emerald-400 mb-2 text-lg">2. Aoristo Fuerte (Apofónico)</h5>
+                      <p>Carecen de sigma. Indican el pasado reduciendo o destruyendo por completo la raíz del presente.</p>
+                      <ul className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-4 font-mono bg-slate-950 p-4 rounded-lg">
+                          <li>λείπω ➔ ἔλιπον</li>
+                          <li>βάλλω ➔ ἔβαλον</li>
+                          <li>λαμβάνω ➔ ἔλαβον</li>
+                          <li>φεύγω ➔ ἔφυγον</li>
+                          <li>ἔρχομαι ➔ ἦλθον (Supletivo)</li>
+                          <li>ὁράω ➔ εἶδον (Supletivo)</li>
+                      </ul>
+                  </div>
+                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-inner">
+                      <h5 className="font-bold text-purple-400 mb-2 text-lg">3. Aoristo Atemático (Muy Antiguo)</h5>
+                      <p>Desinencias pegadas a pelo a la raíz sin vocales de unión: γιγνώσκω -> ἔγνων, ἔγνως, ἔγνω.</p>
+                  </div>
+                </div>
+              )
+            },
+            voz_media: {
+              category: "Morfología Verbal", title: "5. Voz Media y Participios", icon: <MessageCircle size={20} />,
+              content: (
+                <div className="space-y-6 text-sm text-slate-300">
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Ego del Sujeto (Voz Media)</h4>
+                  <p>La Voz Media indica que el sujeto realiza la acción y <strong>revierte física o psicológicamente sobre él mismo</strong> o su interés más íntimo. Los <strong>Verbos Deponentes</strong> se conjugan igual, pero su significado real es puramente ACTIVO.</p>
+                  
+                  <h4 className="font-bold text-purple-400 text-xl border-b border-slate-700 pb-2 mt-6">Declinación del Participio (Presente Activo)</h4>
+                  <div className="overflow-x-auto bg-slate-900 p-3 rounded-xl border border-slate-700 shadow-inner">
+                    <table className="table-greek w-full whitespace-nowrap text-center">
+                      <thead>
+                        <tr><th>Caso</th><th>Masc (3ª)</th><th>Fem (1ª)</th><th>Neutro (3ª)</th><th>Masc Plural</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td className="font-bold text-slate-400">Nom</td><td>λύ-<strong className="text-purple-400">ων</strong></td><td>λύ-<strong className="text-pink-400">ουσα</strong></td><td>λῦ-<strong className="text-purple-400">ον</strong></td><td>λύ-<strong className="text-purple-400">οντες</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">Acus</td><td>λύ-<strong className="text-purple-400">οντα</strong></td><td>λύ-<strong className="text-pink-400">ουσαν</strong></td><td>λῦ-<strong className="text-purple-400">ον</strong></td><td>λύ-<strong className="text-purple-400">οντας</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">Gen</td><td>λύ-<strong className="text-purple-400">οντος</strong></td><td>λυ-<strong className="text-pink-400">ούσης</strong></td><td>λύ-<strong className="text-purple-400">οντος</strong></td><td>λυ-<strong className="text-purple-400">όντων</strong></td></tr>
+                        <tr><td className="font-bold text-slate-400">Dat</td><td>λύ-<strong className="text-purple-400">οντι</strong></td><td>λυ-<strong className="text-pink-400">ούσῃ</strong></td><td>λύ-<strong className="text-purple-400">οντι</strong></td><td>λύ-<strong className="text-purple-400">ουσι(ν)</strong></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )
+            },
+            analizador: { category: "Herramientas Mágicas", title: "6. Analizador Universal", icon: <Search size={20} />, content: <AnalizadorUniversal /> },
+            diccionario: { category: "Herramientas Mágicas", title: "7. Diccionario Épico", icon: <BookOpen size={20} />, content: <DiccionarioEpico /> },
+            funciones: { category: "Herramientas Mágicas", title: "8. Forja de Homero", icon: <Zap size={20} />, content: <div className="space-y-6"><IsopsephiaCalculator /><HomericScansion /><EpithetGenerator /></div> },
+            mitologia: {
+              category: "Contexto Cultural", title: "Mitología y Monstruos", icon: <Shield size={20} />,
+              content: (
+                <div className="space-y-6 text-sm text-slate-300">
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">El Cosmos Homérico</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-blue-950/40 p-5 rounded-xl border border-blue-800 shadow-inner">
+                      <h5 className="font-bold text-blue-400 mb-1 text-lg">🌊 Poseidón</h5>
+                      <p>Agitador de la Tierra. Encarna el abismo insondable e irracional de la naturaleza. Enemigo mortal de Odiseo por cegar a su hijo, el Cíclope.</p>
+                    </div>
+                    <div className="bg-slate-800/60 p-5 rounded-xl border border-slate-600 shadow-inner">
+                      <h5 className="font-bold text-slate-200 mb-1 text-lg">🦉 Atenea Glaucópide</h5>
+                      <p>Diosa de la civilización y la Mētis (astucia táctica). Guía del héroe, no con fuerza bruta, sino con consejos e ilusiones.</p>
+                    </div>
+                  </div>
+                  <h4 className="font-bold text-red-400 text-xl mt-6 border-b border-slate-700 pb-2">Monstruos y Pruebas del Alma</h4>
+                  <ul className="space-y-4 bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                    <li><strong className="text-red-400 font-sans text-lg">Cíclopes:</strong> Antítesis de la civilización. No plantan, no tienen asamblea (ágora) y devoran a los huéspedes (violan la Xenía de Zeus).</li>
+                    <li><strong className="text-emerald-400 font-sans text-lg">Lotófagos:</strong> El terror al olvido. La flor de loto destruye el deseo activo de volver a casa (el Nóstos).</li>
+                    <li><strong className="text-pink-400 font-sans text-lg">Calipso y Circe:</strong> Representan el estancamiento. Circe animaliza, revelando la verdadera naturaleza. Calipso ofrece el mayor tabú de todos: la inmortalidad para un humano.</li>
+                    <li><strong className="text-indigo-400 font-sans text-lg">Escila y Caribdis:</strong> El dilema trágico; aceptar pérdidas dolorosas e inevitables cuando no existe la elección perfecta.</li>
+                  </ul>
+                </div>
+              )
+            },
+            vocabulario: {
+              category: "Morfología Nominal", title: "Vocabulario Épico", icon: <BookOpen size={20} />,
+              content: (
+                <div className="space-y-6 text-sm text-slate-300">
+                  <h4 className="font-bold text-amber-400 text-xl border-b border-slate-700 pb-2">Epítetos y Fórmulas Orales</h4>
+                  <p>Sustantivo + Epíteto conformaban bloques prefabricados que los aedos usaban para encajar en la métrica dactílica sin tener que pensar la sílaba exacta en directo.</p>
+                  <ul className="font-mono text-emerald-300 bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-inner space-y-2">
+                    <li>πολύμητις Ὀδυσσεύς (Odiseo, fecundo en ardides)</li>
+                    <li>γλαυκῶπις Ἀθήνη (Atenea, de ojos brillantes/lechuza)</li>
+                    <li>ῥοδοδάκτυλος Ἠώς (La Aurora, de dedos rosados)</li>
+                  </ul>
+                </div>
+              )
+            },
+            adjetivos: {
+              category: "Morfología Nominal", title: "Adjetivos (1ª y 2ª Clase)", icon: <Layers size={20} />,
+              content: (
+                <div className="space-y-6 text-sm text-slate-300">
+                  <h4 className="font-bold text-blue-400 text-xl border-b border-slate-700 pb-2">1ª Clase (Modelo 2-1-2)</h4>
+                  <p>Usan la 2ª Declinación para Masculino/Neutro y la 1ª Declinación para Femenino.</p>
+                  <table className="table-greek w-full text-center mb-6 shadow-inner">
+                    <thead><tr><th>Caso</th><th>Masc (2ª)</th><th>Fem (1ª)</th><th>Neutro (2ª)</th></tr></thead>
+                    <tbody>
+                      <tr><td className="font-bold text-slate-400">Nom Sg</td><td>καλ-<strong className="text-amber-400">ός</strong></td><td>καλ-<strong className="text-pink-400">ή</strong></td><td>καλ-<strong className="text-emerald-400">όν</strong></td></tr>
+                      <tr><td className="font-bold text-slate-400">Acus Sg</td><td>καλ-<strong className="text-amber-400">όν</strong></td><td>καλ-<strong className="text-pink-400">ήν</strong></td><td>καλ-<strong className="text-emerald-400">όν</strong></td></tr>
+                      <tr><td className="font-bold text-slate-400">Gen Sg</td><td>καλ-<strong className="text-amber-400">οῦ</strong></td><td>καλ-<strong className="text-pink-400">ῆς</strong></td><td>καλ-<strong className="text-emerald-400">οῦ</strong></td></tr>
+                    </tbody>
+                  </table>
+                  <h4 className="font-bold text-purple-400 text-xl border-b border-slate-700 pb-2 mt-8">2ª Clase (Modelo 3-1-3)</h4>
+                  <p>Masc/Neutro usan la 3ª Declinación. Femenino usa la 1ª (Alfa impura). Ejemplo: πᾶς, πᾶσα, πᾶν (todo).</p>
+                  <table className="table-greek w-full text-center shadow-inner">
+                    <thead><tr><th>Caso</th><th>Masc (3ª)</th><th>Fem (1ª)</th><th>Neutro (3ª)</th></tr></thead>
+                    <tbody>
+                      <tr><td className="font-bold text-slate-400">Nom Sg</td><td>πᾶς</td><td>πᾶσ-α</td><td>πᾶν</td></tr>
+                      <tr><td className="font-bold text-slate-400">Acus Sg</td><td>πάντ-α</td><td>πᾶσ-αν</td><td>πᾶν</td></tr>
+                      <tr><td className="font-bold text-slate-400">Gen Sg</td><td>παντ-ός</td><td>πάσ-ης</td><td>παντ-ός</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              )
+            }
+          };
+
+          return (
+            <div className="min-h-screen bg-[#020617] text-slate-200">
+              <header className="px-6 py-4 border-b border-slate-800 bg-slate-950 flex justify-between items-center shadow-lg">
+                <h1 className="text-2xl font-black text-amber-500 uppercase tracking-widest drop-shadow-md">La Odisea Educativa</h1>
+                {gameState === 'playing' && <button onClick={() => setIsCodexOpen(true)} className="flex items-center gap-2 bg-slate-800 text-amber-400 px-6 py-2 rounded-xl font-bold border border-amber-600/50 hover:bg-slate-700 transition-colors shadow-md"><BookOpen size={20}/> Códex</button>}
+              </header>
+
+              <main className="max-w-5xl mx-auto p-6 pb-40">
+                {gameState === 'intro' && (
+                  <div className="flex flex-col items-center justify-center py-20 text-center animate-in zoom-in duration-1000">
+                    <h2 className="text-[6rem] font-black text-amber-500 mb-4 drop-shadow-lg leading-none uppercase">La Odisea</h2>
+                    <h3 className="text-2xl text-amber-500/80 tracking-[0.4em] mb-12 uppercase">Edición Magistral</h3>
+                    <div className="bg-slate-900/60 p-12 rounded-[3rem] shadow-2xl border border-slate-700 max-w-3xl">
+                      <VideoIntro />
+                      <p className="text-xl text-slate-300 mb-10 leading-relaxed">Inicia el doloroso viaje del Nóstos. Cruza los 15 cantos homéricos resolviendo los enigmas morfosintácticos de la Antigua Grecia.</p>
+                      <button onClick={startGame} className="bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-black text-2xl font-black px-16 py-6 rounded-2xl shadow-[0_0_40px_rgba(217,119,6,0.6)] transform hover:scale-105 transition-all">Zarpar de Troya</button>
+                    </div>
+                  </div>
+                )}
+                {gameState === 'playing' && (
+                  <div className="space-y-8 animate-in slide-in-from-bottom-10 duration-700">
+                    <OdysseyMap currentLevelId={currentLevel.id} />
+                    <AthenaGuide message={currentLevel.athenaMsg} />
+                    <div className="bg-slate-900/80 p-10 rounded-3xl border border-slate-700 shadow-xl">
+                      <div className="flex items-center gap-4 mb-4"><span className="bg-amber-600 text-black text-3xl font-black w-14 h-14 flex items-center justify-center rounded-xl">{currentLevel.id}</span><h2 className="text-4xl font-black text-white">{currentLevel.title}</h2></div>
+                      <p className="text-xl text-amber-500/90 font-serif italic pl-18">{currentLevel.lore}</p>
+                    </div>
+                    <div className="papyrus-bg p-12 rounded-3xl text-center shadow-2xl border-y-8 border-amber-900/80">
+                      <h3 className="font-serif font-black text-amber-950 mb-8 uppercase tracking-[0.3em] flex justify-center gap-4"><Feather/> Fragmento Adaptado <Feather/></h3>
+                      <AedoPlayer />
+                      <div className="greek-font text-4xl mb-12 text-[#2c1810] leading-loose px-8">{currentLevel.papyrusText}</div>
+                      <div className="bg-white/80 p-8 rounded-2xl text-xl text-[#3d2216] font-serif shadow-lg border-l-8 border-amber-800"><strong>Traducción:</strong> {currentLevel.translation}</div>
+                      <WordAnalysisTable levelId={currentLevel.id} />
+                    </div>
+                    <div className="bg-slate-900/90 p-12 rounded-3xl border border-slate-700 shadow-2xl relative overflow-hidden">
+                      <div className="absolute -top-10 -right-10 opacity-5"><Scroll size={300}/></div>
+                      <div className="bg-blue-950/40 border-l-4 border-blue-500 p-6 rounded-xl mb-10"><strong className="text-blue-400 block uppercase tracking-widest text-sm mb-2">Misión</strong><p className="text-blue-100 text-lg">{currentLevel.instruction}</p></div>
+                      <h3 className="text-3xl font-black text-white mb-8 border-b border-slate-800 pb-6">{currentLevel.question}</h3>
+                      <div className="grid gap-4 relative z-10">
+                        {currentLevel.options.map((opt, i) => (
+                          <button key={i} onClick={() => {
+                            if(feedback) return;
+                            if(opt.correct) {
+                              setFeedback({ text: '¡Correcto!', type: 'success' }); 
+                              if(!inventory.some(item => item.name === currentLevel.reward)) setInventory([...inventory, { name: currentLevel.reward, icon: currentLevel.rewardIcon }]);
+                              setTimeout(() => { setFeedback(null); setShowOracle(false); if(levelIndex < LEVELS.length -1) setLevelIndex(l => l+1); else setGameState('victory'); window.scrollTo(0,0); }, 3000);
+                            } else { setFeedback({ text: 'Error fatal', type: 'error' }); setTimeout(() => setFeedback(null), 2000); }
+                          }} className={`w-full p-8 text-left text-xl rounded-2xl border-2 transition-all ${feedback ? (opt.correct ? 'bg-green-900/50 border-green-500 text-green-200' : 'bg-slate-950 border-slate-800 text-slate-600 opacity-50') : 'bg-slate-800 border-slate-600 hover:border-amber-500 hover:bg-slate-700'}`}>{opt.text}</button>
+                        ))}
+                      </div>
+                      {!feedback && <button onClick={() => setShowOracle(!showOracle)} className="mt-10 mx-auto flex items-center gap-3 bg-purple-900/30 text-purple-300 px-8 py-4 rounded-full border border-purple-500/50 hover:bg-purple-800/50 font-bold"><Eye/> {showOracle ? 'Ocultar Oráculo' : 'Consultar Oráculo'}</button>}
+                      {showOracle && !feedback && <div className="mt-6 bg-purple-950/50 p-6 rounded-2xl border border-purple-500/50 text-purple-200 text-lg text-center font-serif italic">"{currentLevel.oracleHint}"</div>}
+                      {feedback && <div className={`mt-8 p-6 text-2xl font-black text-center rounded-2xl border-2 ${feedback.type === 'success' ? 'bg-green-900/50 border-green-500 text-green-400' : 'bg-red-900/50 border-red-500 text-red-400'}`}>{feedback.text}</div>}
+                    </div>
+                  </div>
+                )}
+                {gameState === 'victory' && (
+                  <div className="text-center py-24 animate-in zoom-in duration-1000">
+                    <Crown size={150} className="mx-auto text-amber-500 mb-8 drop-shadow-[0_0_50px_rgba(217,119,6,0.8)]" />
+                    <h2 className="text-[5rem] font-black text-amber-500 mb-8 uppercase leading-none">¡El Nóstos<br/>ha terminado!</h2>
+                    <div className="bg-slate-900 p-12 rounded-[3rem] border border-slate-700 max-w-4xl mx-auto">
+                      <p className="text-2xl text-slate-300 mb-10 leading-relaxed">Has burlado a los dioses, derrotado a los monstruos y recuperado Ítaca gracias a tu conocimiento de la antigua gramática.</p>
+                      <h4 className="text-amber-500 font-black mb-6 uppercase tracking-widest text-xl"><Star className="inline mr-2"/> Tesoros de la Epopeya <Star className="inline ml-2"/></h4>
+                      <div className="flex flex-wrap justify-center gap-4 mb-12">
+                        {inventory.map((item, i) => (<div key={i} className="bg-slate-800 p-4 rounded-xl flex flex-col items-center border border-slate-600 w-32 shadow-xl"><span className="text-5xl mb-3">{item.icon}</span><span className="text-[11px] font-bold text-center text-amber-100 uppercase tracking-wider">{item.name}</span></div>))}
+                      </div>
+                      <button onClick={() => window.location.reload()} className="bg-gradient-to-r from-amber-600 to-amber-500 text-black text-2xl font-black px-16 py-6 rounded-2xl shadow-[0_0_40px_rgba(217,119,6,0.6)] transform hover:scale-105 transition-all">Volver a jugar</button>
+                    </div>
+                  </div>
+                )}
+              </main>
+
+              {gameState === 'playing' && (
+                <div className="fixed bottom-0 w-full bg-slate-950/90 backdrop-blur-md border-t border-slate-800 p-4 z-40">
+                  <div className="max-w-6xl mx-auto flex items-center gap-4 overflow-x-auto custom-scrollbar">
+                    <span className="text-amber-500 font-black uppercase text-sm mr-2 tracking-widest">Tesoros:</span>
+                    {inventory.length === 0 ? <span className="text-slate-500 italic font-serif">Aún no tienes tesoros...</span> : inventory.map((item, idx) => (<div key={idx} className="bg-slate-800 px-4 py-2 rounded-xl flex items-center gap-2 border border-slate-700 whitespace-nowrap shadow-md"><span className="text-xl">{item.icon}</span><span className="text-xs font-bold text-slate-200 uppercase tracking-wider">{item.name}</span></div>))}
+                  </div>
+                </div>
+              )}
+
+              {isCodexOpen && (
+                <div className="fixed inset-0 z-50 bg-slate-950/95 p-6 flex">
+                  <div className="bg-[#0f172a] w-full h-full rounded-3xl flex overflow-hidden border-2 border-amber-500/50 shadow-[0_0_100px_rgba(217,119,6,0.2)] relative">
+                    <button onClick={() => setIsCodexOpen(false)} className="absolute top-6 right-6 z-50 text-white bg-red-600/80 hover:bg-red-600 p-3 rounded-full transition-colors"><XCircle size={28}/></button>
+                    <div className="w-80 border-r border-slate-800 p-6 overflow-y-auto flex flex-col gap-3 bg-[#020617] custom-scrollbar">
+                      <h2 className="text-xl font-black text-amber-500 mb-6 flex items-center gap-2 uppercase tracking-widest"><BookOpen/> Biblioteca</h2>
+                      {Object.keys(CODEX_DATA).map(k => (
+                        <button key={k} onClick={() => setActiveTopic(k)} className={`p-4 text-left rounded-xl transition-all border-2 ${activeTopic === k ? 'bg-slate-800 border-amber-500 text-amber-400 scale-105 shadow-[0_0_15px_rgba(217,119,6,0.3)] z-10' : 'bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-600'}`}>
+                           <span className="text-[10px] uppercase text-slate-500 block mb-1 tracking-widest">{CODEX_DATA[k].category}</span>
+                           <strong className="block text-sm">{CODEX_DATA[k].title}</strong>
+                        </button>
+                      ))}
+                    </div>
+                    <div className="flex-1 p-12 overflow-y-auto relative custom-scrollbar">
+                      <div className="absolute inset-0 opacity-5 pointer-events-none flex justify-center items-center"><BookOpen size={600}/></div>
+                      <div className="relative z-10 max-w-4xl mx-auto">
+                         <h3 className="text-4xl md:text-5xl font-black mb-10 text-white border-b-2 border-slate-800 pb-8 flex items-center gap-4"><span className="text-amber-500">{CODEX_DATA[activeTopic].icon}</span> {CODEX_DATA[activeTopic].title}</h3>
+                         {CODEX_DATA[activeTopic].content}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        }
+
+        const QuoteIcon = (props) => (
+            <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.99c1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+            </svg>
+        );
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
