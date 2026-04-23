@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Odisea Educativa Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="importmap">
       {
@@ -698,32 +700,104 @@ const MonstruosHeroes = () => {
         };
 
         const OdysseyMap = ({ currentLevelId }) => {
-          return (
-            <div className="relative w-full aspect-[21/9] md:aspect-[3/1] bg-slate-950 rounded-2xl border-2 border-slate-700 overflow-hidden mb-8 shadow-inner select-none bg-stars">
-              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30 Q15 15 30 30 T60 30' fill='none' stroke='%2338bdf8' stroke-width='2'/%3E%3C/svg%3E\")" }}></div>
-              <div className="absolute inset-0 opacity-10 flex items-center justify-center"><Compass size={400} /></div>
-              <svg className="absolute inset-0 w-full h-full z-10" preserveAspectRatio="none">
-                <path d="M 85% 25% L 70% 75% L 55% 35% L 25% 70% L 45% 60% L 65% 35% L 80% 45%" fill="none" stroke="#334155" strokeWidth="4" strokeDasharray="8,8" strokeLinecap="round" />
-                <path d="M 85% 25% L 70% 75% L 55% 35% L 25% 70% L 45% 60% L 65% 35% L 80% 45%" fill="none" stroke="#fbbf24" strokeWidth="4" strokeDasharray="1500" strokeDashoffset={1500 - (currentLevelId * 214)} className="transition-all duration-1000 ease-in-out" />
-              </svg>
-              {LEVELS.map((level) => {
-                const isActive = level.id === currentLevelId; const isPast = level.id < currentLevelId;
-                return (
-                  <div key={level.id} className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group z-20" style={{ left: `${level.mapX}%`, top: `${level.mapY}%` }}>
-                    {isActive ? (
-                      <div className="relative">
-                        <div className="absolute inset-0 rounded-full bg-amber-400 animate-ping opacity-60 scale-150"></div>
-                        <div className="w-8 h-8 rounded-full border-2 border-amber-300 bg-amber-600 flex items-center justify-center shadow-[0_0_25px_rgba(217,119,6,1)] scale-125 transform -translate-y-2"><Navigation size={16} className="text-amber-50 transform rotate-45" fill="currentColor"/></div>
-                      </div>
-                    ) : (
-                      <div className={`w-5 h-5 rounded-full border-2 transition-all duration-500 shadow-lg ${isPast ? 'bg-slate-500 border-slate-300' : 'bg-slate-900 border-slate-700'}`} />
-                    )}
-                    <span className={`text-[10px] md:text-xs font-bold mt-2 uppercase tracking-wider bg-slate-950/90 px-2 py-1 rounded border backdrop-blur-sm transition-all ${isActive ? 'text-amber-400 border-amber-500/50 shadow-md translate-y-1' : isPast ? 'text-slate-300 border-slate-700' : 'text-slate-600 border-transparent opacity-0 group-hover:opacity-100'}`}>{level.id}. {level.location}</span>
-                  </div>
-                );
-              })}
-            </div>
-          );
+            const mapRef = useRef(null);
+
+            useEffect(() => {
+                // 1. Inicializar el mapa solo la primera vez que se carga
+                if (!mapRef.current) {
+                    mapRef.current = window.L.map('mapa-odisea', {
+                        zoomControl: false, // Ocultamos los botones de zoom para que sea más inmersivo
+                        dragging: false,    // Evita que el usuario pierda la ruta al arrastrar
+                        scrollWheelZoom: false
+                    }).setView([38.0, 18.0], 5);
+                    
+                    window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap',
+                        className: 'map-tiles'
+                    }).addTo(mapRef.current);
+                }
+
+                const map = mapRef.current;
+                
+                // 2. Diccionario de Coordenadas Reales (Latitud, Longitud)
+                // Las vinculamos al ID de tus niveles para no tocar tu código original.
+                const coords = {
+                    1: [39.95, 26.23], // Troya
+                    2: [33.88, 10.89], // Lotófagos (Djerba, Túnez)
+                    3: [37.75, 15.00], // Cíclope (Etna, Sicilia)
+                    4: [38.79, 15.21], // Eolo (Estrómboli)
+                    5: [41.38, 9.15],  // Lestrigones (Córcega)
+                    6: [41.23, 13.09], // Circe (Monte Circeo, Italia)
+                    7: [39.23, 20.53], // Hades (Río Aqueronte)
+                    8: [40.55, 14.24], // Sirenas (Isla de Capri)
+                    9: [38.24, 15.63], // Escila (Estrecho de Mesina)
+                    10: [36.04, 14.25], // Calipso (Malta)
+                    11: [39.62, 19.91], // Nausícaa (Corfú)
+                    12: [38.36, 20.71], // Ítaca (Llegada)
+                    13: [38.37, 20.71], // Ítaca (Euriclea)
+                    14: [38.38, 20.71], // Ítaca (Mégaron)
+                    15: [38.39, 20.71]  // Ítaca (Lecho)
+                };
+
+                // Limpiar capas de la etapa anterior (para que no se dupliquen al avanzar)
+                map.eachLayer((layer) => {
+                    if (!layer._url) map.removeLayer(layer);
+                });
+
+                const route = [];
+
+                // 3. Dibujar los marcadores sobre las coordenadas
+                LEVELS.forEach(level => {
+                    const c = coords[level.id];
+                    if (!c) return;
+
+                    const isPast = level.id <= currentLevelId;
+                    const isActive = level.id === currentLevelId;
+
+                    if (isPast) route.push(c);
+
+                    // Diseño Tailwind incrustado dentro del mapa interactivo
+                    const markerHtml = isActive 
+                        ? `<div class="w-5 h-5 bg-amber-500 rounded-full border-2 border-white flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,1)] animate-pulse"></div>`
+                        : isPast 
+                            ? `<div class="w-3 h-3 bg-slate-400 rounded-full border border-white opacity-80"></div>`
+                            : `<div class="w-2 h-2 bg-slate-800 rounded-full border border-slate-600 opacity-30"></div>`;
+
+                    const customIcon = window.L.divIcon({
+                        html: markerHtml,
+                        className: '', // Limpiar clases por defecto de Leaflet
+                        iconSize: isActive ? [20, 20] : [12, 12],
+                        iconAnchor: isActive ? [10, 10] : [6, 6]
+                    });
+
+                    window.L.marker(c, { icon: customIcon })
+                        .bindPopup(`<div class="text-amber-950 font-serif text-center"><b>Canto ${level.id}</b><br/>${level.location}</div>`)
+                        .addTo(map);
+                });
+
+                // 4. Trazar la línea del viaje de Odiseo
+                if (route.length > 1) {
+                    window.L.polyline(route, { color: '#fbbf24', weight: 2, dashArray: '6, 6', opacity: 0.8 }).addTo(map);
+                }
+
+                // 5. Mover la cámara volando (FlyTo) a la ubicación de la pregunta actual
+                if (coords[currentLevelId]) {
+                    map.flyTo(coords[currentLevelId], 6, { duration: 2.5 });
+                }
+
+            }, [currentLevelId]);
+
+            return (
+                <div className="relative w-full aspect-[4/3] md:aspect-[21/9] bg-slate-950 rounded-2xl border-2 border-slate-700 overflow-hidden mb-8 shadow-inner z-10">
+                    {/* Magia CSS: Invertimos los colores de OSM para hacer un Modo Noche mitológico */}
+                    <style>{`
+                        .map-tiles { filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7); }
+                        .leaflet-popup-content-wrapper { background-color: #fef3c7; border: 2px solid #b45309; border-radius: 12px; }
+                        .leaflet-popup-tip { background-color: #fef3c7; border: 1px solid #b45309; }
+                    `}</style>
+                    <div id="mapa-odisea" className="w-full h-full cursor-crosshair"></div>
+                </div>
+            );
         };
  const BlocDeNotas = () => {
             const [nota, setNota] = useState(localStorage.getItem('odisea_notas') || '');
