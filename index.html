@@ -779,7 +779,12 @@ const MonstruosHeroes = () => {
                 if (route.length > 1) {
                     window.L.polyline(route, { color: '#fbbf24', weight: 2, dashArray: '6, 6', opacity: 0.8 }).addTo(map);
                 }
-
+                
+                // Corrección: Forzar al mapa a recalcular su tamaño para evitar cortes
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 100);
+                
                 // 5. Mover la cámara volando (FlyTo) a la ubicación de la pregunta actual
                 if (coords[currentLevelId]) {
                     map.flyTo(coords[currentLevelId], 6, { duration: 2.5 });
