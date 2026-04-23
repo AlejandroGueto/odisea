@@ -179,6 +179,71 @@
             );
         };
 
+        const OraculoDelfico = () => {
+            const [profecia, setProfecia] = useState(null);
+            const generar = () => {
+                const s = ["Un águila de alas doradas", "El tridente forjado en la fragua", "Una loba hambrienta", "La lechuza de ojos brillantes", "El viento del norte"];
+                const v = ["quebrará las naves", "revelará un camino de sangre", "devorará las esperanzas", "traerá el favor de los dioses", "hundirá la ciudad de altas murallas"];
+                const c = ["cuando la luna se oculte.", "antes de la novena aurora.", "si no se ofrece la hecatombe.", "bajo la sombra del monte sagrado.", "allí donde el río abraza la sal."];
+                const res = s[Math.floor(Math.random()*s.length)] + " " + v[Math.floor(Math.random()*v.length)] + " " + c[Math.floor(Math.random()*c.length)];
+                setProfecia(res);
+            };
+            return (
+                <div className="bg-slate-900 p-6 rounded-2xl border border-purple-900/50 shadow-lg mt-6 text-center">
+                    <h5 className="font-bold text-purple-400 mb-4 flex items-center justify-center gap-2"><Eye size={20}/> El Oráculo de Delfos</h5>
+                    <button onClick={generar} className="bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-8 py-3 rounded-xl font-bold mb-6 text-sm">Consultar a la Pitia</button>
+                    <div className="bg-slate-950 border-2 border-slate-800 rounded-xl flex flex-col items-center justify-center p-6 min-h-[120px] transition-all">
+                        {profecia ? <span className="font-serif text-lg md:text-xl text-amber-400 italic font-medium leading-relaxed">"{profecia}"</span> : <span className="text-slate-600 italic">El trípode aguarda en silencio...</span>}
+                    </div>
+                </div>
+            );
+        };
+
+        const EtimologiaNombres = () => {
+            const nombres = [
+                { nombre: "Alejandro", griego: "Ἀλέξανδρος", partes: "ἀλέξω (proteger/rechazar) + ἀνήρ (hombre)", sig: "El protector de los hombres." },
+                { nombre: "Sócrates", griego: "Σωκράτης", partes: "σῶς (sano/salvo) + κράτος (poder)", sig: "El que tiene el poder de salvar." },
+                { nombre: "Filipo", griego: "Φίλιππος", partes: "φίλος (amigo/amante) + ἵππος (caballo)", sig: "El que ama a los caballos." },
+                { nombre: "Teodoro", griego: "Θεόδωρος", partes: "θεός (dios) + δῶρον (regalo)", sig: "El regalo de los dioses." },
+                { nombre: "Aristóteles", griego: "Ἀριστοτέλης", partes: "ἄριστος (el mejor) + τέλος (propósito)", sig: "El que tiene el mejor propósito." }
+            ];
+            const [sel, setSel] = useState(nombres[0]);
+            return (
+                <div className="bg-slate-900 p-6 rounded-2xl border border-emerald-900/50 shadow-lg mt-6">
+                    <h5 className="font-bold text-emerald-400 mb-4 flex items-center justify-center gap-2"><BookOpen size={20}/> Onomástica (Etimología)</h5>
+                    <div className="flex flex-wrap gap-2 justify-center mb-6">
+                        {nombres.map(n => <button key={n.nombre} onClick={()=>setSel(n)} className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${sel.nombre===n.nombre ? 'bg-emerald-700 text-white' : 'bg-slate-800 text-emerald-300 hover:bg-slate-700'}`}>{n.nombre}</button>)}
+                    </div>
+                    <div className="bg-slate-950 border border-slate-800 rounded-xl p-5 text-center">
+                        <span className="font-serif text-3xl text-amber-400 block mb-2">{sel.griego}</span>
+                        <span className="font-mono text-emerald-200/70 text-xs md:text-sm block mb-4 border-b border-slate-800 pb-4">{sel.partes}</span>
+                        <span className="text-slate-200 text-lg">"{sel.sig}"</span>
+                    </div>
+                </div>
+            );
+        };
+
+        const CalculadoraEconomia = () => {
+            const [dracmas, setDracmas] = useState(100);
+            const obolos = dracmas * 6;
+            const minas = (dracmas / 100).toFixed(2);
+            const talentos = (dracmas / 6000).toFixed(4);
+            
+            return (
+                <div className="bg-slate-900 p-6 rounded-2xl border border-amber-900/50 shadow-lg mt-6">
+                    <h5 className="font-bold text-amber-500 mb-4 flex items-center justify-center gap-2"><Crown size={20}/> Economía Ática</h5>
+                    <p className="text-slate-400 text-xs text-center mb-4">Ingresa la cantidad de Dracmas (moneda de plata estándar) para ver su equivalencia en otras medidas de la Antigüedad.</p>
+                    <input type="number" value={dracmas} onChange={(e)=>setDracmas(Number(e.target.value))} className="w-full bg-slate-950 border-2 border-amber-700/50 rounded-xl py-3 px-4 text-amber-300 text-center font-bold text-xl mb-6 outline-none" min="0" />
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 text-center">
+                        <div className="bg-slate-950 p-3 rounded-lg border border-slate-800"><span className="block text-[10px] md:text-xs text-slate-500 mb-1">Óbolos (Cobre)</span><span className="text-amber-200 font-mono font-bold text-base md:text-lg">{obolos}</span></div>
+                        <div className="bg-slate-950 p-3 rounded-lg border border-slate-800"><span className="block text-[10px] md:text-xs text-slate-500 mb-1">Minas (Lingotes)</span><span className="text-emerald-300 font-mono font-bold text-base md:text-lg">{minas}</span></div>
+                        <div className="bg-slate-950 p-3 rounded-lg border border-slate-800"><span className="block text-[10px] md:text-xs text-slate-500 mb-1">Talentos (Riqueza extrema)</span><span className="text-purple-300 font-mono font-bold text-base md:text-lg">{talentos}</span></div>
+                    </div>
+                </div>
+            );
+        };
+
+
         const AnalizadorUniversal = () => {
           const [word, setWord] = useState('');
           const lexicon = {
@@ -1369,8 +1434,13 @@ const MonstruosHeroes = () => {
               category: "Premium", title: "10. Herramientas Filológicas", icon: <Activity size={18} />, 
               content: <div className="space-y-6">
                 <h4 className="font-bold text-amber-400 text-lg border-b border-slate-700 pb-2">Los Secretos de los Pitagóricos y los Aedos</h4>
-                <p className="text-sm text-slate-300 mb-4">Usa estas calculadoras místicas para leer el griego como un verdadero bardo de la antigüedad.</p>
-                <IsopsephiaCalculator /><HomericScansion /><EpithetGenerator />
+                <p className="text-sm text-slate-300 mb-4">Usa estas calculadoras místicas e instrumentos del conocimiento para leer el griego como un verdadero bardo de la antigüedad.</p>
+                <IsopsephiaCalculator />
+                <HomericScansion />
+                <EpithetGenerator />
+                <OraculoDelfico />
+                <EtimologiaNombres />
+                <CalculadoraEconomia />
               </div> 
             },
             monstruos: { 
