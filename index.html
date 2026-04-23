@@ -241,8 +241,69 @@
                     </div>
                 </div>
             );
+        };const BlocDeNotas = () => {
+            const [nota, setNota] = useState(localStorage.getItem('odisea_notas') || '');
+            const [guardado, setGuardado] = useState(false);
+
+            const manejarCambio = (e) => {
+                setNota(e.target.value);
+                localStorage.setItem('odisea_notas', e.target.value);
+                setGuardado(true);
+                setTimeout(() => setGuardado(false), 2000);
+            };
+
+            return (
+                <div className="bg-slate-900 p-6 rounded-2xl border border-yellow-900/50 shadow-lg mt-6">
+                    <h5 className="font-bold text-yellow-500 mb-4 flex items-center justify-center gap-2"><BookOpen size={20}/> Pergamino de Notas (Autoguardado)</h5>
+                    <p className="text-slate-400 text-xs text-center mb-4">Escribe aquí tus borradores de traducción. Los dioses guardarán tus palabras mágicamente aunque cierres el papiro.</p>
+                    <textarea 
+                        value={nota} 
+                        onChange={manejarCambio} 
+                        placeholder="La cólera canta, oh diosa, del Pélida Aquiles..." 
+                        className="w-full bg-[#1a1611] border-2 border-yellow-900/50 rounded-xl p-4 text-yellow-100/90 font-serif text-lg h-40 outline-none focus:border-yellow-600 custom-scrollbar shadow-inner"
+                    />
+                    <div className="text-right mt-2 h-4">
+                        {guardado && <span className="text-xs font-bold text-yellow-600 animate-pulse">Guardado en la memoria del navegador...</span>}
+                    </div>
+                </div>
+            );
         };
 
+        const ClepsidraEstudio = () => {
+            const [tiempo, setTiempo] = useState(25 * 60);
+            const [activo, setActivo] = useState(false);
+
+            useEffect(() => {
+                let intervalo = null;
+                if (activo && tiempo > 0) {
+                    intervalo = setInterval(() => setTiempo(t => t - 1), 1000);
+                } else if (tiempo === 0) {
+                    setActivo(false);
+                }
+                return () => clearInterval(intervalo);
+            }, [activo, tiempo]);
+
+            const minutos = Math.floor(tiempo / 60).toString().padStart(2, '0');
+            const segundos = (tiempo % 60).toString().padStart(2, '0');
+
+            return (
+                <div className="bg-slate-900 p-6 rounded-2xl border border-red-900/50 shadow-lg mt-6 text-center">
+                    <h5 className="font-bold text-red-400 mb-4 flex items-center justify-center gap-2"><Activity size={20}/> Clepsidra de Estudio (Pomodoro)</h5>
+                    <p className="text-slate-400 text-xs text-center mb-6">Mide tu tiempo de traducción. Los griegos usaban relojes de agua (clepsidras) para medir el tiempo en los juicios.</p>
+                    <div className="font-mono text-6xl text-red-300 mb-8 font-black drop-shadow-[0_0_10px_rgba(248,113,113,0.4)]">
+                        {minutos}:{segundos}
+                    </div>
+                    <div className="flex justify-center gap-4">
+                        <button onClick={() => setActivo(!activo)} className={`px-8 py-3 rounded-xl font-bold text-sm border-2 transition-all ${activo ? 'bg-red-900/40 border-red-500/50 text-red-300 hover:bg-red-900/60' : 'bg-red-700 hover:bg-red-600 border-red-500 text-white shadow-[0_0_15px_rgba(185,28,28,0.5)]'}`}>
+                            {activo ? 'Pausar el Flujo' : 'Abrir la Clepsidra'}
+                        </button>
+                        <button onClick={() => { setActivo(false); setTiempo(25 * 60); }} className="bg-slate-950 hover:bg-slate-800 text-slate-400 px-6 py-3 rounded-xl font-bold text-sm border-2 border-slate-800 transition-all">
+                            Reiniciar
+                        </button>
+                    </div>
+                </div>
+            );
+        };
 
         const AnalizadorUniversal = () => {
           const [word, setWord] = useState('');
@@ -1435,6 +1496,8 @@ const MonstruosHeroes = () => {
               content: <div className="space-y-6">
                 <h4 className="font-bold text-amber-400 text-lg border-b border-slate-700 pb-2">Los Secretos de los Pitagóricos y los Aedos</h4>
                 <p className="text-sm text-slate-300 mb-4">Usa estas calculadoras místicas e instrumentos del conocimiento para leer el griego como un verdadero bardo de la antigüedad.</p>
+                <BlocDeNotas />
+                <ClepsidraEstudio />
                 <IsopsephiaCalculator />
                 <HomericScansion />
                 <EpithetGenerator />
@@ -1443,6 +1506,7 @@ const MonstruosHeroes = () => {
                 <CalculadoraEconomia />
               </div> 
             },
+
             monstruos: { 
               category: "Lore Épico", title: "11. Monstruos y Divinidades", icon: <Shield size={18} />, 
               content: <div className="space-y-4">
